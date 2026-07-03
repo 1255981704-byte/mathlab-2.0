@@ -1,1 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATA LOG // 6.4 Integration by Substitution</title>
 
+    <!-- 引入机甲字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- 配置 MathJax 渲染数学公式 -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], tags: 'none' },
+            chtml: { scale: 1.1 } 
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- 专属数据日志 CSS -->
+    <style>
+        :root {
+            --bg-page: transparent;
+            --text-main: #d8e6f2;
+            --text-dim: #7d8ea0;
+            --accent-cyan: #00f3ff;
+            --accent-orange: #ff7a3d;
+            --accent-red: #ff3333;
+            --accent-gray: #aab4d4;
+            --font-ui: 'Rajdhani', sans-serif;
+            --font-tech: 'Share Tech Mono', monospace;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* 隐藏原生滚动条，使用机甲滚动条 */
+        html, body {
+            margin: 0; padding: 0; background: var(--bg-page); color: var(--text-main);
+            font-family: var(--font-body); line-height: 1.7; font-size: 15px;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 243, 255, 0.05); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 243, 255, 0.3); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 243, 255, 0.8); }
+
+        .log-container { padding: 30px 40px; max-width: 900px; margin: 0 auto; }
+
+        /* 标题排版 */
+        .doc-header { border-bottom: 1px solid rgba(0,243,255,0.3); padding-bottom: 15px; margin-bottom: 30px; }
+        .doc-id { font-family: var(--font-tech); color: var(--accent-orange); letter-spacing: 3px; font-size: 12px; margin-bottom: 5px; }
+        .doc-title { font-family: var(--font-ui); font-size: 32px; font-weight: 700; color: #fff; margin: 0; letter-spacing: 1px; text-shadow: 0 0 10px rgba(0,243,255,0.5); }
+
+        h2 { 
+            font-family: var(--font-ui); color: var(--accent-cyan); font-size: 22px; font-weight: 700; 
+            letter-spacing: 2px; margin-top: 40px; margin-bottom: 15px; border-left: 4px solid var(--accent-cyan); padding-left: 10px;
+        }
+        p { margin-bottom: 15px; }
+        ul, ol { padding-left: 20px; color: var(--text-dim); }
+        li { margin-bottom: 8px; }
+        strong { color: #fff; }
+
+        /* --- 科幻数据框样式 --- */
+        .t-box {
+            margin: 20px 0; padding: 20px; border-radius: 4px;
+            background: rgba(0, 15, 30, 0.6); position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        .t-box-title {
+            font-family: var(--font-tech); font-size: 13px; font-weight: 700; letter-spacing: 2px;
+            margin-bottom: 15px; display: inline-block; padding: 4px 10px; background: #000;
+        }
+
+        /* 1. 定义框 (Definition) - 赛博青色 */
+        .box-def { border: 1px solid rgba(0, 243, 255, 0.3); border-left: 4px solid var(--accent-cyan); }
+        .box-def .t-box-title { color: var(--accent-cyan); border: 1px solid var(--accent-cyan); box-shadow: 0 0 8px rgba(0,243,255,0.3); }
+
+        /* 2. 公式框 (Formula) - 警示橙色 */
+        .box-formula { border: 1px solid rgba(255, 122, 61, 0.3); border-left: 4px solid var(--accent-orange); background: rgba(30, 10, 0, 0.4); }
+        .box-formula .t-box-title { color: var(--accent-orange); border: 1px solid var(--accent-orange); box-shadow: 0 0 8px rgba(255,122,61,0.3); }
+
+        /* 3. 警告框 (Warning) - 危险红色 */
+        .box-warning { border: 1px solid rgba(255, 51, 51, 0.3); border-left: 4px solid var(--accent-red); background: rgba(40, 5, 5, 0.4); }
+        .box-warning .t-box-title { color: var(--accent-red); border: 1px solid var(--accent-red); box-shadow: 0 0 10px rgba(255,51,51,0.5); animation: pulse-red 2s infinite; }
+
+        /* 4. 示例框 (Example) - 冷静灰蓝 */
+        .box-example { border: 1px solid rgba(170, 180, 212, 0.2); border-left: 4px solid var(--accent-gray); background: rgba(255, 255, 255, 0.02); }
+        .box-example .t-box-title { color: var(--accent-gray); border: 1px solid var(--accent-gray); }
+
+        @keyframes pulse-red { 0%, 100% { box-shadow: 0 0 5px rgba(255,51,51,0.3); } 50% { box-shadow: 0 0 15px rgba(255,51,51,0.8); } }
+        
+        mjx-container { color: #fff !important; text-shadow: 0 0 2px rgba(255,255,255,0.3); }
+    </style>
+</head>
+<body>
+
+<div class="log-container">
+    <div class="doc-header">
+        <div class="doc-id">DATA LOG // SECTION 6.4</div>
+        <h1 class="doc-title">Integration by Substitution</h1>
+    </div>
+
+    <!-- 1. Why Introduce a New Variable? -->
+    <h2>1. Why Introduce a New Variable?</h2>
+    <p>The lecture begins with</p>
+    \[ \int(2x+1)^3\,dx. \]
+    <p>One valid method is to expand first:</p>
+    \[ (2x+1)^3=8x^3+12x^2+6x+1. \]
+    <p>Then</p>
+    \[ \int(2x+1)^3dx =2x^4+4x^3+3x^2+x+C. \]
+    <p>This works, but expansion becomes inefficient for higher powers or more complicated inner functions.</p>
+
+    <div class="t-box box-def">
+        <div class="t-box-title">THE STRUCTURAL OBSERVATION</div>
+        <p>The integrand is a power of the inner function \(2x+1\). The derivative of that inner function is the constant \(2\):</p>
+        \[ \frac{d}{dx}(2x+1)=2. \]
+        <p>Substitution temporarily names the inner function \(u\), allowing the ordinary power rule to be applied directly.</p>
+    </div>
+
+    <!-- 2. Example 1: The Lecture's First Substitution -->
+    <h2>2. Example 1: The Lecture's First Substitution</h2>
+    <p>Evaluate \[ \int(2x+1)^3\,dx. \]</p>
+    <p>Let \[ u=2x+1. \]</p>
+    <p>Because \(u\) is a function of \(x\), differentiate both sides:</p>
+    \[ \frac{du}{dx}=2 \qquad\Longrightarrow\qquad du=2\,dx \qquad\Longrightarrow\qquad dx=\frac12\,du. \]
+    <p>Now replace both the inner function and the differential:</p>
+    \[
+    \begin{aligned}
+    \int(2x+1)^3\,dx &=\int u^3\left(\frac12\,du\right)\\[3pt]
+    &=\frac12\int u^3\,du\\[3pt]
+    &=\frac12\cdot\frac{u^4}{4}+C\\[3pt]
+    &=\frac18u^4+C.
+    \end{aligned}
+    \]
+    <p>Substitute back:</p>
+    \[ \boxed{\int(2x+1)^3\,dx=\frac18(2x+1)^4+C}. \]
+
+    <div class="t-box box-formula">
+        <div class="t-box-title">THE SUBSTITUTION ALGORITHM</div>
+        <ol>
+            <li>Choose \(u\) as the useful inner expression.</li>
+            <li>Compute \(du\) from \(du/dx\).</li>
+            <li>Solve for the factor involving \(dx\), if necessary.</li>
+            <li>Rewrite the entire integral using only \(u\) and \(du\).</li>
+            <li>Integrate, then substitute back to \(x\).</li>
+        </ol>
+    </div>
+
+    <!-- 3. Example 2: A Denominator and Its Derivative -->
+    <h2>3. Example 2: A Denominator and Its Derivative</h2>
+    <p>Evaluate \[ \int\frac{x}{x^2+9}\,dx. \]</p>
+    <p>The lecture highlights the denominator as the inner function and the numerator as part of its derivative. Let</p>
+    \[ u=x^2+9, \qquad du=2x\,dx, \qquad x\,dx=\frac12\,du. \]
+    <p>Therefore,</p>
+    \[
+    \begin{aligned}
+    \int\frac{x}{x^2+9}\,dx &=\frac12\int\frac1u\,du\\[3pt]
+    &=\frac12\ln|u|+C\\[3pt]
+    &=\boxed{\frac12\ln(x^2+9)+C}.
+    \end{aligned}
+    \]
+    <p>Absolute values are unnecessary in the final line because \(x^2+9>0\).</p>
+
+    <div class="t-box box-formula">
+        <div class="t-box-title">LOGARITHMIC PATTERN</div>
+        \[ \boxed{\int\frac{g'(x)}{g(x)}\,dx=\ln|g(x)|+C}. \]
+        <p>If only a constant multiple of \(g'(x)\) is present, adjust that constant outside the integral.</p>
+    </div>
+
+    <!-- 4. Example 3: Two Valid Choices of u -->
+    <h2>4. Example 3: Two Valid Choices of \(u\)</h2>
+    <p>Evaluate \[ \int\sin x\cos x\,dx. \]</p>
+    <p>The lecture gives two correct substitutions.</p>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">SOLUTION 1: CHOOSE SINE FOR THE NEW VARIABLE</div>
+        <p>Then \(du=\cos x\,dx\), so</p>
+        \[
+        \begin{aligned}
+        \int\sin x\cos x\,dx &=\int u\,du\\[3pt]
+        &=\frac12u^2+C\\[3pt]
+        &=\boxed{\frac12\sin^2x+C}.
+        \end{aligned}
+        \]
+    </div>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">SOLUTION 2: CHOOSE COSINE FOR THE NEW VARIABLE</div>
+        <p>Then \(du=-\sin x\,dx\), so</p>
+        \[
+        \begin{aligned}
+        \int\sin x\cos x\,dx &=-\int u\,du\\[3pt]
+        &=-\frac12u^2+C\\[3pt]
+        &=\boxed{-\frac12\cos^2x+C}.
+        \end{aligned}
+        \]
+    </div>
+
+    <p>The two answers appear different, but</p>
+    \[
+    \begin{aligned}
+    -\frac12\cos^2x+C &=-\frac12(1-\sin^2x)+C\\[3pt]
+    &=\frac12\sin^2x+\left(C-\frac12\right).
+    \end{aligned}
+    \]
+    <p>Since \(C-1/2\) is still an arbitrary constant, the two answers represent the same family of antiderivatives.</p>
+
+    <div class="t-box box-def">
+        <div class="t-box-title">EQUIVALENT ANTIDERIVATIVES</div>
+        <p>Two correct indefinite-integral answers may look different. If they differ by only a constant, they represent the same family. Differentiate each answer to confirm that both produce the original integrand.</p>
+    </div>
+
+    <!-- 5. Example 4: Rewrite Before Substituting -->
+    <h2>5. Example 4: Rewrite Before Substituting</h2>
+    <p>Evaluate the lecture's final example:</p>
+    \[ \int\frac{\sin^5x}{\cos^7x}\,dx. \]
+    <p>The visible pattern is not yet a direct substitution. Use</p>
+    \[ \tan x=\frac{\sin x}{\cos x}, \qquad \sec^2x=\frac1{\cos^2x}. \]
+    <p>Rewrite:</p>
+    \[
+    \begin{aligned}
+    \frac{\sin^5x}{\cos^7x} &=\frac{\sin^5x}{\cos^5x}\cdot\frac1{\cos^2x}\\[3pt]
+    &=\tan^5x\sec^2x.
+    \end{aligned}
+    \]
+    <p>Now let</p>
+    \[ u=\tan x, \qquad du=\sec^2x\,dx. \]
+    <p>Then</p>
+    \[
+    \begin{aligned}
+    \int\frac{\sin^5x}{\cos^7x}\,dx &=\int u^5\,du\\[3pt]
+    &=\frac16u^6+C\\[3pt]
+    &=\boxed{\frac16\tan^6x+C}.
+    \end{aligned}
+    \]
+
+    <!-- 6. How to Choose u -->
+    <h2>6. How to Choose \(u\)</h2>
+    
+    <div class="t-box box-formula">
+        <div class="t-box-title">PATTERN CHECKLIST</div>
+        <p>Look for one of the following structures:</p>
+        <ul>
+            <li>a power of an inner expression together with its derivative;</li>
+            <li>a denominator together with its derivative in the numerator;</li>
+            <li>a trigonometric function together with the differential of another;</li>
+            <li>an expression that becomes a power after an identity or algebraic rewrite.</li>
+        </ul>
+    </div>
+
+    <div class="t-box box-warning">
+        <div class="t-box-title">WARNING // COMMON ERRORS</div>
+        <ul>
+            <li>Replacing the inner expression but leaving \(dx\) unchanged.</li>
+            <li>Forgetting the factor \(1/2\) when \(du=2\,dx\) or \(du=2x\,dx\).</li>
+            <li>Mixing \(x\) and \(u\) in the transformed integral.</li>
+            <li>Losing the negative sign when \(u=\cos x\).</li>
+            <li>Assuming two antiderivatives are different without checking whether they differ only by a constant.</li>
+        </ul>
+    </div>
+
+    <!-- 7. Principal Results -->
+    <h2>7. Principal Results</h2>
+    <div class="t-box box-formula">
+        <div class="t-box-title">REVERSE CHAIN RULE</div>
+        <p>If \(F'=f\), then</p>
+        \[ \boxed{\int f(g(x))g'(x)\,dx=F(g(x))+C}. \]
+    </div>
+    
+    <br><br><br>
+</div>
+
+</body>
+</html>
