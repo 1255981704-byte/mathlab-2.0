@@ -75,4 +75,57 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 2. 先把侧边栏里写死的默认展开项全部折叠并取消高亮
     document.querySelectorAll('.nav-unit-btn').forEach(btn => {
-        btn.classList.
+        btn.classList.remove('active');
+        const menu = btn.querySelector('.nav-sub-menu');
+        if (menu) menu.style.display = 'none';
+    });
+    document.querySelectorAll('.nav-sub-item').forEach(item => {
+        item.classList.remove('current'); 
+    });
+
+    // 3. 寻找与当前 pageId 完全匹配的子菜单按钮
+    let targetItem = null;
+    document.querySelectorAll('.nav-sub-item').forEach(item => {
+        let onclickStr = item.getAttribute('onclick') || '';
+        // 匹配 onClick 里面是否包含 loadPage('6-1')
+        if (onclickStr.includes("loadPage('" + pageId + "')")) {
+            targetItem = item;
+        }
+    });
+
+    // 4. 如果找到了对应的选项，执行自动定位魔法
+    if (targetItem) {
+        // 给当前项加上高亮样式
+        targetItem.classList.add('current');
+        
+        // 修改当前项的点击事件，防止冒泡触发折叠，直接关闭侧边栏即可
+        targetItem.onclick = function(e) { 
+            e.stopPropagation(); 
+            toggleSidebar(); 
+        };
+
+        // 找到它所在的章 (UNIT)
+        let parentMenu = targetItem.closest('.nav-sub-menu');
+        let parentUnit = targetItem.closest('.nav-unit-btn');
+
+        if (parentMenu && parentUnit) {
+            // 自动展开该章
+            parentMenu.style.display = 'block';
+            parentUnit.classList.add('active');
+
+            // 自动将侧边栏内部的滚动条，平滑滚动到当前发光项的位置！
+            setTimeout(() => {
+                const scrollArea = document.querySelector('.nav-scroll-area') || document.querySelector('.nav-panel-container');
+                if(scrollArea) {
+                    // 计算居中位置
+                    const itemTop = parentUnit.offsetTop + targetItem.offsetTop;
+                    const halfScreen = scrollArea.clientHeight / 2;
+                    scrollArea.scrollTo({
+                        top: itemTop - halfScreen + 50,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100); // 延迟一点点等渲染完毕
+        }
+    }
+});
