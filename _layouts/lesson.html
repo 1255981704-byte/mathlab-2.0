@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGNITE: {{ page.title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- 引入之前抽离的全局 css -->
+    <link rel="stylesheet" href="/css/ignite-core.css"> 
+</head>
+<body>
+
+    <div class="fx-layer fx-grid"></div>
+
+    <!-- 注入头部组件 -->
+    {% include header.html %}
+
+    <div class="interface">
+        
+        <!-- 注入侧边栏组件 -->
+        {% include sidebar.html %}
+
+        <div class="main-view">
+            <!-- 完美咬合的边距和机甲阴影 -->
+            <div class="view-body">
+                <div class="corner tl"></div><div class="corner tr"></div>
+                <div class="corner bl"></div><div class="corner br"></div>
+                
+                <div class="vh-group">
+                    <div class="title-wrapper">
+                        <!-- 动态注入标题文字！ -->
+                        <div class="vh-main">{{ page.title }}</div>
+                        <div class="vh-sub">{{ page.subtitle }}</div>
+                    </div>
+                    <div class="author-tag">INSTRUCTOR: <b>HUANDONG CAO</b></div>
+                </div>
+
+                <div class="control-deck">
+                    <button class="mode-btn active" onclick="switchView('lecture', this)">
+                        <svg class="mode-icon" viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM8 8v8l7-4z"/></svg>
+                        LECTURE
+                    </button>
+                    <button class="mode-btn" onclick="switchView('notes', this)">
+                        <svg class="mode-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        NOTES
+                    </button>
+                    <button class="mode-btn" onclick="switchView('assign', this)">
+                        <svg class="mode-icon" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        ASSIGNMENT
+                    </button>
+                    <button class="mode-btn" onclick="switchView('quiz', this)">
+                        <svg class="mode-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        QUIZ
+                    </button>
+                    <button class="mode-btn lab-btn" onclick="switchView('lab', this)">
+                        <svg class="mode-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l-5.5 9h11L12 2zm0 3.8l2.6 4.2h-5.2L12 5.8zM7.5 13l-3 7h15l-3-7h-9zm1.8 2h5.4l1.3 3H8l1.3-3z"/>
+                        </svg>
+                        IGNITE MATH LAB
+                    </button>
+                </div>
+
+                <div style="flex:1; position:relative; width: 100%; height: 100%; overflow: hidden;">
+                    
+                    <div id="view-lecture" class="stark-panel active">
+                        <div class="panel-header"><div class="ph-title">VIDEO FEED</div><div class="ph-meta">1080P // REC</div></div>
+                        <div class="panel-body" style="padding: 20px; flex:1; display:flex; align-items:center; justify-content:center; background: rgba(0,0,0,0.2);">
+                            <!-- 16:9 全息副屏 -->
+                            <div class="video-wrapper">
+                                <!-- 动态注入视频地址！ -->
+                                <video id="lectureVideo" controls><source src="{{ page.video_src }}" type="video/mp4"></video>
+                                <div class="vid-overlay-live">● LIVE</div><div class="vid-overlay-text">IGNITE SECURE STREAM</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 动态注入笔记、作业、测验地址！ -->
+                    <div id="view-notes" class="stark-panel">
+                        <div class="panel-header"><div class="ph-title">DATA LOGS</div><div class="ph-meta">SYNCED</div></div>
+                        <div class="panel-body" style="padding: 0; flex:1;"><iframe src="{{ page.notes_src }}" class="iframe-container"></iframe></div>
+                    </div>
+                    <div id="view-assign" class="stark-panel"><iframe src="{{ page.assign_src }}" class="iframe-container"></iframe></div>
+                    <div id="view-lab" class="stark-panel">
+                        <div class="panel-header"><div class="ph-title">LABORATORY</div></div>
+                        <div class="panel-body" style="padding:0; flex:1;"><iframe src="derivative.html" class="iframe-container"></iframe></div>
+                    </div>
+                    <div id="view-quiz" class="stark-panel"><iframe src="{{ page.quiz_src }}" class="iframe-container"></iframe></div>
+                </div>
+
+                <div class="view-footer" style="margin-top:auto; padding-top:15px; border-top: 1px solid rgba(255,255,255,0.05); flex-shrink:0;">
+                    <span style="font-family:'Share Tech Mono'; color:#456; font-size:10px;">SYSTEM STABLE // PANG: Ready.</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 引入之前抽离的全局脚本 -->
+    <script src="/js/ignite-ui.js"></script>
+</body>
+</html>
