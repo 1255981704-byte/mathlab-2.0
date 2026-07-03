@@ -1,0 +1,46 @@
+/* =====================================================================
+   IGNITE GRAPH STYLE — consistent SVG visuals across all decks
+   Apply these classes to SVG elements so every graph matches.
+
+   Convention:
+     • Axes    → class="axis"        (neutral gray, 1.2px)
+     • Ticks   → wrap in <g class="ticks">  (subtle gray, 1px)
+     • Labels  → class="lbl"         (mono font, neutral gray)
+     • Curve   → class="curve"       (themed primary accent, 2.2px)
+     • Point   → class="point"       (themed secondary accent)
+     • Marker arrowheads use a <marker> with a fixed neutral fill.
+
+   Themed automatically: .curve and .point follow --accent / --accent-2,
+   so they stay consistent within clean and holographic themes alike.
+   ===================================================================== */
+
+.axis { stroke: #7d8ea0; stroke-width: 1.2; fill: none; }
+g.ticks line { stroke: #6a7290; stroke-width: 1; }
+.lbl { fill: #7d8ea0; font-family: 'Share Tech Mono', monospace; }
+
+.curve { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+.point { fill: var(--accent-2); }
+
+/* Filled region under a curve (e.g. area / Riemann) */
+.region { fill: rgba(0, 212, 230, 0.12); stroke: none; }
+body.theme-holo .region { fill: rgba(155, 107, 255, 0.14); }
+
+/* Helper rectangle for a shaded panel behind a graph */
+.graph-bg { fill: rgba(255, 255, 255, 0.02); }
+
+/* Dashed reference line (e.g. an asymptote or boundary) */
+.ref { stroke: #4d5b6a; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+
+/* Riemann / trapezoid helpers */
+.riemann-rect {
+    fill: rgba(0, 212, 230, 0.12);
+    stroke: var(--accent);
+    stroke-width: 1.1;
+}
+.trap-region {
+    fill: rgba(255, 122, 61, 0.11);
+    stroke: var(--accent-2);
+    stroke-width: 1.1;
+}
+body.theme-holo .riemann-rect { fill: rgba(155, 107, 255, 0.14); }
+body.theme-holo .trap-region { fill: rgba(255, 122, 214, 0.12); }
