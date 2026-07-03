@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IGNITE: {{ page.title }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ '/css/ignite-core.css' | relative_url }}"> 
+    <link rel="stylesheet" href="./css/ignite-core.css">
     
     <style>
         /* =========================================
@@ -74,31 +74,29 @@
                 
               <div style="flex:1; position:relative; width: 100%; height: 100%; overflow: hidden;">
                     
-                    <!-- LECTURE -->
-                    <div id="view-lecture" class="stark-panel active">
-                        <iframe src="{{ page.lecture_src }}" class="iframe-container"></iframe>
-                    </div>
+                   <!-- LECTURE -->
+                <div id="view-lecture" class="stark-panel active">
+                    <iframe src="./{{ page.lecture_src }}" class="iframe-container"></iframe>
+                </div>
 
-                    <!-- NOTES -->
-                    <div id="view-notes" class="stark-panel">
-                        <iframe src="{{ page.notes_src }}" class="iframe-container"></iframe>
-                    </div>
+                <!-- NOTES -->
+                <div id="view-notes" class="stark-panel">
+                    <iframe src="./{{ page.notes_src }}" class="iframe-container"></iframe>
+                </div>
 
-                    <!-- ASSIGNMENT -->
-                    <div id="view-assign" class="stark-panel">
-                        <iframe src="{{ page.assign_src }}" class="iframe-container"></iframe>
-                    </div>
+                <!-- ASSIGNMENT -->
+                <div id="view-assign" class="stark-panel">
+                    <iframe src="./{{ page.assign_src }}" class="iframe-container"></iframe>
+                </div>
 
-                    <!-- LAB (暂时写死) -->
-                    <div id="view-lab" class="stark-panel">
-                        <iframe src="derivative.html" class="iframe-container"></iframe>
-                    </div>
+                <!-- LAB -->
+                <div id="view-lab" class="stark-panel">
+                    <iframe src="./derivative.html" class="iframe-container"></iframe>
+                </div>
 
-                    <!-- QUIZ -->
-                    <div id="view-quiz" class="stark-panel">
-                        <iframe src="{{ page.quiz_src }}" class="iframe-container"></iframe>
-                    </div>
-
+                <!-- QUIZ -->
+                <div id="view-quiz" class="stark-panel">
+                    <iframe src="./{{ page.quiz_src }}" class="iframe-container"></iframe>
                 </div>
 
             <!-- 右侧：悬浮侧壁工具栏 -->
