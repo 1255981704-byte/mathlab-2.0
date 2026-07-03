@@ -76,24 +76,11 @@
                         </div>
                     </div>
 
-                    <!-- 动态注入笔记、作业、测验地址！ -->
-                    <div id="view-notes" class="stark-panel">
-                        <div class="panel-header"><div class="ph-title">DATA LOGS</div><div class="ph-meta">SYNCED</div></div>
-                        <div class="panel-body" style="padding: 0; flex:1;"><iframe src="{{ page.notes_src }}" class="iframe-container"></iframe></div>
+            
+                   <!-- 动态注入幻灯片引擎！ -->
+                    <div id="view-lecture" class="stark-panel active">
+                        <iframe src="{{ page.lecture_src }}" class="iframe-container"></iframe>
                     </div>
-                    <div id="view-assign" class="stark-panel"><iframe src="{{ page.assign_src }}" class="iframe-container"></iframe></div>
-                    <div id="view-lab" class="stark-panel">
-                        <div class="panel-header"><div class="ph-title">LABORATORY</div></div>
-                        <div class="panel-body" style="padding:0; flex:1;"><iframe src="derivative.html" class="iframe-container"></iframe></div>
-                    </div>
-                    <div id="view-quiz" class="stark-panel"><iframe src="{{ page.quiz_src }}" class="iframe-container"></iframe></div>
-                </div>
-
-                <div class="view-footer" style="margin-top:auto; padding-top:15px; border-top: 1px solid rgba(255,255,255,0.05); flex-shrink:0;">
-                    <span style="font-family:'Share Tech Mono'; color:#456; font-size:10px;">SYSTEM STABLE // PANG: Ready.</span>
-                </div>
-            </div>
-        </div>
 
     </div>
 
