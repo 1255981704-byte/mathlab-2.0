@@ -1,1 +1,310 @@
-1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGNITE // 07 Integration by Parts [BC]</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- 修正为云端机甲幻灯片专属 CSS -->
+    <link rel="stylesheet" href="./css/ignite-deck.css">
+    <link rel="stylesheet" href="./css/graph-style.css">
+
+    <!-- 针对本课分部积分表格的专属赛博样式 -->
+    <style>
+        .parts-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;
+        }
+        .parts-grid > div {
+            background: rgba(0, 243, 255, 0.05); border: 1px solid rgba(0, 243, 255, 0.2);
+            border-left: 3px solid var(--accent); padding: 12px; border-radius: 4px;
+            font-family: 'Share Tech Mono', monospace; font-size: 14px;
+        }
+        .parts-grid strong { color: var(--accent-2); margin-right: 10px; font-size: 11px; letter-spacing: 2px; }
+
+        .tabular-parts {
+            display: grid; grid-template-columns: 60px 1fr 1fr; gap: 4px; margin: 20px 0;
+            background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border-strong); border-radius: 6px; padding: 10px;
+        }
+        .tabular-parts > div {
+            padding: 10px; display: flex; align-items: center; justify-content: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05); font-family: 'Share Tech Mono', monospace;
+        }
+        .tabular-parts .head {
+            color: var(--accent); font-weight: 700; font-size: 11px; letter-spacing: 2px; border-bottom: 1px solid var(--accent);
+        }
+        .tabular-parts .sign { color: var(--accent-2); font-weight: bold; font-size: 18px; }
+    </style>
+
+    <script>window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="auto-resize">
+
+<nav class="progress-nav" id="progressNav" aria-label="Lesson sections">
+    <div class="pn-item active" data-go="0"><div class="pn-node">01</div><div class="pn-title">OVERVIEW</div><div class="pn-sub">Product rule in reverse</div></div>
+    <div class="pn-item" data-go="1"><div class="pn-node">02</div><div class="pn-title">KEY FORMULA</div><div class="pn-sub">Derivation &amp; choice</div></div>
+    <div class="pn-item" data-go="2"><div class="pn-node">03</div><div class="pn-title">EXERCISE 01</div><div class="pn-sub">Algebraic times exponential</div></div>
+    <div class="pn-item" data-go="3"><div class="pn-node">04</div><div class="pn-title">EXERCISE 02</div><div class="pn-sub">Logarithmic factor</div></div>
+    <div class="pn-item" data-go="4"><div class="pn-node">05</div><div class="pn-title">EXERCISE 03</div><div class="pn-sub">Hidden product</div></div>
+    <div class="pn-item" data-go="5"><div class="pn-node">06</div><div class="pn-title">EXERCISE 04</div><div class="pn-sub">Repeated parts</div></div>
+    <div class="pn-item" data-go="6"><div class="pn-node">07</div><div class="pn-title">EXERCISE 05</div><div class="pn-sub">Definite integral</div></div>
+</nav>
+
+<main class="deck" id="deck">
+    <section class="slide title active" data-slide="0">
+        <div class="title-brand">07 <span>//</span> INTEGRATION BY PARTS</div>
+        <div class="title-sub">BC ONLY &nbsp;&bull;&nbsp; REVERSE THE PRODUCT RULE</div>
+        <div class="title-rule"></div>
+        <div class="title-meta">ONE CHOICE: MAKE THE NEXT INTEGRAL SIMPLER</div>
+    </section>
+
+    <section class="slide formula-slide" data-slide="1">
+        <div class="slide-title">
+            <span class="tag">FORMULA</span>
+            <h1>Integration by Parts Formula</h1>
+        </div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>STATEMENT</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <p>Start with \(d(uv)=u\,dv+v\,du\). Rearrange after integrating.</p>
+                        <div class="eq-box">
+                            <div class="eq-head">INDEFINITE FORM</div>
+                            <div class="eq-body">\[\displaystyle \int u\,dv=uv-\int v\,du\]</div>
+                        </div>
+                        <div class="eq-box">
+                            <div class="eq-head">DEFINITE FORM</div>
+                            <div class="eq-body">\[\displaystyle \int_a^b u\,dv=[uv]_a^b-\int_a^b v\,du\]</div>
+                        </div>
+                        <p class="note">The formula is short. The choice of \(u\) and \(dv\) is the whole game.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>DERIVATION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="parts-derivation">
+                        <span class="vid-rec">&#9679; REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">DERIVATION VIDEO</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="sol-head">DERIVATION</div>
+                        <div class="step">Product rule: \(\displaystyle d(uv)=u\,dv+v\,du\).</div>
+                        <div class="eqc">\[\displaystyle \int d(uv)=\int u\,dv+\int v\,du\]</div>
+                        <div class="step">Since \(\int d(uv)=uv\), solve for the integral we want.</div>
+                        <div class="eqc">\[\displaystyle \int u\,dv=uv-\int v\,du\]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="2">
+        <div class="slide-title"><span class="num">01</span><h1>Algebraic and Exponential Product</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body">
+                    <div class="prompt">Evaluate \(\displaystyle\int xe^{2x}\,dx\).</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="parts-example-1">
+                        <span class="vid-rec">&#9679; REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 01</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="sol-head">DERIVATION</div>
+                        <div class="parts-grid">
+                            <div><strong>CHOOSE</strong>\(u=x\)</div>
+                            <div><strong>CHOOSE</strong>\(dv=e^{2x}\,dx\)</div>
+                            <div><strong>DIFFERENTIATE</strong>\(du=dx\)</div>
+                            <div><strong>INTEGRATE</strong>\(v=\frac12e^{2x}\)</div>
+                        </div>
+                        <div class="eqc">\[\displaystyle \int xe^{2x}dx=x\cdot\frac12e^{2x}-\int\frac12e^{2x}\,dx\]</div>
+                        <div class="eqc">\[\displaystyle =\frac12xe^{2x}-\frac14e^{2x}+C\]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="3">
+        <div class="slide-title"><span class="num">02</span><h1>Logarithmic Factor</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body">
+                    <div class="prompt">Evaluate \(\displaystyle\int x^2\ln x\,dx\).</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="parts-logarithm">
+                        <span class="vid-rec">&#9679; REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 02</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="sol-head">DERIVATION</div>
+                        <div class="parts-grid">
+                            <div><strong>CHOOSE</strong>\(u=\ln x\)</div>
+                            <div><strong>CHOOSE</strong>\(dv=x^2\,dx\)</div>
+                            <div><strong>DIFFERENTIATE</strong>\(du=\frac1x\,dx\)</div>
+                            <div><strong>INTEGRATE</strong>\(v=\frac13x^3\)</div>
+                        </div>
+                        <div class="eqc">\[\displaystyle \int x^2\ln x\,dx=\frac13x^3\ln x-\int\frac13x^3\cdot\frac1x\,dx\]</div>
+                        <div class="eqc">\[\displaystyle =\frac13x^3\ln x-\frac13\int x^2\,dx=\frac13x^3\ln x-\frac19x^3+C\]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="4">
+        <div class="slide-title"><span class="num">03</span><h1>Hidden Product</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body">
+                    <div class="prompt">Evaluate \(\displaystyle\int\ln x\,dx\).</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="parts-hidden-product">
+                        <span class="vid-rec">&#9679; REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 03</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="sol-head">DERIVATION</div>
+                        <div class="step">Rewrite as a product: \(\displaystyle \int\ln x\,dx=\int(\ln x)(1)\,dx\).</div>
+                        <div class="parts-grid">
+                            <div><strong>CHOOSE</strong>\(u=\ln x\)</div>
+                            <div><strong>CHOOSE</strong>\(dv=dx\)</div>
+                            <div><strong>DIFFERENTIATE</strong>\(du=\frac1x\,dx\)</div>
+                            <div><strong>INTEGRATE</strong>\(v=x\)</div>
+                        </div>
+                        <div class="eqc">\[\displaystyle \int\ln x\,dx=x\ln x-\int x\cdot\frac1x\,dx=x\ln x-x+C\]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="5">
+        <div class="slide-title"><span class="num">04</span><h1>Repeated Integration by Parts</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body">
+                    <div class="prompt">Evaluate \(\displaystyle\int x^2e^x\,dx\).</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="parts-repeated">
+                        <span class="vid-rec">&#9679; REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 04</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="sol-head">DERIVATION</div>
+                        
+                        <!-- 专属科技感表格 -->
+                        <div class="tabular-parts" aria-label="Tabular integration by parts">
+                            <div class="head">SIGN</div><div class="head">DIFFERENTIATE</div><div class="head">INTEGRATE</div>
+                            <div class="sign">+</div><div>\(x^2\)</div><div>\(e^x\)</div>
+                            <div class="sign">&minus;</div><div>\(2x\)</div><div>\(e^x\)</div>
+                            <div class="sign">+</div><div>\(2\)</div><div>\(e^x\)</div>
+                            <div></div><div>\(0\)</div><div>\(e^x\)</div>
+                        </div>
+                        
+                        <div class="eqc">\[\displaystyle \int x^2e^x\,dx=x^2e^x-2xe^x+2e^x+C\]</div>
+                        <div class="eqc">\[\displaystyle =e^x(x^2-2x+2)+C\]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="6">
+        <div class="slide-title"><span class="num">05</span><h1>Definite Integration by Parts</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body">
+                    <div class="prompt">Evaluate \(\displaystyle\int_0^1xe^{2x}\,dx\).</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="parts-definite">
+                        <span class="vid-rec">&#9679; REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 05</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="sol-head">DERIVATION</div>
+                        <div class="step">Use \(u=x,\ dv=e^{2x}dx,\ du=dx,\ v=\frac12e^{2x}\).</div>
+                        <div class="eqc">\[\displaystyle
+                            \int_0^1xe^{2x}dx
+                            =\left[\frac12xe^{2x}\right]_0^1
+                            -\frac12\int_0^1e^{2x}dx
+                        \]</div>
+                        <div class="eqc">\[\displaystyle
+                            =\left[\frac12xe^{2x}-\frac14e^{2x}\right]_0^1
+                            =\left(\frac12e^2-\frac14e^2\right)-\left(0-\frac14\right)
+                            =\frac{e^2+1}{4}
+                        \]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div class="controls">
+    <button class="ctrl-btn" id="prev" aria-label="Previous">&#9664;</button>
+    <div class="counter"><b id="cur">1</b> / <span id="tot">7</span></div>
+    <button class="ctrl-btn" id="next" aria-label="Next">&#9654;</button>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Expanded video">
+    <div class="modal-stage">
+        <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+        <div class="vid-slot" id="modalSlot" style="aspect-ratio:unset;">
+            <div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label" id="modalLabel">VIDEO</div></div>
+        </div>
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+</div>
+
+<!-- 修正为云端机甲脚本 -->
+<script src="./js/ignite-deck.js"></script>
+</body>
+</html>
