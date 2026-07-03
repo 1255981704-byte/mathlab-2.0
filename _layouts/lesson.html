@@ -5,32 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IGNITE: {{ page.title }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- 引入之前抽离的全局 css -->
-    <link rel="stylesheet" href="./css/ignite-core.css">
- 
+    
+    <!-- 引入机甲外壳 CSS -->
+    <link rel="stylesheet" href="{{ '/css/ignite-core.css' | relative_url }}"> 
 </head>
 <body>
 
     <div class="fx-layer fx-grid"></div>
 
-    <!-- 注入头部组件 -->
+    <!-- 注入头部和侧边栏 -->
     {% include header.html %}
 
     <div class="interface">
-        
-        <!-- 注入侧边栏组件 -->
         {% include sidebar.html %}
 
         <div class="main-view">
-            <!-- 完美咬合的边距和机甲阴影 -->
             <div class="view-body">
                 <div class="corner tl"></div><div class="corner tr"></div>
                 <div class="corner bl"></div><div class="corner br"></div>
                 
                 <div class="vh-group">
                     <div class="title-wrapper">
-                        <!-- 动态注入标题文字！ -->
-                    
+                        <!-- 接收 6-1.html 传来的标题 -->
                         <div class="vh-main">{{ page.title }}</div>
                         <div class="vh-sub">{{ page.subtitle }}</div>
                     </div>
@@ -64,28 +60,48 @@
 
                 <div style="flex:1; position:relative; width: 100%; height: 100%; overflow: hidden;">
                     
-                    <div id="view-lecture" class="stark-panel active">
-                        <div class="panel-header"><div class="ph-title">VIDEO FEED</div><div class="ph-meta">1080P // REC</div></div>
-                        <div class="panel-body" style="padding: 20px; flex:1; display:flex; align-items:center; justify-content:center; background: rgba(0,0,0,0.2);">
-                            <!-- 16:9 全息副屏 -->
-                            <div class="video-wrapper">
-                                <!-- 动态注入视频地址！ -->
-                                <video id="lectureVideo" controls><source src="{{ page.video_src }}" type="video/mp4"></video>
-                                <div class="vid-overlay-live">● LIVE</div><div class="vid-overlay-text">IGNITE SECURE STREAM</div>
-                            </div>
-                        </div>
-                    </div>
-
-            
-                   <!-- 动态注入幻灯片引擎！ -->
+                    <!-- LECTURE: 接收 6-1.html 传来的 lecture6-1.html -->
                     <div id="view-lecture" class="stark-panel active">
                         <iframe src="{{ page.lecture_src }}" class="iframe-container"></iframe>
                     </div>
 
+                    <!-- NOTES: 接收 6-1.html 传来的 notes6-1.html -->
+                    <div id="view-notes" class="stark-panel">
+                        <div class="panel-header"><div class="ph-title">DATA LOGS</div><div class="ph-meta">SYNCED</div></div>
+                        <div class="panel-body" style="padding: 0; flex:1;">
+                            <iframe src="{{ page.notes_src }}" class="iframe-container"></iframe>
+                        </div>
+                    </div>
+
+                    <!-- ASSIGNMENT: 接收 assign_src -->
+                    <div id="view-assign" class="stark-panel">
+                        <iframe src="{{ page.assign_src }}" class="iframe-container"></iframe>
+                    </div>
+
+                    <!-- LAB: 暂时固定为 derivative.html -->
+                    <div id="view-lab" class="stark-panel">
+                        <div class="panel-header"><div class="ph-title">LABORATORY</div></div>
+                        <div class="panel-body" style="padding:0; flex:1;">
+                            <iframe src="derivative.html" class="iframe-container"></iframe>
+                        </div>
+                    </div>
+
+                    <!-- QUIZ: 接收 quiz_src -->
+                    <div id="view-quiz" class="stark-panel">
+                        <iframe src="{{ page.quiz_src }}" class="iframe-container"></iframe>
+                    </div>
+
+                </div>
+
+                <div class="view-footer" style="margin-top:auto; padding-top:15px; border-top: 1px solid rgba(255,255,255,0.05); flex-shrink:0;">
+                    <span style="font-family:'Share Tech Mono'; color:#456; font-size:10px;">SYSTEM STABLE // PANG: Ready.</span>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- 引入之前抽离的全局脚本 -->
-  <script src="./js/ignite-ui.js"></script>
-
+    <!-- 引入侧边栏交互 JS -->
+    <script src="{{ '/js/ignite-ui.js' | relative_url }}"></script>
 </body>
 </html>
