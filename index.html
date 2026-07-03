@@ -9,35 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     
     <!-- 引入你的核心样式 -->
-   <link rel="stylesheet" href="./css/ignite-core.css">
+    <link rel="stylesheet" href="./css/ignite-core.css">
     
     <style>
-        /* --- 载入动画专属样式 --- */
-        #boot-layer {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #000510; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            font-family: 'Share Tech Mono', monospace; transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        #boot-layer.finished { opacity: 0; pointer-events: none; transform: scale(1.1); }
-        .boot-spinner {
-            width: 80px; height: 80px; border: 2px solid rgba(0, 243, 255, 0.1); border-top: 2px solid #00f3ff;
-            border-radius: 50%; animation: bootSpin 1s linear infinite; box-shadow: 0 0 20px rgba(0, 243, 255, 0.2); position: relative;
-        }
-        .boot-spinner::before {
-            content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 1px solid rgba(0, 243, 255, 0.3);
-            border-radius: 50%; border-bottom: 2px solid #0077ff; animation: bootSpin 2s linear infinite reverse;
-        }
-        @keyframes bootSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .boot-text { margin-top: 30px; color: #00f3ff; font-size: 14px; letter-spacing: 2px; text-shadow: 0 0 5px #00f3ff; }
-        .boot-log { margin-top: 10px; font-size: 10px; color: rgba(255, 255, 255, 0.5); height: 20px; }
-        .boot-bar-box { width: 200px; height: 2px; background: #112233; margin-top: 20px; position: relative; overflow: hidden; }
-        .boot-bar-fill { width: 0%; height: 100%; background: #00f3ff; box-shadow: 0 0 10px #00f3ff; transition: width 0.2s linear; }
-        .boot-grid {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;
-            background-image: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-
         /* --- 首页导航栏收起动画 --- */
         .sidebar { transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
         .sidebar.collapsed { transform: translateX(-120%); opacity: 0; width: 0 !important; margin: 0 !important; padding: 0 !important; pointer-events: none; }
@@ -55,15 +29,6 @@
     </style>
 </head>
 <body>
-
-    <!-- 启动层 -->
-    <div id="boot-layer">
-        <div class="boot-grid"></div>
-        <div class="boot-spinner"></div>
-        <div class="boot-text">SYSTEM BOOT SEQUENCE</div>
-        <div class="boot-bar-box"><div class="boot-bar-fill" id="bootFill"></div></div>
-        <div class="boot-log" id="bootLog">CONNECTING TO CORE...</div>
-    </div>
 
     <div class="fx-layer fx-grid"></div>
 
@@ -113,30 +78,6 @@
     </div>
 
     <script>
-        // --- 载入动画逻辑 ---
-        window.addEventListener('load', () => {
-            const bootLayer = document.getElementById('boot-layer');
-            const bootFill = document.getElementById('bootFill');
-            const bootLog = document.getElementById('bootLog');
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 5;
-                if(progress > 100) progress = 100;
-                bootFill.style.width = progress + "%";
-                if(progress < 30) bootLog.innerText = "LOADING ASSETS...";
-                else if(progress < 60) bootLog.innerText = "DECRYPTING DATA STREAMS...";
-                else if(progress < 90) bootLog.innerText = "ESTABLISHING SECURE LINK...";
-                else bootLog.innerText = "ACCESS GRANTED.";
-                if(progress === 100) {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        bootLayer.classList.add('finished');
-                        setTimeout(() => bootLayer.style.display = 'none', 600);
-                    }, 500);
-                }
-            }, 30);
-        });
-
         // --- 系统全局数据中心 ---
         const curriculum = [
             {
@@ -291,7 +232,7 @@
             document.getElementById('enterBtn').disabled = (targetURL === '#');
         }
 
-        // --- 无缝衔接收起动画 ---
+        // --- 无缝衔接收起动画 (没有大括号丢失问题了！) ---
         function launch() {
             if(!targetURL || targetURL === '#') {
                 alert(">> PANG: Please select a section first.");
@@ -308,8 +249,9 @@
             const mainView = document.querySelector('.main-view');
             if (mainView) mainView.style.boxShadow = "0 0 50px rgba(0, 243, 255, 0.5) inset";
             
+            // 无延迟瞬间跳转
             window.location.href = targetURL;
-        } // <--- 就是补上这个大括号！！！
+        }
     </script>
 </body>
 </html>
