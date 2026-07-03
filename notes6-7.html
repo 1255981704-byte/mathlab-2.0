@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATA LOG // 6.7 Integration by Parts [BC]</title>
 
+    <!-- 引入机甲字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- 配置 MathJax 渲染数学公式 -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], tags: 'none' },
+            chtml: { scale: 1.1 } 
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- 专属数据日志 CSS -->
+    <style>
+        :root {
+            --bg-page: transparent;
+            --text-main: #d8e6f2;
+            --text-dim: #7d8ea0;
+            --accent-cyan: #00f3ff;
+            --accent-orange: #ff7a3d;
+            --accent-red: #ff3333;
+            --accent-gray: #aab4d4;
+            --font-ui: 'Rajdhani', sans-serif;
+            --font-tech: 'Share Tech Mono', monospace;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        html, body {
+            margin: 0; padding: 0; background: var(--bg-page); color: var(--text-main);
+            font-family: var(--font-body); line-height: 1.7; font-size: 15px;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 243, 255, 0.05); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 243, 255, 0.3); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 243, 255, 0.8); }
+
+        .log-container { padding: 30px 40px; max-width: 900px; margin: 0 auto; }
+
+        /* 标题排版 */
+        .doc-header { border-bottom: 1px solid rgba(0,243,255,0.3); padding-bottom: 15px; margin-bottom: 30px; }
+        .doc-id { font-family: var(--font-tech); color: var(--accent-orange); letter-spacing: 3px; font-size: 12px; margin-bottom: 5px; }
+        .doc-title { font-family: var(--font-ui); font-size: 32px; font-weight: 700; color: #fff; margin: 0; letter-spacing: 1px; text-shadow: 0 0 10px rgba(0,243,255,0.5); }
+
+        p { margin-bottom: 15px; }
+        strong { color: #fff; }
+
+        /* --- 科幻数据框样式 --- */
+        .t-box {
+            margin: 20px 0; padding: 20px; border-radius: 4px;
+            background: rgba(0, 15, 30, 0.6); position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        .t-box-title {
+            font-family: var(--font-tech); font-size: 13px; font-weight: 700; letter-spacing: 2px;
+            margin-bottom: 15px; display: inline-block; padding: 4px 10px; background: #000;
+        }
+
+        /* 1. 公式框 (Formula) - 警示橙色 */
+        .box-formula { border: 1px solid rgba(255, 122, 61, 0.3); border-left: 4px solid var(--accent-orange); background: rgba(30, 10, 0, 0.4); }
+        .box-formula .t-box-title { color: var(--accent-orange); border: 1px solid var(--accent-orange); box-shadow: 0 0 8px rgba(255,122,61,0.3); }
+
+        /* 2. 任务框 (Task/Exercise) - 冰蓝色 */
+        .box-task { border: 1px solid rgba(0, 243, 255, 0.2); border-left: 4px solid var(--accent-cyan); background: rgba(255, 255, 255, 0.02); }
+        .box-task .t-box-title { color: var(--accent-cyan); border: 1px solid var(--accent-cyan); box-shadow: 0 0 8px rgba(0,243,255,0.3); }
+
+        /* 将 LaTeX 留白替换为赛博朋克风的输入等待区 */
+        .awaiting-computation {
+            border-top: 1px dashed rgba(0, 243, 255, 0.3);
+            margin-top: 25px; padding-top: 10px;
+            font-family: var(--font-tech); font-size: 12px; color: rgba(0, 243, 255, 0.5);
+            letter-spacing: 2px; animation: blink-text 2s infinite;
+        }
+
+        @keyframes blink-text { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+        
+        mjx-container { color: #fff !important; text-shadow: 0 0 2px rgba(255,255,255,0.3); }
+    </style>
+</head>
+<body>
+
+<div class="log-container">
+    <div class="doc-header">
+        <div class="doc-id">DATA LOG // SECTION 6.7 [BC ONLY]</div>
+        <h1 class="doc-title">Integration by Parts</h1>
+    </div>
+
+    <!-- Ex1. Product rule in reverse -->
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 01 // PRODUCT RULE IN REVERSE</div>
+        <p>Use the product rule to derive a formula for \(\displaystyle\int u\,dv\).</p>
+        \[ \frac{d}{dx}(uv)=u'v+uv' \]
+        
+        <!-- 赛博朋克留白区 -->
+        <div class="awaiting-computation">&gt; AWAITING DERIVATION COMPUTATION...</div>
+    </div>
+
+    <!-- Integration by Parts Formula -->
+    <div class="t-box box-formula">
+        <div class="t-box-title">CORE PROTOCOL // INTEGRATION BY PARTS</div>
+        \[ \int u\,dv=uv-\int v\,du \]
+        <br>
+        \[ \int_a^b u\,dv=[uv]_a^b-\int_a^b v\,du \]
+        <p style="margin-top: 15px; color: var(--accent-orange); font-family: var(--font-tech); font-size: 13px;">
+            > TACTICAL ADVICE: Choose \(u\) so that differentiating it makes the new integral simpler.
+        </p>
+    </div>
+
+    <!-- Ex2. Choosing the parts -->
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 02 // CHOOSING THE PARTS</div>
+        <p>Evaluate \(\displaystyle\int xe^{2x}\,dx\).</p>
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <!-- Ex3. Logarithmic factor -->
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 03 // LOGARITHMIC FACTOR</div>
+        <p>Evaluate \(\displaystyle\int x^2\ln x\,dx\).</p>
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <!-- Ex4. Hidden product -->
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 04 // HIDDEN PRODUCT</div>
+        <p>Evaluate \(\displaystyle\int \ln x\,dx\).</p>
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <!-- Ex5. Repeated parts -->
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 05 // REPEATED PARTS</div>
+        <p>Evaluate \(\displaystyle\int x^2e^x\,dx\).</p>
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <!-- Ex6. Definite integral -->
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 06 // DEFINITE INTEGRAL</div>
+        <p>Evaluate \(\displaystyle\int_0^1xe^{2x}\,dx\).</p>
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <br><br><br>
+</div>
+
+</body>
+</html>
