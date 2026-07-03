@@ -5,27 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IGNITE: {{ page.title }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/ignite-core.css">
+    
+    <!-- 绝对稳妥的底层 CSS 路径 -->
+    <link rel="stylesheet" href="./css/ignite-core.css"> 
     
     <style>
         /* =========================================
-           沉浸式全屏布局定制 (覆盖 ignite-core)
+           沉浸式全屏布局定制
            ========================================= */
         .main-view {
-            flex-direction: row !important; /* 横向排布：主屏幕 + 右侧工具栏 */
+            flex-direction: row !important; 
             width: 100% !important; max-width: 100% !important; height: 100% !important;
             margin: 0 !important; border: none !important; box-shadow: none !important; background: #000 !important;
         }
 
-        /* 释放内容区：绝对全屏撑满 */
         .immersive-area {
-            flex: 1; height: 100%; position: relative; overflow: hidden;
-            background: #000;
+            flex: 1; height: 100%; position: relative; overflow: hidden; background: #000;
         }
 
-        /* 全新的右侧垂直侧壁栏 */
+        /* 修复 1：加上 flex-shrink: 0，绝对不允许被挤扁！ */
         .right-toolbar {
-            width: 80px; height: 100%;
+            width: 80px; height: 100%; flex-shrink: 0; 
             background: rgba(5, 10, 15, 0.95);
             border-left: 1px solid rgba(0, 243, 255, 0.2);
             display: flex; flex-direction: column; align-items: center;
@@ -33,7 +33,6 @@
             box-shadow: -10px 0 30px rgba(0,0,0,0.8);
         }
 
-        /* 垂直排列的机甲按钮 */
         .mode-btn {
             width: 60px; height: 60px; margin-bottom: 15px;
             background: rgba(0, 30, 60, 0.3); border: 1px solid rgba(0, 243, 255, 0.2);
@@ -53,7 +52,6 @@
         .stark-panel.active { display: block; }
         .iframe-container { width: 100%; height: 100%; border: none; display: block; background: #000; }
         
-        /* 微调左侧唤醒按钮防止遮挡 */
         .sidebar-toggle-btn { top: 20px !important; }
     </style>
 </head>
@@ -69,37 +67,33 @@
 
         <div class="main-view">
             
-            <!-- 左侧：100% 无死角沉浸式屏幕 -->
+            <!-- 左侧：无死角沉浸式屏幕 -->
             <div class="immersive-area">
                 
-              <div style="flex:1; position:relative; width: 100%; height: 100%; overflow: hidden;">
-                    
-                   <!-- LECTURE -->
+                <!-- 修复 2：使用最稳妥的根目录寻址法 -->
                 <div id="view-lecture" class="stark-panel active">
-                    <iframe src="./{{ page.lecture_src }}" class="iframe-container"></iframe>
+                    <iframe src="{{ page.lecture_src }}" class="iframe-container"></iframe>
                 </div>
 
-                <!-- NOTES -->
                 <div id="view-notes" class="stark-panel">
-                    <iframe src="./{{ page.notes_src }}" class="iframe-container"></iframe>
+                    <iframe src="{{ page.notes_src }}" class="iframe-container"></iframe>
                 </div>
 
-                <!-- ASSIGNMENT -->
                 <div id="view-assign" class="stark-panel">
-                    <iframe src="./{{ page.assign_src }}" class="iframe-container"></iframe>
+                    <iframe src="{{ page.assign_src }}" class="iframe-container"></iframe>
                 </div>
 
-                <!-- LAB -->
                 <div id="view-lab" class="stark-panel">
-                    <iframe src="./derivative.html" class="iframe-container"></iframe>
+                    <iframe src="derivative.html" class="iframe-container"></iframe>
                 </div>
 
-                <!-- QUIZ -->
                 <div id="view-quiz" class="stark-panel">
-                    <iframe src="./{{ page.quiz_src }}" class="iframe-container"></iframe>
+                    <iframe src="{{ page.quiz_src }}" class="iframe-container"></iframe>
                 </div>
 
-            <!-- 右侧：悬浮侧壁工具栏 -->
+            </div>
+
+            <!-- 右侧：悬浮侧壁工具栏 (它现在绝对不会消失了) -->
             <div class="right-toolbar">
                 <button class="mode-btn active" onclick="switchView('lecture', this)">
                     <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM8 8v8l7-4z"/></svg>
@@ -118,7 +112,6 @@
                     QUIZ
                 </button>
                 
-                <!-- LAB 按钮被推到了侧边栏的最下面 -->
                 <button class="mode-btn lab-btn" onclick="switchView('lab', this)">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2l-5.5 9h11L12 2zm0 3.8l2.6 4.2h-5.2L12 5.8zM7.5 13l-3 7h15l-3-7h-9zm1.8 2h5.4l1.3 3H8l1.3-3z"/>
@@ -131,7 +124,7 @@
 
     </div>
 
-    <!-- 引入侧边栏交互 JS -->
-    <script src="{{ '/js/ignite-ui.js' | relative_url }}"></script>
+    <!-- 绝对稳妥的 JS 路径 -->
+    <script src="./js/ignite-ui.js"></script>
 </body>
 </html>
