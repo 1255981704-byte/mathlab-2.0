@@ -72,32 +72,34 @@
             <!-- 左侧：100% 无死角沉浸式屏幕 -->
             <div class="immersive-area">
                 
-                <!-- LECTURE (默认显示) -->
-                <div id="view-lecture" class="stark-panel active">
-                    <iframe src="{{ page.lecture_src }}" class="iframe-container"></iframe>
-                </div>
+               <div style="flex:1; position:relative; width: 100%; height: 100%; overflow: hidden;">
+                    
+                    <!-- LECTURE -->
+                    <div id="view-lecture" class="stark-panel active">
+                        <iframe src="{{ page.lecture_src | relative_url }}" class="iframe-container"></iframe>
+                    </div>
 
-                <!-- NOTES -->
-                <div id="view-notes" class="stark-panel">
-                    <iframe src="{{ page.notes_src }}" class="iframe-container"></iframe>
-                </div>
+                    <!-- NOTES -->
+                    <div id="view-notes" class="stark-panel">
+                        <iframe src="{{ page.notes_src | relative_url }}" class="iframe-container"></iframe>
+                    </div>
 
-                <!-- ASSIGNMENT -->
-                <div id="view-assign" class="stark-panel">
-                    <iframe src="{{ page.assign_src }}" class="iframe-container"></iframe>
-                </div>
+                    <!-- ASSIGNMENT -->
+                    <div id="view-assign" class="stark-panel">
+                        <iframe src="{{ page.assign_src | relative_url }}" class="iframe-container"></iframe>
+                    </div>
 
-                <!-- LAB -->
-                <div id="view-lab" class="stark-panel">
-                    <iframe src="derivative.html" class="iframe-container"></iframe>
-                </div>
+                    <!-- LAB -->
+                    <div id="view-lab" class="stark-panel">
+                        <iframe src="{{ '/derivative.html' | relative_url }}" class="iframe-container"></iframe>
+                    </div>
 
-                <!-- QUIZ -->
-                <div id="view-quiz" class="stark-panel">
-                    <iframe src="{{ page.quiz_src }}" class="iframe-container"></iframe>
-                </div>
+                    <!-- QUIZ -->
+                    <div id="view-quiz" class="stark-panel">
+                        <iframe src="{{ page.quiz_src | relative_url }}" class="iframe-container"></iframe>
+                    </div>
 
-            </div>
+                </div>
 
             <!-- 右侧：悬浮侧壁工具栏 -->
             <div class="right-toolbar">
