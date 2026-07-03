@@ -1,0 +1,92 @@
+/* =========================================
+   IGNITE MATH LAB - CORE UI V36
+   ========================================= */
+
+/* --- 1. 基础重置与全屏锁定 --- */
+html, body {
+    height: 100%; width: 100%; overflow: hidden; margin: 0; padding: 0;
+    display: flex; flex-direction: column; background: #000205; 
+    font-family: 'Rajdhani', sans-serif;
+}
+a { text-decoration: none; }
+
+/* 彻底清除外部残余 */
+.interface, .main-view { background: transparent !important; border: none !important; box-shadow: none !important; }
+.interface { flex: 1; display: flex; overflow: hidden; position: relative; }
+
+/* --- 2. 悬浮抽屉式侧边栏 --- */
+.nav-panel-container {
+    width: 320px; height: 100%; overflow-y: auto; 
+    background: rgba(5, 10, 15, 0.95); border-right: 1px solid rgba(0, 243, 255, 0.2);
+    position: absolute; top: 0; left: 0; z-index: 100; 
+    backdrop-filter: blur(10px); box-shadow: 20px 0 50px rgba(0,0,0,0.8);
+    transform: translateX(-100%); transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.nav-panel-container.open { transform: translateX(0); }
+
+/* 呼出按钮与遮罩 */
+.sidebar-toggle-btn {
+    position: absolute; left: 0; top: 40px; z-index: 90;
+    background: rgba(0, 15, 30, 0.85); border: 1px solid rgba(0, 243, 255, 0.4);
+    border-left: none; border-radius: 0 10px 10px 0; color: #00f3ff;
+    padding: 12px 20px 12px 15px; font-weight: 600; font-size: 15px; letter-spacing: 1.5px;
+    cursor: pointer; backdrop-filter: blur(8px); display: flex; align-items: center; gap: 10px;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.4);
+}
+.sidebar-toggle-btn:hover {
+    background: rgba(0, 243, 255, 0.2); border-color: #00f3ff;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.1);
+    padding-left: 20px; padding-right: 15px;
+}
+.sidebar-toggle-btn.hidden { opacity: 0; transform: translateX(-100%); pointer-events: none; }
+
+.sidebar-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6); z-index: 95; opacity: 0; pointer-events: none;
+    backdrop-filter: blur(3px); transition: opacity 0.5s ease;
+}
+.sidebar-overlay.active { opacity: 1; pointer-events: auto; }
+
+/* --- 3. HUD 悬浮控制台 (核心视觉) --- */
+.main-view { flex: 1; height: 100%; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+
+.view-body { 
+    flex: 1; width: calc(100% - 320px); max-width: 1400px; margin: 30px auto; 
+    display: flex; flex-direction: column; padding: 40px; overflow: hidden; box-sizing: border-box; position: relative; 
+    background: rgba(0, 15, 30, 0.5); border: 1px solid rgba(0, 243, 255, 0.15); box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8); 
+    backdrop-filter: blur(8px); border-radius: 4px; transition: padding 0.5s cubic-bezier(0.23, 1, 0.32, 1), width 0.5s ease;
+}
+@media (max-width: 1200px) { .view-body { width: calc(100% - 120px); } }
+@media (max-width: 900px) { .view-body { width: calc(100% - 40px); padding: 30px; margin: 20px auto; } }
+
+/* 专注折叠模式 */
+.vh-group { max-height: 200px; opacity: 1; transform: translateY(0) scale(1); filter: blur(0); margin-bottom: 20px; transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1), margin 0.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease-out, transform 0.4s ease-in, filter 0.4s linear; transform-origin: top left; will-change: transform, opacity, max-height; }
+.view-body.focus-mode { padding-top: 25px; }
+.view-body.focus-mode .vh-group { max-height: 0; margin-bottom: 0; padding-bottom: 0; opacity: 0; transform: translateY(-30px) scale(0.95); filter: blur(10px); pointer-events: none; border-bottom: none; }
+
+/* 菜单按钮 */
+.control-deck { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; border-bottom: 1px solid rgba(0,243,255,0.2); padding-bottom: 20px; flex-shrink: 0; }
+.mode-btn { height: 45px; padding: 0 25px; background: rgba(0, 30, 60, 0.3); border: 1px solid rgba(0, 243, 255, 0.2); color: #678; font-weight: 700; font-size: 14px; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease; clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px); display: flex; align-items: center; gap: 10px; }
+.mode-btn:hover, .mode-btn.active { background: rgba(0, 243, 255, 0.1); border-color: #00f3ff; color: #00f3ff; box-shadow: 0 0 15px rgba(0, 243, 255, 0.1); }
+.mode-btn.lab-btn { margin-left: auto; border: 1px solid rgba(255, 85, 0, 0.4); color: #ffaa00; background: rgba(255, 85, 0, 0.05); padding: 0 30px; font-weight: 800; letter-spacing: 2px; }
+.mode-btn.lab-btn:hover, .mode-btn.lab-btn.active { background: rgba(255, 85, 0, 0.15); border-color: #ffaa00; color: #fff; box-shadow: 0 0 25px rgba(255, 85, 0, 0.3), inset 0 0 10px rgba(255, 85, 0, 0.1); text-shadow: 0 0 8px rgba(255, 170, 0, 0.8); }
+.mode-btn.lab-btn svg { transition: transform 0.3s; }
+.mode-btn.lab-btn:hover svg { transform: scale(1.2); filter: drop-shadow(0 0 5px #ffaa00); }
+
+/* --- 4. 视频与面板容器 --- */
+.stark-panel { display: none; width: 100%; height: 100%; flex-direction: column; overflow: hidden; }
+.stark-panel.active { display: flex; }
+.iframe-container { width: 100%; height: 100%; border: none; display: block; background: transparent; }
+
+.video-wrapper { width: 100%; max-width: 1000px; aspect-ratio: 16 / 9; position: relative; background: #000; border: 1px solid rgba(0, 243, 255, 0.3); border-radius: 8px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6); overflow: hidden; }
+.video-wrapper video { width: 100%; height: 100%; object-fit: contain; outline: none; background: #000; }
+.vid-overlay-live { position: absolute; top: 15px; left: 15px; color: #ff3333; font-weight: bold; font-family: 'Share Tech Mono', monospace; animation: blink 2s infinite; z-index: 2; pointer-events: none; text-shadow: 0 0 10px rgba(255,51,51,0.5); }
+.vid-overlay-text { position: absolute; bottom: 15px; left: 15px; color: rgba(255,255,255,0.5); font-family: 'Share Tech Mono', monospace; font-size: 12px; z-index: 2; pointer-events: none; }
+@keyframes blink { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
+
+/* --- 5. 科幻滚动条 (解决溢出问题) --- */
+.sub-grid { flex: 1; overflow-y: auto; min-height: 0; padding-right: 15px; margin-bottom: 20px; display: grid; gap: 15px; align-content: start; }
+.sub-grid::-webkit-scrollbar { width: 6px; }
+.sub-grid::-webkit-scrollbar-track { background: rgba(0, 243, 255, 0.05); border-radius: 4px; }
+.sub-grid::-webkit-scrollbar-thumb { background: rgba(0, 243, 255, 0.3); border-radius: 4px; border: 1px solid rgba(0, 243, 255, 0.1); transition: all 0.3s ease; }
+.sub-grid::-webkit-scrollbar-thumb:hover { background: rgba(0, 243, 255, 0.8); box-shadow: 0 0 10px rgba(0, 243, 255, 0.5); }
