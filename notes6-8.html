@@ -1,1 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATA LOG // 6.8 Riemann Sums</title>
 
+    <!-- 引入机甲字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- 配置 MathJax 渲染数学公式 -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], tags: 'none' },
+            chtml: { scale: 1.1 } 
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- 专属数据日志 CSS -->
+    <style>
+        :root {
+            --bg-page: transparent;
+            --text-main: #d8e6f2;
+            --text-dim: #7d8ea0;
+            --accent-cyan: #00f3ff;
+            --accent-orange: #ff7a3d;
+            --accent-red: #ff3333;
+            --accent-gray: #aab4d4;
+            --font-ui: 'Rajdhani', sans-serif;
+            --font-tech: 'Share Tech Mono', monospace;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        html, body {
+            margin: 0; padding: 0; background: var(--bg-page); color: var(--text-main);
+            font-family: var(--font-body); line-height: 1.7; font-size: 15px;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 243, 255, 0.05); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 243, 255, 0.3); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 243, 255, 0.8); }
+
+        .log-container { padding: 30px 40px; max-width: 900px; margin: 0 auto; }
+
+        /* 标题排版 */
+        .doc-header { border-bottom: 1px solid rgba(0,243,255,0.3); padding-bottom: 15px; margin-bottom: 30px; }
+        .doc-id { font-family: var(--font-tech); color: var(--accent-orange); letter-spacing: 3px; font-size: 12px; margin-bottom: 5px; }
+        .doc-title { font-family: var(--font-ui); font-size: 32px; font-weight: 700; color: #fff; margin: 0; letter-spacing: 1px; text-shadow: 0 0 10px rgba(0,243,255,0.5); }
+
+        h2 { 
+            font-family: var(--font-ui); color: var(--accent-cyan); font-size: 22px; font-weight: 700; 
+            letter-spacing: 2px; margin-top: 40px; margin-bottom: 15px; border-left: 4px solid var(--accent-cyan); padding-left: 10px;
+        }
+        p { margin-bottom: 15px; }
+        strong { color: #fff; }
+
+        /* --- 科幻数据框样式 --- */
+        .t-box {
+            margin: 20px 0; padding: 20px; border-radius: 4px;
+            background: rgba(0, 15, 30, 0.6); position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        .t-box-title {
+            font-family: var(--font-tech); font-size: 13px; font-weight: 700; letter-spacing: 2px;
+            margin-bottom: 15px; display: inline-block; padding: 4px 10px; background: #000;
+        }
+
+        /* 公式框 (Formula) - 警示橙色 */
+        .box-formula { border: 1px solid rgba(255, 122, 61, 0.3); border-left: 4px solid var(--accent-orange); background: rgba(30, 10, 0, 0.4); }
+        .box-formula .t-box-title { color: var(--accent-orange); border: 1px solid var(--accent-orange); box-shadow: 0 0 8px rgba(255,122,61,0.3); }
+
+        /* 任务框 (Task/Exercise) - 冰蓝色 */
+        .box-task { border: 1px solid rgba(0, 243, 255, 0.2); border-left: 4px solid var(--accent-cyan); background: rgba(255, 255, 255, 0.02); }
+        .box-task .t-box-title { color: var(--accent-cyan); border: 1px solid var(--accent-cyan); box-shadow: 0 0 8px rgba(0,243,255,0.3); }
+
+        /* --- 数据表格样式 --- */
+        .data-table {
+            width: 100%; border-collapse: collapse; text-align: center; margin: 20px 0;
+            font-family: var(--font-tech); font-size: 15px; color: var(--text-main);
+        }
+        .data-table th, .data-table td { border: 1px solid rgba(255,255,255,0.1); padding: 12px; }
+        .data-table thead { background: rgba(0, 243, 255, 0.1); color: var(--accent-cyan); }
+        .data-table.summary-table th { background: rgba(255, 122, 61, 0.1); color: var(--accent-orange); }
+
+        /* 将 LaTeX 留白替换为赛博朋克风的输入等待区 */
+        .awaiting-computation {
+            border-top: 1px dashed rgba(0, 243, 255, 0.3);
+            margin-top: 25px; padding-top: 10px;
+            font-family: var(--font-tech); font-size: 12px; color: rgba(0, 243, 255, 0.5);
+            letter-spacing: 2px; animation: blink-text 2s infinite;
+        }
+
+        @keyframes blink-text { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+        
+        mjx-container { color: #fff !important; text-shadow: 0 0 2px rgba(255,255,255,0.3); }
+    </style>
+</head>
+<body>
+
+<div class="log-container">
+    <div class="doc-header">
+        <div class="doc-id">DATA LOG // SECTION 6.8</div>
+        <h1 class="doc-title">Riemann Sums</h1>
+    </div>
+
+    <!-- Ex1. Right Riemann Sum -->
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 01 // RIGHT RIEMANN SUM</div>
+        <p>Approximate \(\displaystyle\int_0^2x^2\,dx\) using \(n=4\) right-endpoint rectangles.</p>
+        
+        <!-- SVG 图表绘制 -->
+        <svg viewBox="0 0 520 300" style="width: 100%; max-width: 400px; margin: 15px auto; display: block;">
+            <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#7d8ea0"/></marker></defs>
+            <line x1="38" y1="250" x2="490" y2="250" stroke="#7d8ea0" stroke-width="1.2" marker-end="url(#arrow)"/>
+            <line x1="60" y1="270" x2="60" y2="14" stroke="#7d8ea0" stroke-width="1.2" marker-end="url(#arrow)"/>
+            <g stroke="#6a7290" stroke-width="1">
+                <line x1="160" y1="245" x2="160" y2="255"/><line x1="260" y1="245" x2="260" y2="255"/>
+                <line x1="360" y1="245" x2="360" y2="255"/><line x1="460" y1="245" x2="460" y2="255"/>
+            </g>
+            <path d="M60 250 Q260 250 460 30" fill="none" stroke="#00f3ff" stroke-width="2.2" stroke-linecap="round"/>
+            <text x="493" y="255" fill="#7d8ea0" font-family="Share Tech Mono" font-size="12">x</text>
+            <text x="46" y="18" fill="#7d8ea0" font-family="Share Tech Mono" font-size="12">y</text>
+        </svg>
+
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <!-- Riemann Sum Definition -->
+    <div class="t-box box-formula">
+        <div class="t-box-title">DEFINITION // RIEMANN SUM</div>
+        \[ \Delta x=\frac{b-a}{n}, \qquad \sum_{i=1}^{n}f(x_i^*)\,\Delta x \]
+        <p style="margin-top:15px; font-size:14px; color:var(--text-dim);">The sample point \(x_i^*\) determines whether the rectangles are left, right, or midpoint rectangles.</p>
+    </div>
+
+    <!-- Ex2. Trapezoidal approximation -->
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 02 // TRAPEZOIDAL APPROXIMATION</div>
+        <p>Use the data to approximate \(\displaystyle\int_0^9v(t)\,dt\).</p>
+        
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>\(t\) (s)</th>
+                    <th>0</th><th>2</th><th>5</th><th>9</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>\(v(t)\) (m/s)</th>
+                    <td>4</td><td>7</td><td>10</td><td>6</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <!-- Ex3. Underestimate or Overestimate -->
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 03 // UNDERESTIMATE OR OVERESTIMATE</div>
+        <p>For the increasing, concave-up function shown, classify the Left, Right, Midpoint, and Trapezoidal approximations.</p>
+
+        <svg viewBox="0 0 500 290" style="width: 100%; max-width: 400px; margin: 15px auto; display: block;">
+            <defs><marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#7d8ea0"/></marker></defs>
+            <line x1="30" y1="250" x2="480" y2="250" stroke="#7d8ea0" stroke-width="1.2" marker-end="url(#arrow2)"/>
+            <line x1="50" y1="270" x2="50" y2="16" stroke="#7d8ea0" stroke-width="1.2" marker-end="url(#arrow2)"/>
+            <path d="M50 250 Q250 250 450 30" fill="none" stroke="#00f3ff" stroke-width="2.2" stroke-linecap="round"/>
+            <text x="482" y="255" fill="#7d8ea0" font-family="Share Tech Mono" font-size="12">x</text>
+            <text x="36" y="18" fill="#7d8ea0" font-family="Share Tech Mono" font-size="12">y</text>
+        </svg>
+
+        <div class="awaiting-computation">&gt; AWAITING CLASSIFICATION LOG...</div>
+    </div>
+
+    <!-- Summary Table -->
+    <h2>Summary: Underestimate or Overestimate</h2>
+    <table class="data-table summary-table">
+        <thead>
+            <tr>
+                <th>Function</th>
+                <th>Left</th>
+                <th>Right</th>
+                <th>Midpoint</th>
+                <th>Trapezoidal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="color:#fff;">Increasing</td>
+                <td style="color:#00f3ff;">Under</td>
+                <td style="color:#ff3333;">Over</td>
+                <td style="color:var(--text-dim);">---</td>
+                <td style="color:var(--text-dim);">---</td>
+            </tr>
+            <tr>
+                <td style="color:#fff;">Decreasing</td>
+                <td style="color:#ff3333;">Over</td>
+                <td style="color:#00f3ff;">Under</td>
+                <td style="color:var(--text-dim);">---</td>
+                <td style="color:var(--text-dim);">---</td>
+            </tr>
+            <tr>
+                <td style="color:#fff;">Concave up</td>
+                <td style="color:var(--text-dim);">---</td>
+                <td style="color:var(--text-dim);">---</td>
+                <td style="color:#00f3ff;">Under</td>
+                <td style="color:#ff3333;">Over</td>
+            </tr>
+            <tr>
+                <td style="color:#fff;">Concave down</td>
+                <td style="color:var(--text-dim);">---</td>
+                <td style="color:var(--text-dim);">---</td>
+                <td style="color:#ff3333;">Over</td>
+                <td style="color:#00f3ff;">Under</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Ex4. Sum to integral -->
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 04 // SUM TO INTEGRAL</div>
+        <p>Express the limit as a definite integral, then evaluate it.</p>
+        \[ \lim_{n\to\infty}\sum_{i=1}^{n} \left(1+\frac{2i}{n}\right)^3\frac{2}{n} \]
+        <div class="awaiting-computation">&gt; AWAITING EVALUATION...</div>
+    </div>
+
+    <!-- Ex5. Integral to sum -->
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 05 // INTEGRAL TO RIGHT SUM</div>
+        <p>Write \(\displaystyle\int_0^\pi\sin x\,dx\) as the limit of right Riemann sums.</p>
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <!-- Ex6. Integral to midpoint sum -->
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 06 // INTEGRAL TO MIDPOINT SUM</div>
+        <p>Write \(\displaystyle\int_2^5\sqrt{1+x^2}\,dx\) as the limit of midpoint Riemann sums.</p>
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <br><br><br>
+</div>
+
+</body>
+</html>
