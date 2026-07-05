@@ -1,1 +1,249 @@
-q
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATA LOG // 6.5 Long Division and Completing the Square</title>
+
+    <!-- 引入机甲字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- 配置 MathJax 渲染数学公式 -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], tags: 'none' },
+            chtml: { scale: 1.1 } 
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- 专属数据日志 CSS -->
+    <style>
+        :root {
+            --bg-page: transparent;
+            --text-main: #d8e6f2;
+            --text-dim: #7d8ea0;
+            --accent-cyan: #00f3ff;
+            --accent-orange: #ff7a3d;
+            --accent-red: #ff3333;
+            --accent-gray: #aab4d4;
+            --font-ui: 'Rajdhani', sans-serif;
+            --font-tech: 'Share Tech Mono', monospace;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* 隐藏原生滚动条，使用机甲滚动条 */
+        html, body {
+            margin: 0; padding: 0; background: var(--bg-page); color: var(--text-main);
+            font-family: var(--font-body); line-height: 1.7; font-size: 15px;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 243, 255, 0.05); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 243, 255, 0.3); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 243, 255, 0.8); }
+
+        .log-container { padding: 30px 40px; max-width: 900px; margin: 0 auto; }
+
+        /* 标题排版 */
+        .doc-header { border-bottom: 1px solid rgba(0,243,255,0.3); padding-bottom: 15px; margin-bottom: 30px; }
+        .doc-id { font-family: var(--font-tech); color: var(--accent-orange); letter-spacing: 3px; font-size: 12px; margin-bottom: 5px; }
+        .doc-title { font-family: var(--font-ui); font-size: 32px; font-weight: 700; color: #fff; margin: 0; letter-spacing: 1px; text-shadow: 0 0 10px rgba(0,243,255,0.5); }
+
+        h2 { 
+            font-family: var(--font-ui); color: var(--accent-cyan); font-size: 22px; font-weight: 700; 
+            letter-spacing: 2px; margin-top: 40px; margin-bottom: 15px; border-left: 4px solid var(--accent-cyan); padding-left: 10px;
+        }
+        p { margin-bottom: 15px; }
+        ul, ol { padding-left: 20px; color: var(--text-dim); }
+        li { margin-bottom: 8px; }
+        strong { color: #fff; }
+
+        /* --- 科幻数据框样式 --- */
+        .t-box {
+            margin: 20px 0; padding: 20px; border-radius: 4px;
+            background: rgba(0, 15, 30, 0.6); position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        .t-box-title {
+            font-family: var(--font-tech); font-size: 13px; font-weight: 700; letter-spacing: 2px;
+            margin-bottom: 15px; display: inline-block; padding: 4px 10px; background: #000;
+        }
+
+        /* 1. 定义框 (Definition) - 赛博青色 */
+        .box-def { border: 1px solid rgba(0, 243, 255, 0.3); border-left: 4px solid var(--accent-cyan); }
+        .box-def .t-box-title { color: var(--accent-cyan); border: 1px solid var(--accent-cyan); box-shadow: 0 0 8px rgba(0,243,255,0.3); }
+
+        /* 2. 公式框 (Formula) - 警示橙色 */
+        .box-formula { border: 1px solid rgba(255, 122, 61, 0.3); border-left: 4px solid var(--accent-orange); background: rgba(30, 10, 0, 0.4); }
+        .box-formula .t-box-title { color: var(--accent-orange); border: 1px solid var(--accent-orange); box-shadow: 0 0 8px rgba(255,122,61,0.3); }
+
+        /* 3. 警告框 (Warning) - 危险红色 */
+        .box-warning { border: 1px solid rgba(255, 51, 51, 0.3); border-left: 4px solid var(--accent-red); background: rgba(40, 5, 5, 0.4); }
+        .box-warning .t-box-title { color: var(--accent-red); border: 1px solid var(--accent-red); box-shadow: 0 0 10px rgba(255,51,51,0.5); animation: pulse-red 2s infinite; }
+
+        /* 4. 示例框 (Example) - 冷静灰蓝 */
+        .box-example { border: 1px solid rgba(170, 180, 212, 0.2); border-left: 4px solid var(--accent-gray); background: rgba(255, 255, 255, 0.02); }
+        .box-example .t-box-title { color: var(--accent-gray); border: 1px solid var(--accent-gray); }
+
+        @keyframes pulse-red { 0%, 100% { box-shadow: 0 0 5px rgba(255,51,51,0.3); } 50% { box-shadow: 0 0 15px rgba(255,51,51,0.8); } }
+        
+        mjx-container { color: #fff !important; text-shadow: 0 0 2px rgba(255,255,255,0.3); }
+    </style>
+</head>
+<body>
+
+<div class="log-container">
+    <div class="doc-header">
+        <div class="doc-id">DATA LOG // SECTION 6.5</div>
+        <h1 class="doc-title">Long Division and Completing the Square</h1>
+    </div>
+
+    <!-- 1. Rational Integrands -->
+    <h2>1. Rational Integrands</h2>
+    <p>A rational function is a quotient of polynomials,</p>
+    \[ \frac{P(x)}{Q(x)}. \]
+    <p>Before integrating, compare the degrees and inspect the denominator.</p>
+
+    <div class="t-box box-def">
+        <div class="t-box-title">DECISION PROCESS</div>
+        <ol>
+            <li>If \(\deg P\geq\deg Q\), perform polynomial long division first.</li>
+            <li>If the denominator contains an irreducible quadratic, complete the square.</li>
+            <li>Rewrite the remaining proper rational expression into a standard logarithmic or inverse-trigonometric form.</li>
+        </ol>
+    </div>
+
+    <!-- 2. Polynomial Long Division -->
+    <h2>2. Polynomial Long Division</h2>
+    <p>Long division rewrites an improper rational function as</p>
+    \[ \frac{P(x)}{Q(x)}=S(x)+\frac{R(x)}{Q(x)}, \qquad \deg R<\deg Q. \]
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 1: DIVIDE BEFORE INTEGRATING</div>
+        <p>Evaluate \[ \int\frac{x^3+2x^2+x+1}{x^2+1}\,dx. \]</p>
+        <p>Polynomial division gives \[ \frac{x^3+2x^2+x+1}{x^2+1} =x+2-\frac1{x^2+1}. \]</p>
+        <p>Therefore,</p>
+        \[
+        \begin{aligned}
+        \int\frac{x^3+2x^2+x+1}{x^2+1}\,dx &=\int\left(x+2-\frac1{x^2+1}\right)dx\\[3pt]
+        &=\boxed{\frac{x^2}{2}+2x-\arctan x+C}.
+        \end{aligned}
+        \]
+    </div>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 2: A LINEAR DIVISOR</div>
+        <p>Evaluate \[ \int\frac{x^2+1}{x-1}\,dx. \]</p>
+        <p>Since \[ \frac{x^2+1}{x-1}=x+1+\frac2{x-1}, \]</p>
+        <p>we obtain</p>
+        \[
+        \begin{aligned}
+        \int\frac{x^2+1}{x-1}\,dx &=\int\left(x+1+\frac2{x-1}\right)dx\\[3pt]
+        &=\boxed{\frac{x^2}{2}+x+2\ln|x-1|+C}.
+        \end{aligned}
+        \]
+    </div>
+
+    <div class="t-box box-warning">
+        <div class="t-box-title">WARNING // DO NOT INTEGRATE NUMERATOR AND DENOMINATOR SEPARATELY</div>
+        <p>In general,</p>
+        \[ \int\frac{P(x)}{Q(x)}\,dx \neq \frac{\int P(x)\,dx}{\int Q(x)\,dx}. \]
+        <p>The quotient must first be simplified by algebra, substitution, completing the square, or partial fractions.</p>
+    </div>
+
+    <!-- 3. Completing the Square -->
+    <h2>3. Completing the Square</h2>
+    <p>For a quadratic expression,</p>
+    \[ x^2+bx+c =\left(x+\frac b2\right)^2+c-\frac{b^2}{4}. \]
+    <p>This reveals a shifted version of a standard inverse-trigonometric or logarithmic form.</p>
+
+    <div class="t-box box-formula">
+        <div class="t-box-title">TWO STANDARD QUADRATIC FORMS</div>
+        <p>For \(a>0\),</p>
+        \[ \boxed{\int\frac{du}{u^2+a^2}=\frac1a\arctan\left(\frac ua\right)+C} \]
+        <p>and</p>
+        \[ \boxed{\int\frac{du}{u^2-a^2} =\frac1{2a}\ln\left|\frac{u-a}{u+a}\right|+C}. \]
+    </div>
+
+    <!-- 4. Positive Completed Square -->
+    <h2>4. Positive Completed Square</h2>
+    
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 3: AN ARCTANGENT FORM</div>
+        <p>Evaluate \[ \int\frac{dx}{x^2+6x+13}. \]</p>
+        <p>Complete the square: \[ x^2+6x+13=(x+3)^2+4. \]</p>
+        <p>Let \(u=x+3\). Then</p>
+        \[ \int\frac{dx}{(x+3)^2+2^2} =\frac12\arctan\left(\frac{x+3}{2}\right)+C. \]
+        <p>Thus,</p>
+        \[ \boxed{\int\frac{dx}{x^2+6x+13} =\frac12\arctan\left(\frac{x+3}{2}\right)+C}. \]
+    </div>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 4: SEPARATE A DERIVATIVE TERM FIRST</div>
+        <p>Evaluate \[ \int\frac{x+1}{x^2+4x+8}\,dx. \]</p>
+        <p>The denominator has derivative \(2x+4\). Rewrite the numerator as</p>
+        \[ x+1=\frac12(2x+4)-1. \]
+        <p>Then</p>
+        \[
+        \begin{aligned}
+        \int\frac{x+1}{x^2+4x+8}\,dx &=\frac12\int\frac{2x+4}{x^2+4x+8}\,dx -\int\frac{dx}{(x+2)^2+4}\\[3pt]
+        &=\boxed{\frac12\ln(x^2+4x+8) -\frac12\arctan\left(\frac{x+2}{2}\right)+C}.
+        \end{aligned}
+        \]
+    </div>
+
+    <!-- 5. Difference of Squares After Completing -->
+    <h2>5. Difference of Squares After Completing</h2>
+    
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 5: A LOGARITHMIC FORM</div>
+        <p>Evaluate \[ \int\frac{dx}{x^2-4x+3}. \]</p>
+        <p>Complete the square: \[ x^2-4x+3=(x-2)^2-1. \]</p>
+        <p>Let \(u=x-2\). Using the standard formula,</p>
+        \[
+        \begin{aligned}
+        \int\frac{du}{u^2-1} &=\frac12\ln\left|\frac{u-1}{u+1}\right|+C\\[3pt]
+        &=\boxed{\frac12\ln\left|\frac{x-3}{x-1}\right|+C}.
+        \end{aligned}
+        \]
+    </div>
+
+    <p>The denominator in this example also factors as \((x-1)(x-3)\). Partial fractions provide an equivalent method and lead to the same logarithmic family.</p>
+
+    <!-- 6. Verification and Common Errors -->
+    <h2>6. Verification and Common Errors</h2>
+    <p>Differentiate the answer to Example 3. Let \(z=(x+3)/2\):</p>
+    \[
+    \begin{aligned}
+    \frac{d}{dx}\left[\frac12\arctan z\right] &=\frac12\cdot\frac{1}{1+z^2}\cdot\frac12\\[3pt]
+    &=\frac{1}{(x+3)^2+4} =\frac{1}{x^2+6x+13}.
+    \end{aligned}
+    \]
+
+    <div class="t-box box-warning">
+        <div class="t-box-title">WARNING // COMMON ERRORS</div>
+        <ul>
+            <li>Skipping long division when the rational function is improper.</li>
+            <li>Completing the square with the wrong constant.</li>
+            <li>Forgetting the scale factor \(1/a\) in the arctangent formula.</li>
+            <li>Omitting absolute values in logarithmic answers.</li>
+            <li>Failing to split the numerator into a denominator-derivative part and a remainder.</li>
+        </ul>
+    </div>
+
+    <!-- 7. Principal Results -->
+    <h2>7. Principal Results</h2>
+    
+    <div class="t-box box-formula">
+        <div class="t-box-title">STRATEGY SUMMARY</div>
+        \[ \boxed{\deg P\geq\deg Q\quad\Longrightarrow\quad\text{long divide first}} \]
+        \[ \boxed{x^2+bx+c=\left(x+\frac b2\right)^2+c-\frac{b^2}{4}} \]
+        <p>After completing the square, match the denominator to \(u^2+a^2\) or \(u^2-a^2\), and verify the result by differentiation.</p>
+    </div>
+    
+    <br><br><br>
+</div>
+
+</body>
+</html>
