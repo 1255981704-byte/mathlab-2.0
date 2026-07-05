@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>IGNITE // 06 Linear Partial Fractions [BC]</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Rajdhani:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    
+    <!-- 【精准云端寻址】 -->
+    <link rel="stylesheet" href="./css/ignite-deck.css">
+    <link rel="stylesheet" href="./css/graph-style.css">
+    
+    <script>window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="auto-resize">
 
+<nav class="progress-nav" id="progressNav" aria-label="Lesson sections">
+    <div class="pn-item active" data-go="0"><div class="pn-node">01</div><div class="pn-title">OVERVIEW</div><div class="pn-sub">BC extension</div></div>
+    <div class="pn-item" data-go="1"><div class="pn-node">02</div><div class="pn-title">SETUP</div><div class="pn-sub">Proper &amp; Factored</div></div>
+    <div class="pn-item" data-go="2"><div class="pn-node">03</div><div class="pn-title">DISTINCT</div><div class="pn-sub">Linear Factors</div></div>
+    <div class="pn-item" data-go="3"><div class="pn-node">04</div><div class="pn-title">COVER-UP</div><div class="pn-sub">Shortcut</div></div>
+    <div class="pn-item" data-go="4"><div class="pn-node">05</div><div class="pn-title">REPEATED</div><div class="pn-sub">All Powers</div></div>
+    <div class="pn-item" data-go="5"><div class="pn-node">06</div><div class="pn-title">IMPROPER</div><div class="pn-sub">Rational Integral</div></div>
+    <div class="pn-item" data-go="6"><div class="pn-node">07</div><div class="pn-title">VERIFY</div><div class="pn-sub">Recombine</div></div>
+    <div class="pn-item" data-go="7"><div class="pn-node">08</div><div class="pn-title">SUMMARY</div><div class="pn-sub">Templates</div></div>
+</nav>
+
+<div class="deck" id="deck">
+
+    <section class="slide title active" data-slide="0">
+        <div class="title-brand">06 <span>//</span> PARTIAL FRACTIONS</div>
+        <div class="title-sub">LINEAR FACTORS &nbsp;&bull;&nbsp; LOGARITHMIC ANTIDERIVATIVES</div>
+        <div class="title-rule"></div>
+        <div class="title-meta">DECOMPOSE FIRST; INTEGRATE EACH FACTOR</div>
+    </section>
+
+    <section class="slide definition-slide" data-slide="1">
+        <div class="slide-title"><h1>Make It Proper, Then Factor</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>CHECK 1</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <div class="eq-box"><div class="eq-head">PROPER FRACTION</div><div class="eq-body">\[\deg P&lt;\deg Q\]</div></div>
+                        <p>If not, perform polynomial long division first.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>CHECK 2</div>
+                <div class="box-body">
+                    <div class="sol-text">
+                        <div class="step">Factor the denominator completely over the real numbers.</div>
+                        <div class="step">Assign a partial-fraction term to every required factor and power.</div>
+                        <div class="step">Solve for constants, integrate, then recombine to verify.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="2">
+        <div class="slide-title"><h1>One Constant per Factor</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>TEMPLATE</div>
+                <div class="box-body">
+                    <div class="eq-box"><div class="eq-head">DECOMPOSITION</div><div class="eq-body">\[\frac{P(x)}{(x-r)(x-s)}=\frac{A}{x-r}+\frac{B}{x-s}\]</div></div>
+                    <div class="eq-box"><div class="eq-head">EXAMPLE</div><div class="eq-body">\[\frac{5x+1}{(x-1)(x+2)}=\frac2{x-1}+\frac3{x+2}\]</div></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>INTEGRATE &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="distinct">
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LESSON VIDEO // DISTINCT FACTORS</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="eqc">\[\boxed{2\ln|x-1|+3\ln|x+2|+C}\]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="3">
+        <div class="slide-title"><h1>Use the Zeros of the Factors</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>THREE FACTORS</div>
+                <div class="box-body">
+                    <div class="eq-box"><div class="eq-head">SETUP</div><div class="eq-body">\[\frac{2x^2+1}{x(x-1)(x+1)}=\frac A x+\frac B{x-1}+\frac C{x+1}\]</div></div>
+                    <div class="eqc">\[x=0\Rightarrow A=-1\]</div>
+                    <div class="eqc">\[x=1\Rightarrow B=\frac32,\quad x=-1\Rightarrow C=\frac32\]</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>RESULT</div>
+                <div class="box-body">
+                    <div class="sol-text">
+                        <div class="eqc">\[\boxed{-\ln|x|+\frac32\ln|x-1|+\frac32\ln|x+1|+C}\]</div>
+                        <div class="step">Substituting factor zeros isolates one unknown at a time.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide formula-slide" data-slide="4">
+        <div class="slide-title"><h1>Include Every Power</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>TEMPLATE</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <div class="eq-box"><div class="eq-head">FOR (X − R)^M</div><div class="eq-body">\[\frac{A_1}{x-r}+\frac{A_2}{(x-r)^2}+\cdots+\frac{A_m}{(x-r)^m}\]</div></div>
+                        <p class="note">Skipping an intermediate power makes the decomposition incomplete.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>EXAMPLE &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="repeated">
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LESSON VIDEO // REPEATED FACTORS</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="eqc">\[\frac{3x+5}{x(x+1)^2}=\frac5x-\frac5{x+1}-\frac2{(x+1)^2}\]</div>
+                        <div class="eqc">\[\boxed{5\ln|x|-5\ln|x+1|+\frac2{x+1}+C}\]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="5">
+        <div class="slide-title"><h1>Improper Rational Integral</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body">
+                    <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{x^3+2x}{x^2-1}dx\]</div></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="long-division-first">
+                        <div class="vid-placeholder"><div class="vid-icon">?</div><div class="vid-label">SOLUTION VIDEO // IMPROPER RATIONAL INTEGRAL</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="eqc">\[\frac{x^3+2x}{x^2-1}=x+\frac{3x}{x^2-1}\]</div>
+                        <div class="eqc">\[\frac{3x}{x^2-1}=\frac{3/2}{x-1}+\frac{3/2}{x+1}\]</div>
+                        <div class="eqc">\[\boxed{\frac{x^2}{2}+\frac32\ln|x-1|+\frac32\ln|x+1|+C}\]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide definition-slide" data-slide="6">
+        <div class="slide-title"><h1>Recombine Before You Trust It</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>ALGEBRA CHECK</div>
+                <div class="box-body">
+                    <div class="eq-box"><div class="eq-head">RECOMBINE</div><div class="eq-body">\[\frac2{x-1}+\frac3{x+2}=\frac{2(x+2)+3(x-1)}{(x-1)(x+2)}=\frac{5x+1}{(x-1)(x+2)}\]</div></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>CALCULUS CHECK</div>
+                <div class="box-body">
+                    <div class="sol-text">
+                        <div class="step">Differentiate the final logarithmic antiderivative.</div>
+                        <div class="step">The derivative must reproduce the original rational function.</div>
+                        <div class="step">This catches sign and coefficient errors.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide formula-slide" data-slide="7">
+        <div class="slide-title"><h1>Linear Partial-Fraction Templates</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>DISTINCT</div>
+                <div class="box-body">
+                    <div class="eqc">\[\frac{P(x)}{(x-r)(x-s)}=\frac A{x-r}+\frac B{x-s}\]</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>REPEATED</div>
+                <div class="box-body">
+                    <div class="eqc">\[\frac{P(x)}{(x-r)^m}=\frac{A_1}{x-r}+\cdots+\frac{A_m}{(x-r)^m}\]</div>
+                    <div class="step">Proper → factor → complete template → solve → integrate → verify.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="controls"><button class="ctrl-btn" id="prev">◄</button><div class="counter"><b id="cur">1</b> / <span id="tot">8</span></div><button class="ctrl-btn" id="next">►</button></div>
+
+<div class="modal" id="modal">
+    <div class="modal-stage">
+        <button class="modal-close" id="modalClose">×</button>
+        <div class="vid-slot" id="modalSlot">
+            <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label" id="modalLabel">VIDEO</div></div>
+        </div>
+        <div id="modalCaption"></div>
+    </div>
+</div>
+
+<!-- 【极简精准的底层脚本寻址】 -->
+<script src="./js/ignite-deck.js"></script>
+</body>
+</html>
