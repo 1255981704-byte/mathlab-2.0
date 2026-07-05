@@ -7,7 +7,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Rajdhani:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
     
-    <!-- 【精准云端寻址】 -->
+    <!-- 【精准云端寻址：彻底抛弃旧的相对路径】 -->
     <link rel="stylesheet" href="./css/ignite-deck.css">
     <link rel="stylesheet" href="./css/graph-style.css">
     
@@ -203,7 +203,11 @@
 
 </div>
 
-<div class="controls"><button class="ctrl-btn" id="prev">◄</button><div class="counter"><b id="cur">1</b> / <span id="tot">8</span></div><button class="ctrl-btn" id="next">►</button></div>
+<div class="controls">
+    <button class="ctrl-btn" id="prev">◄</button>
+    <div class="counter"><b id="cur">1</b> / <span id="tot">8</span></div>
+    <button class="ctrl-btn" id="next">►</button>
+</div>
 
 <div class="modal" id="modal">
     <div class="modal-stage">
@@ -215,7 +219,7 @@
     </div>
 </div>
 
-<!-- 【极简精准的底层脚本寻址】 -->
+<!-- 【仅保留唯一的引擎控制脚本，剔除了 integration-nav.js 炸弹】 -->
 <script src="./js/ignite-deck.js"></script>
 </body>
 </html>
