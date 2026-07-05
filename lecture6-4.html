@@ -6,7 +6,7 @@
     <title>IGNITE // 04 U-Substitution</title>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Rajdhani:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
     
-    <!-- 【修改点：修正了 css 路径】 -->
+    <!-- 【精准云端寻址】 -->
     <link rel="stylesheet" href="./css/ignite-deck.css">
     <link rel="stylesheet" href="./css/graph-style.css">
     
@@ -14,51 +14,246 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body class="auto-resize">
+
 <nav class="progress-nav" id="progressNav" aria-label="Lesson sections">
-<div class="pn-item active" data-go="0"><div class="pn-node">01</div><div class="pn-title">OVERVIEW</div><div class="pn-sub">Reverse chain rule</div></div>
-<div class="pn-item" data-go="1"><div class="pn-node">02</div><div class="pn-title">WHY U?</div><div class="pn-sub">Expand vs Substitute</div></div>
-<div class="pn-item" data-go="2"><div class="pn-node">03</div><div class="pn-title">EXAMPLE 01</div><div class="pn-sub">Linear Inner Function</div></div>
-<div class="pn-item" data-go="3"><div class="pn-node">04</div><div class="pn-title">EXAMPLE 02</div><div class="pn-sub">Log Pattern</div></div>
-<div class="pn-item" data-go="4"><div class="pn-node">05</div><div class="pn-title">EXAMPLE 03</div><div class="pn-sub">Two Choices</div></div>
-<div class="pn-item" data-go="5"><div class="pn-node">06</div><div class="pn-title">EQUIVALENCE</div><div class="pn-sub">Same Family</div></div>
-<div class="pn-item" data-go="6"><div class="pn-node">07</div><div class="pn-title">EXAMPLE 04</div><div class="pn-sub">Rewrite with Tan</div></div>
-<div class="pn-item" data-go="7"><div class="pn-node">08</div><div class="pn-title">SUMMARY</div><div class="pn-sub">Reverse Chain Rule</div></div>
+    <div class="pn-item active" data-go="0"><div class="pn-node">01</div><div class="pn-title">OVERVIEW</div><div class="pn-sub">Reverse chain rule</div></div>
+    <div class="pn-item" data-go="1"><div class="pn-node">02</div><div class="pn-title">WHY U?</div><div class="pn-sub">Expand vs Substitute</div></div>
+    <div class="pn-item" data-go="2"><div class="pn-node">03</div><div class="pn-title">EXAMPLE 01</div><div class="pn-sub">Linear Inner Function</div></div>
+    <div class="pn-item" data-go="3"><div class="pn-node">04</div><div class="pn-title">EXAMPLE 02</div><div class="pn-sub">Log Pattern</div></div>
+    <div class="pn-item" data-go="4"><div class="pn-node">05</div><div class="pn-title">EXAMPLE 03</div><div class="pn-sub">Two Choices</div></div>
+    <div class="pn-item" data-go="5"><div class="pn-node">06</div><div class="pn-title">EQUIVALENCE</div><div class="pn-sub">Same Family</div></div>
+    <div class="pn-item" data-go="6"><div class="pn-node">07</div><div class="pn-title">EXAMPLE 04</div><div class="pn-sub">Rewrite with Tan</div></div>
+    <div class="pn-item" data-go="7"><div class="pn-node">08</div><div class="pn-title">SUMMARY</div><div class="pn-sub">Reverse Chain Rule</div></div>
 </nav>
 
 <div class="deck" id="deck">
-<section class="slide title active" data-slide="0"><div class="title-brand">04 <span>//</span> U-SUBSTITUTION</div><div class="title-sub">REVERSE THE CHAIN RULE</div><div class="title-rule"></div><div class="title-meta">REPLACE THE INNER FUNCTION AND ITS DIFFERENTIAL</div></section>
 
-<section class="slide" data-slide="1"><div class="slide-title"><h1>Why Introduce a New Variable?</h1></div><div class="slide-body">
-<div class="box"><div class="box-head"><span class="dot"></span>METHOD 1 — EXPAND</div><div class="box-body"><div class="statement"><p>Start with the lecture's first example:</p><div class="eq-box"><div class="eq-head">PROBLEM</div><div class="eq-body">\[\int(2x+1)^3dx\]</div></div><div class="eqc">\[(2x+1)^3=8x^3+12x^2+6x+1\]</div><div class="eqc">\[=2x^4+4x^3+3x^2+x+C\]</div><p class="note">Expansion works, but it scales badly for large powers.</p></div></div></div>
-<div class="box"><div class="box-head sol"><span class="dot"></span>METHOD 2 — SEE THE INNER FUNCTION</div><div class="box-body"><div class="vid-slot" data-vid="why-u"><span class="vid-rec">● REC</span><div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // WHY U?</div></div></div><div class="sol-text"><div class="sol-head">STRUCTURE</div><div class="eqc">\[u=2x+1\]</div><div class="eqc">\[du=2dx\]</div><div class="step">Substitution turns a composite power into an ordinary power of (u).</div></div></div></div>
-</div></section>
+    <section class="slide title active" data-slide="0">
+        <div class="title-brand">04 <span>//</span> U-SUBSTITUTION</div>
+        <div class="title-sub">REVERSE THE CHAIN RULE</div>
+        <div class="title-rule"></div>
+        <div class="title-meta">REPLACE THE INNER FUNCTION AND ITS DIFFERENTIAL</div>
+    </section>
 
-<section class="slide" data-slide="2"><div class="slide-title"><h1>Track the Differential Carefully</h1></div><div class="slide-body">
-<div class="box"><div class="box-head"><span class="dot"></span>SET UP</div><div class="box-body"><div class="statement"><div class="eq-box"><div class="eq-head">CHOOSE U</div><div class="eq-body">\[u=2x+1\]</div></div><div class="eq-box"><div class="eq-head">DIFFERENTIAL</div><div class="eq-body">\[\frac{du}{dx}=2\Rightarrow du=2dx\Rightarrow dx=\frac12du\]</div></div><p class="note">Replace both the inner expression and the differential dx.</p></div></div></div>
-<div class="box"><div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div><div class="box-body"><div class="vid-slot" data-vid="example-1"><span class="vid-rec">● REC</span><div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // EXAMPLE 01</div></div></div><div class="sol-text"><div class="eqc">\[\int u^3\frac12du=\frac12\cdot\frac{u^4}{4}+C\]</div><div class="eqc">\[\boxed{\frac18(2x+1)^4+C}\]</div></div></div></div>
-</div></section>
+    <section class="slide" data-slide="1">
+        <div class="slide-title"><h1>Why Introduce a New Variable?</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>METHOD 1 — EXPAND</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <p>Start with the lecture's first example:</p>
+                        <div class="eq-box"><div class="eq-head">PROBLEM</div><div class="eq-body">\[\int(2x+1)^3dx\]</div></div>
+                        <div class="eqc">\[(2x+1)^3=8x^3+12x^2+6x+1\]</div>
+                        <div class="eqc">\[=2x^4+4x^3+3x^2+x+C\]</div>
+                        <p class="note">Expansion works, but it scales badly for large powers.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>METHOD 2 — SEE THE INNER FUNCTION</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="why-u">
+                        <span class="vid-rec">● REC</span>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // WHY U?</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="sol-head">STRUCTURE</div>
+                        <div class="eqc">\[u=2x+1\]</div>
+                        <div class="eqc">\[du=2dx\]</div>
+                        <div class="step">Substitution turns a composite power into an ordinary power of (u).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="slide" data-slide="3"><div class="slide-title"><h1>Denominator and Its Derivative</h1></div><div class="slide-body"><div class="box"><div class="box-head"><span class="dot"></span>PROBLEM</div><div class="box-body"><div class="statement"><div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{x}{x^2+9}dx\]</div></div></div></div></div><div class="box"><div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div><div class="box-body"><div class="vid-slot" data-vid="example-2"><span class="vid-rec">? REC</span><div class="vid-placeholder"><div class="vid-icon">?</div><div class="vid-label">LECTURE VIDEO // LOG PATTERN</div></div></div><div class="sol-text"><div class="eqc">\[u=x^2+9,\qquad du=2x\,dx,\qquad x\,dx=\frac12du\]</div><div class="eqc">\[\frac12\int\frac1u du=\frac12\ln|u|+C\]</div><div class="eqc">\[\boxed{\frac12\ln(x^2+9)+C}\]</div><div class="step">The denominator is always positive.</div></div></div></div></div></section>
+    <section class="slide" data-slide="2">
+        <div class="slide-title"><h1>Track the Differential Carefully</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>SET UP</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <div class="eq-box"><div class="eq-head">CHOOSE U</div><div class="eq-body">\[u=2x+1\]</div></div>
+                        <div class="eq-box"><div class="eq-head">DIFFERENTIAL</div><div class="eq-body">\[\frac{du}{dx}=2\Rightarrow du=2dx\Rightarrow dx=\frac12du\]</div></div>
+                        <p class="note">Replace both the inner expression and the differential dx.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="example-1">
+                        <span class="vid-rec">● REC</span>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // EXAMPLE 01</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="eqc">\[\int u^3\frac12du=\frac12\cdot\frac{u^4}{4}+C\]</div>
+                        <div class="eqc">\[\boxed{\frac18(2x+1)^4+C}\]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="slide" data-slide="4"><div class="slide-title"><h1>Two Correct Choices of (u)</h1></div><div class="slide-body"><div class="box"><div class="box-head"><span class="dot"></span>PROBLEM</div><div class="box-body"><div class="statement"><div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\sin x\cos x\,dx\]</div></div></div></div></div><div class="box"><div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div><div class="box-body"><div class="vid-slot" data-vid="example-3"><span class="vid-rec">? REC</span><div class="vid-placeholder"><div class="vid-icon">?</div><div class="vid-label">LECTURE VIDEO // TWO CHOICES</div></div></div><div class="sol-text"><div class="eqc">\[u=\sin x,\quad du=\cos x\,dx\Rightarrow \boxed{\frac12\sin^2x+C}\]</div><div class="eqc">\[u=\cos x,\quad du=-\sin x\,dx\Rightarrow \boxed{-\frac12\cos^2x+C}\]</div></div></div></div></div></section>
+    <section class="slide" data-slide="3">
+        <div class="slide-title"><h1>Denominator and Its Derivative</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{x}{x^2+9}dx\]</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="example-2">
+                        <span class="vid-rec">● REC</span>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // LOG PATTERN</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="eqc">\[u=x^2+9,\qquad du=2x\,dx,\qquad x\,dx=\frac12du\]</div>
+                        <div class="eqc">\[\frac12\int\frac1u du=\frac12\ln|u|+C\]</div>
+                        <div class="eqc">\[\boxed{\frac12\ln(x^2+9)+C}\]</div>
+                        <div class="step">The denominator is always positive.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="slide definition-slide" data-slide="5"><div class="slide-title"><h1>Different Forms, Same Family</h1></div><div class="slide-body">
-<div class="box"><div class="box-head"><span class="dot"></span>USE THE PYTHAGOREAN IDENTITY</div><div class="box-body"><div class="statement"><div class="eq-box"><div class="eq-head">IDENTITY</div><div class="eq-body">\[\cos^2x=1-\sin^2x\]</div></div><div class="eqc">\[-\frac12\cos^2x+C=-\frac12+\frac12\sin^2x+C\]</div><div class="eqc">\[=\frac12\sin^2x+\widetilde C\]</div></div></div></div>
-<div class="box"><div class="box-head sol"><span class="dot"></span>BIG PICTURE &amp; VIDEO</div><div class="box-body"><div class="vid-slot" data-vid="equivalent"><span class="vid-rec">● REC</span><div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // EQUIVALENT ANSWERS</div></div></div><div class="sol-text"><div class="step">Indefinite integrals that differ only by a constant represent the same family.</div><div class="step">Differentiate both answers: each derivative is (sin xcos x).</div></div></div></div>
-</div></section>
+    <section class="slide" data-slide="4">
+        <div class="slide-title"><h1>Two Correct Choices of (u)</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\sin x\cos x\,dx\]</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="example-3">
+                        <span class="vid-rec">● REC</span>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // TWO CHOICES</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="eqc">\[u=\sin x,\quad du=\cos x\,dx\Rightarrow \boxed{\frac12\sin^2x+C}\]</div>
+                        <div class="eqc">\[u=\cos x,\quad du=-\sin x\,dx\Rightarrow \boxed{-\frac12\cos^2x+C}\]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="slide" data-slide="6"><div class="slide-title"><h1>Rewrite Before Substituting</h1></div><div class="slide-body"><div class="box"><div class="box-head"><span class="dot"></span>PROBLEM</div><div class="box-body"><div class="statement"><div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{\sin^5x}{\cos^7x}dx\]</div></div></div></div></div><div class="box"><div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div><div class="box-body"><div class="vid-slot" data-vid="example-4"><span class="vid-rec">? REC</span><div class="vid-placeholder"><div class="vid-icon">?</div><div class="vid-label">LECTURE VIDEO // TAN SUBSTITUTION</div></div></div><div class="sol-text"><div class="eqc">\[\frac{\sin^5x}{\cos^7x}=\frac{\sin^5x}{\cos^5x}\frac1{\cos^2x}=\tan^5x\sec^2x\]</div><div class="eqc">\[u=\tan x,\quad du=\sec^2x\,dx\]</div><div class="eqc">\[\int u^5du=\boxed{\frac16\tan^6x+C}\]</div></div></div></div></div></section>
+    <section class="slide definition-slide" data-slide="5">
+        <div class="slide-title"><h1>Different Forms, Same Family</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>USE THE PYTHAGOREAN IDENTITY</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <div class="eq-box"><div class="eq-head">IDENTITY</div><div class="eq-body">\[\cos^2x=1-\sin^2x\]</div></div>
+                        <div class="eqc">\[-\frac12\cos^2x+C=-\frac12+\frac12\sin^2x+C\]</div>
+                        <div class="eqc">\[=\frac12\sin^2x+\widetilde C\]</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>BIG PICTURE &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="equivalent">
+                        <span class="vid-rec">● REC</span>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // EQUIVALENT ANSWERS</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="step">Indefinite integrals that differ only by a constant represent the same family.</div>
+                        <div class="step">Differentiate both answers: each derivative is (sin xcos x).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="slide formula-slide" data-slide="7"><div class="slide-title"><h1>Reverse the Chain Rule</h1></div><div class="slide-body">
-<div class="box"><div class="box-head"><span class="dot"></span>CORE FORMULA</div><div class="box-body"><div class="statement"><div class="eq-box"><div class="eq-head">U-SUBSTITUTION</div><div class="eq-body">\[\boxed{\int f(g(x))g'(x)dx=F(g(x))+C}\]</div></div><p>Choose the inner expression as <strong>u</strong>, compute <strong>du</strong>, rewrite the entire integral, integrate, and substitute back.</p></div></div></div>
-<div class="box"><div class="box-head sol"><span class="dot"></span>FINAL CHECKLIST</div><div class="box-body"><div class="sol-text"><div class="step">Can you identify an inner function?</div><div class="step">Is its derivative present up to a constant?</div><div class="step">Did every (x) and (dx) disappear after substitution?</div><div class="step">Did you substitute back and add (C)?</div></div></div></div>
-</div></section>
+    <section class="slide" data-slide="6">
+        <div class="slide-title"><h1>Rewrite Before Substituting</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{\sin^5x}{\cos^7x}dx\]</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="example-4">
+                        <span class="vid-rec">● REC</span>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // TAN SUBSTITUTION</div></div>
+                    </div>
+                    <div class="sol-text">
+                        <div class="eqc">\[\frac{\sin^5x}{\cos^7x}=\frac{\sin^5x}{\cos^5x}\frac1{\cos^2x}=\tan^5x\sec^2x\]</div>
+                        <div class="eqc">\[u=\tan x,\quad du=\sec^2x\,dx\]</div>
+                        <div class="eqc">\[\int u^5du=\boxed{\frac16\tan^6x+C}\]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide formula-slide" data-slide="7">
+        <div class="slide-title"><h1>Reverse the Chain Rule</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>CORE FORMULA</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <div class="eq-box"><div class="eq-head">U-SUBSTITUTION</div><div class="eq-body">\[\boxed{\int f(g(x))g'(x)dx=F(g(x))+C}\]</div></div>
+                        <p>Choose the inner expression as <strong>u</strong>, compute <strong>du</strong>, rewrite the entire integral, integrate, and substitute back.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>FINAL CHECKLIST</div>
+                <div class="box-body">
+                    <div class="sol-text">
+                        <div class="step">Can you identify an inner function?</div>
+                        <div class="step">Is its derivative present up to a constant?</div>
+                        <div class="step">Did every (x) and (dx) disappear after substitution?</div>
+                        <div class="step">Did you substitute back and add (C)?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
-<div class="controls"><button class="ctrl-btn" id="prev">◄</button><div class="counter"><b id="cur">1</b> / <span id="tot">8</span></div><button class="ctrl-btn" id="next">►</button></div>
-<div class="modal" id="modal"><div class="modal-stage"><button class="modal-close" id="modalClose">×</button><div class="vid-slot" id="modalSlot"><div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label" id="modalLabel">VIDEO</div></div></div><div class="modal-caption" id="modalCaption"></div></div></div>
+<div class="controls">
+    <button class="ctrl-btn" id="prev">◄</button>
+    <div class="counter"><b id="cur">1</b> / <span id="tot">8</span></div>
+    <button class="ctrl-btn" id="next">►</button>
+</div>
 
-<!-- 【修改点：修正了 js 路径，并移除了多余的未定义脚本】 -->
+<div class="modal" id="modal">
+    <div class="modal-stage">
+        <button class="modal-close" id="modalClose">×</button>
+        <div class="vid-slot" id="modalSlot">
+            <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label" id="modalLabel">VIDEO</div></div>
+        </div>
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+</div>
+
+<!-- 【彻底清理旧版 nav JS，仅保留内核幻灯片驱动】 -->
 <script src="./js/ignite-deck.js"></script>
 </body>
 </html>
