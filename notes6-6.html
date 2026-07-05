@@ -1,1 +1,249 @@
-1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATA LOG // 6.6 Linear Partial Fractions [BC]</title>
+
+    <!-- 引入机甲字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- 配置 MathJax 渲染数学公式 -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], tags: 'none' },
+            chtml: { scale: 1.1 } 
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- 专属数据日志 CSS -->
+    <style>
+        :root {
+            --bg-page: transparent;
+            --text-main: #d8e6f2;
+            --text-dim: #7d8ea0;
+            --accent-cyan: #00f3ff;
+            --accent-orange: #ff7a3d;
+            --accent-red: #ff3333;
+            --accent-gray: #aab4d4;
+            --font-ui: 'Rajdhani', sans-serif;
+            --font-tech: 'Share Tech Mono', monospace;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        html, body {
+            margin: 0; padding: 0; background: var(--bg-page); color: var(--text-main);
+            font-family: var(--font-body); line-height: 1.7; font-size: 15px;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 243, 255, 0.05); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 243, 255, 0.3); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 243, 255, 0.8); }
+
+        .log-container { padding: 30px 40px; max-width: 900px; margin: 0 auto; }
+
+        /* 标题排版 */
+        .doc-header { border-bottom: 1px solid rgba(0,243,255,0.3); padding-bottom: 15px; margin-bottom: 30px; }
+        .doc-id { font-family: var(--font-tech); color: var(--accent-orange); letter-spacing: 3px; font-size: 12px; margin-bottom: 5px; }
+        .doc-title { font-family: var(--font-ui); font-size: 32px; font-weight: 700; color: #fff; margin: 0; letter-spacing: 1px; text-shadow: 0 0 10px rgba(0,243,255,0.5); }
+
+        h2 { 
+            font-family: var(--font-ui); color: var(--accent-cyan); font-size: 22px; font-weight: 700; 
+            letter-spacing: 2px; margin-top: 40px; margin-bottom: 15px; border-left: 4px solid var(--accent-cyan); padding-left: 10px;
+        }
+        p { margin-bottom: 15px; }
+        ul, ol { padding-left: 20px; color: var(--text-dim); }
+        li { margin-bottom: 8px; }
+        strong { color: #fff; }
+
+        /* --- 科幻数据框样式 --- */
+        .t-box {
+            margin: 20px 0; padding: 20px; border-radius: 4px;
+            background: rgba(0, 15, 30, 0.6); position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        .t-box-title {
+            font-family: var(--font-tech); font-size: 13px; font-weight: 700; letter-spacing: 2px;
+            margin-bottom: 15px; display: inline-block; padding: 4px 10px; background: #000;
+        }
+
+        /* 1. 定义框 (Definition) - 赛博青色 */
+        .box-def { border: 1px solid rgba(0, 243, 255, 0.3); border-left: 4px solid var(--accent-cyan); }
+        .box-def .t-box-title { color: var(--accent-cyan); border: 1px solid var(--accent-cyan); box-shadow: 0 0 8px rgba(0,243,255,0.3); }
+
+        /* 2. 公式框 (Formula) - 警示橙色 */
+        .box-formula { border: 1px solid rgba(255, 122, 61, 0.3); border-left: 4px solid var(--accent-orange); background: rgba(30, 10, 0, 0.4); }
+        .box-formula .t-box-title { color: var(--accent-orange); border: 1px solid var(--accent-orange); box-shadow: 0 0 8px rgba(255,122,61,0.3); }
+
+        /* 3. 警告框 (Warning) - 危险红色 */
+        .box-warning { border: 1px solid rgba(255, 51, 51, 0.3); border-left: 4px solid var(--accent-red); background: rgba(40, 5, 5, 0.4); }
+        .box-warning .t-box-title { color: var(--accent-red); border: 1px solid var(--accent-red); box-shadow: 0 0 10px rgba(255,51,51,0.5); animation: pulse-red 2s infinite; }
+
+        /* 4. 示例框 (Example) - 冷静灰蓝 */
+        .box-example { border: 1px solid rgba(170, 180, 212, 0.2); border-left: 4px solid var(--accent-gray); background: rgba(255, 255, 255, 0.02); }
+        .box-example .t-box-title { color: var(--accent-gray); border: 1px solid var(--accent-gray); }
+
+        @keyframes pulse-red { 0%, 100% { box-shadow: 0 0 5px rgba(255,51,51,0.3); } 50% { box-shadow: 0 0 15px rgba(255,51,51,0.8); } }
+        
+        mjx-container { color: #fff !important; text-shadow: 0 0 2px rgba(255,255,255,0.3); }
+
+        /* Math Table Style for Cover-Up shortcut */
+        .math-table { width: auto; margin: 15px auto; border-left: 2px solid var(--accent-cyan); padding-left: 15px; }
+        .math-table td { padding: 4px 15px; font-family: var(--font-tech); font-size: 14px; }
+        .math-table td:first-child { border-right: 1px solid rgba(255,255,255,0.1); color: var(--accent-orange); }
+    </style>
+</head>
+<body>
+
+<div class="log-container">
+    <div class="doc-header">
+        <div class="doc-id">DATA LOG // SECTION 6.6 [BC ONLY]</div>
+        <h1 class="doc-title">Linear Partial Fractions</h1>
+    </div>
+
+    <!-- 1. Why Partial Fractions? -->
+    <h2>1. Why Partial Fractions?</h2>
+    <p>Partial-fraction decomposition rewrites one complicated rational function as a sum of simpler rational functions whose antiderivatives are logarithms.</p>
+
+    <div class="t-box box-def">
+        <div class="t-box-title">REQUIRED STARTING CONDITIONS</div>
+        <p>Before decomposing \(P(x)/Q(x)\):</p>
+        <ol>
+            <li>make the fraction proper, so \(\deg P<\deg Q\); and</li>
+            <li>factor the denominator completely over the real numbers.</li>
+        </ol>
+        <p>If the fraction is improper, perform polynomial long division first.</p>
+    </div>
+    <p>This section considers denominators that factor into linear terms.</p>
+
+    <!-- 2. Distinct Linear Factors -->
+    <h2>2. Distinct Linear Factors</h2>
+    <p>If \[ Q(x)=(a_1x+b_1)(a_2x+b_2)\cdots(a_nx+b_n) \] has distinct linear factors, assign one constant numerator to each factor.</p>
+
+    <div class="t-box box-formula">
+        <div class="t-box-title">DISTINCT LINEAR-FACTOR FORM</div>
+        <p>For example,</p>
+        \[ \boxed{ \frac{P(x)}{(x-r)(x-s)} =\frac{A}{x-r}+\frac{B}{x-s} }, \qquad r\neq s. \]
+    </div>
+
+    <p>Multiply both sides by the common denominator, then solve for the unknown constants by substituting convenient values or comparing coefficients.</p>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 1: TWO DISTINCT LINEAR FACTORS</div>
+        <p>Evaluate \[ \int\frac{5x+1}{(x-1)(x+2)}\,dx. \]</p>
+        <p>Write \[ \frac{5x+1}{(x-1)(x+2)} =\frac{A}{x-1}+\frac{B}{x+2}. \]</p>
+        <p>Multiplying by \((x-1)(x+2)\) gives \[ 5x+1=A(x+2)+B(x-1). \]</p>
+        <p>Set \(x=1\): \(6=3A\), so \(A=2\). Set \(x=-2\): \(-9=-3B\), so \(B=3\). Thus,</p>
+        \[
+        \begin{aligned}
+        \int\frac{5x+1}{(x-1)(x+2)}\,dx &=\int\left(\frac2{x-1}+\frac3{x+2}\right)dx\\[3pt]
+        &=\boxed{2\ln|x-1|+3\ln|x+2|+C}.
+        \end{aligned}
+        \]
+    </div>
+
+    <!-- 3. The Cover-Up Shortcut -->
+    <h2>3. The Cover-Up Shortcut</h2>
+    <p>For distinct linear factors, constants can often be found quickly by temporarily covering the corresponding factor.</p>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 2: THREE DISTINCT FACTORS</div>
+        <p>Decompose \[ \frac{2x^2+1}{x(x-1)(x+1)} =\frac{A}{x}+\frac{B}{x-1}+\frac{C}{x+1}. \]</p>
+        <p>Multiplying through gives \[ 2x^2+1=A(x-1)(x+1)+Bx(x+1)+Cx(x-1). \]</p>
+        <p>Use the zeros of the factors:</p>
+        
+        <table class="math-table">
+            <tr><td>\(x=0\)</td><td>\(1=-A \Rightarrow A=-1\)</td></tr>
+            <tr><td>\(x=1\)</td><td>\(3=2B \Rightarrow B=\frac32\)</td></tr>
+            <tr><td>\(x=-1\)</td><td>\(3=2C \Rightarrow C=\frac32\)</td></tr>
+        </table>
+
+        <p>Therefore,</p>
+        \[ \boxed{ \frac{2x^2+1}{x(x-1)(x+1)} =-\frac1x+\frac{3/2}{x-1}+\frac{3/2}{x+1} }. \]
+        <p>Its indefinite integral is</p>
+        \[ \boxed{-\ln|x|+\frac32\ln|x-1|+\frac32\ln|x+1|+C}. \]
+    </div>
+
+    <!-- 4. Repeated Linear Factors -->
+    <h2>4. Repeated Linear Factors</h2>
+    <p>Every power of a repeated linear factor must appear in the decomposition.</p>
+
+    <div class="t-box box-formula">
+        <div class="t-box-title">REPEATED LINEAR-FACTOR FORM</div>
+        <p>For a factor \((x-r)^m\), include</p>
+        \[ \boxed{ \frac{A_1}{x-r}+\frac{A_2}{(x-r)^2}+\cdots+ \frac{A_m}{(x-r)^m} }. \]
+        <p>Skipping an intermediate power makes the decomposition incomplete.</p>
+    </div>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 3: A REPEATED FACTOR</div>
+        <p>Evaluate \[ \int\frac{3x+5}{x(x+1)^2}\,dx. \]</p>
+        <p>Use the complete form \[ \frac{3x+5}{x(x+1)^2} =\frac{A}{x}+\frac{B}{x+1}+\frac{C}{(x+1)^2}. \]</p>
+        <p>After multiplying by \(x(x+1)^2\), \[ 3x+5=A(x+1)^2+Bx(x+1)+Cx. \]</p>
+        <p>Set \(x=0\) to obtain \(A=5\). Set \(x=-1\) to obtain \(2=-C\), so \(C=-2\). Comparing the \(x^2\)-coefficients gives \(A+B=0\), so \(B=-5\). Hence,</p>
+        \[
+        \begin{aligned}
+        \int\frac{3x+5}{x(x+1)^2}\,dx &=\int\left(\frac5x-\frac5{x+1}-\frac2{(x+1)^2}\right)dx\\[3pt]
+        &=\boxed{5\ln|x|-5\ln|x+1|+\frac2{x+1}+C}.
+        \end{aligned}
+        \]
+    </div>
+
+    <!-- 5. Improper Rational Functions -->
+    <h2>5. Improper Rational Functions</h2>
+    
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 4: LONG DIVISION BEFORE DECOMPOSITION</div>
+        <p>Evaluate \[ \int\frac{x^3+2x}{x^2-1}\,dx. \]</p>
+        <p>Long division gives \[ \frac{x^3+2x}{x^2-1}=x+\frac{3x}{x^2-1}. \]</p>
+        <p>The remainder may be decomposed:</p>
+        \[ \frac{3x}{(x-1)(x+1)} =\frac{3/2}{x-1}+\frac{3/2}{x+1}. \]
+        <p>Therefore,</p>
+        \[ \boxed{ \int\frac{x^3+2x}{x^2-1}\,dx =\frac{x^2}{2}+\frac32\ln|x-1|+\frac32\ln|x+1|+C }. \]
+        <p>Equivalently, the logarithms may be combined as \(\frac32\ln|x^2-1|\).</p>
+    </div>
+
+    <!-- 6. Verification -->
+    <h2>6. Verification</h2>
+    <p>There are two useful checks.</p>
+
+    <div class="t-box box-def">
+        <div class="t-box-title">ALGEBRAIC AND CALCULUS CHECKS</div>
+        <ul>
+            <li>Recombine the partial fractions and confirm that the original rational function is recovered.</li>
+            <li>Differentiate the final antiderivative and confirm that the original integrand is recovered.</li>
+        </ul>
+    </div>
+
+    <p>For Example 1,</p>
+    \[ \frac2{x-1}+\frac3{x+2} =\frac{2(x+2)+3(x-1)}{(x-1)(x+2)} =\frac{5x+1}{(x-1)(x+2)}. \]
+
+    <div class="t-box box-warning">
+        <div class="t-box-title">WARNING // COMMON ERRORS</div>
+        <ul>
+            <li>Decomposing before making the fraction proper.</li>
+            <li>Failing to factor the denominator completely.</li>
+            <li>Omitting powers associated with a repeated linear factor.</li>
+            <li>Using a polynomial numerator over a linear factor; the numerator should be a constant.</li>
+            <li>Omitting absolute values in logarithmic antiderivatives.</li>
+        </ul>
+    </div>
+
+    <!-- 7. Principal Results -->
+    <h2>7. Principal Results</h2>
+    
+    <div class="t-box box-formula">
+        <div class="t-box-title">LINEAR PARTIAL-FRACTION TEMPLATES</div>
+        \[ \frac{P(x)}{(x-r)(x-s)} =\frac{A}{x-r}+\frac{B}{x-s} \]
+        <p>and</p>
+        \[ \frac{P(x)}{(x-r)^m} =\frac{A_1}{x-r}+\frac{A_2}{(x-r)^2}+\cdots+ \frac{A_m}{(x-r)^m}. \]
+        <p>Make the fraction proper, factor completely, include every required term, solve for the constants, integrate, and verify.</p>
+    </div>
+    
+    <br><br><br>
+</div>
+
+</body>
+</html>
