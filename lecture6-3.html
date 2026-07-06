@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGNITE // 03 Formulas and Calculating Indefinite Integrals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Rajdhani:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    
+    <!-- 【精准云端寻址】 -->
+    <link rel="stylesheet" href="./css/ignite-deck.css">
+    <link rel="stylesheet" href="./css/graph-style.css">
+    <link rel="stylesheet" href="integration-topic.css">
+    
+    <style>
+        .formula-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.formula-card{border:1px solid var(--border);border-left:2px solid var(--accent-2);background:var(--bg-soft);padding:14px 16px}.formula-card b{display:block;color:var(--accent-2);font-family:var(--font-tech);font-size:10px;letter-spacing:1.5px;margin-bottom:8px}.compact .eq-box{margin:12px 0}.rule-list{display:grid;gap:10px}.rule{display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:start;padding:12px;border:1px solid var(--border);background:var(--bg-soft)}.rule em{font-family:var(--font-tech);color:var(--accent);font-style:normal}.warning{color:#ff8a61}
+        .supplemental-video{width:min(100%,420px);margin:18px auto 0;flex:0 0 auto}.slide.title .supplemental-video{position:absolute;width:min(420px,38vw);left:50%;bottom:72px;transform:translateX(-50%);margin:0}
+    </style>
+    <script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="auto-resize">
+<nav class="progress-nav" id="progressNav" aria-label="Lesson sections">
+    <div class="pn-item active" data-go="0"><div class="pn-node">01</div><div class="pn-title">OVERVIEW</div><div class="pn-sub">Formula recognition</div></div>
+    <div class="pn-item" data-go="1"><div class="pn-node">02</div><div class="pn-title">PROCESS</div><div class="pn-sub">Five reliable moves</div></div>
+    <div class="pn-item" data-go="2"><div class="pn-node">03</div><div class="pn-title">ALGEBRAIC</div><div class="pn-sub">Power and logarithm</div></div>
+    <div class="pn-item" data-go="3"><div class="pn-node">04</div><div class="pn-title">EXPONENTIAL</div><div class="pn-sub">Base e and base a</div></div>
+    <div class="pn-item" data-go="4"><div class="pn-node">05</div><div class="pn-title">TRIGONOMETRIC</div><div class="pn-sub">Reverse derivative rules</div></div>
+    <div class="pn-item" data-go="5"><div class="pn-node">06</div><div class="pn-title">EXERCISE 01</div><div class="pn-sub">Rewrite first</div></div>
+    <div class="pn-item" data-go="6"><div class="pn-node">07</div><div class="pn-title">LINEAR INNER</div><div class="pn-sub">Reverse chain rule</div></div>
+    <div class="pn-item" data-go="7"><div class="pn-node">08</div><div class="pn-title">EXERCISE 02</div><div class="pn-sub">Mixed linear forms</div></div>
+    <div class="pn-item" data-go="8"><div class="pn-node">09</div><div class="pn-title">INITIAL VALUE</div><div class="pn-sub">Choose the constant</div></div>
+    <div class="pn-item" data-go="9"><div class="pn-node">10</div><div class="pn-title">SUMMARY</div><div class="pn-sub">Core formulas</div></div>
+</nav>
+<div class="deck" id="deck">
+    <section class="slide title active" data-slide="0"><div class="title-brand">03 <span>//</span> INTEGRATION FORMULAS</div><div class="title-sub">REVERSE DIFFERENTIATION &nbsp;&bull;&nbsp; PATTERN RECOGNITION</div><div class="title-rule"></div><div class="title-meta">SIMPLIFY &nbsp;//&nbsp; MATCH &nbsp;//&nbsp; INTEGRATE &nbsp;//&nbsp; VERIFY</div></section>
+
+    <section class="slide definition-slide" data-slide="1"><div class="slide-title"><span class="tag">PROCESS</span><h1>A Reliable Integration Workflow</h1></div><div class="slide-body">
+        <div class="box"><div class="box-head"><span class="dot"></span>WHAT ARE WE FINDING?</div><div class="box-body"><div class="statement"><p>An indefinite integral is the complete family of antiderivatives.</p><div class="eq-box"><div class="eq-head">DEFINITION</div><div class="eq-body">\[\displaystyle F'(x)=f(x)\quad\Longrightarrow\quad\int f(x)\,dx=F(x)+C.\]</div></div><p>The constant \(C\) represents every vertical shift with the same derivative.</p></div></div></div>
+        <div class="box"><div class="box-head sol"><span class="dot"></span>FIVE MOVES</div><div class="box-body"><div class="rule-list"><div class="rule"><em>01</em><div>Simplify or rewrite the integrand.</div></div><div class="rule"><em>02</em><div>Separate sums and constant multiples.</div></div><div class="rule"><em>03</em><div>Match each term to a formula.</div></div><div class="rule"><em>04</em><div>Include one constant \(C\).</div></div><div class="rule"><em>05</em><div>Differentiate to verify.</div></div></div></div></div>
+    </div></section>
+
+    <section class="slide formula-slide" data-slide="2"><div class="slide-title"><span class="tag">FORMULAS</span><h1>Algebraic Antiderivatives</h1></div><div class="slide-body">
+        <div class="box"><div class="box-head"><span class="dot"></span>CONSTANT &amp; POWER</div><div class="box-body"><div class="eq-box"><div class="eq-head">CONSTANT</div><div class="eq-body">\[\displaystyle \int k\,dx=kx+C\]</div></div><div class="eq-box"><div class="eq-head">POWER RULE // N ≠ -1</div><div class="eq-body">\[\displaystyle \int x^n\,dx=\frac{x^{n+1}}{n+1}+C\]</div></div><p>Increase the exponent by one, then divide by the new exponent.</p></div></div>
+        <div class="box"><div class="box-head sol"><span class="dot"></span>EXCEPTION &amp; EXAMPLE</div><div class="box-body"><div class="eq-box"><div class="eq-head">EXCEPTION // N = -1</div><div class="eq-body">\[\displaystyle \int\frac1x\,dx=\ln|x|+C\]</div></div><div class="sol-text"><div class="sol-head">NEGATIVE POWER</div><div class="eqc">\[\displaystyle \int x^{-4}\,dx=\frac{x^{-3}}{-3}+C=-\frac{1}{3x^3}+C.\]</div><div class="step warning">Never apply the power rule to \(x^{-1}\).</div></div></div></div>
+    </div></section>
+
+    <section class="slide formula-slide" data-slide="3"><div class="slide-title"><span class="tag">FORMULAS</span><h1>Exponential Antiderivatives</h1></div><div class="slide-body">
+        <div class="box"><div class="box-head"><span class="dot"></span>FORMULA TABLE</div><div class="box-body"><div class="eq-box"><div class="eq-head">BASE E</div><div class="eq-body">\[\displaystyle \int e^x\,dx=e^x+C\]</div></div><div class="eq-box"><div class="eq-head">BASE A</div><div class="eq-body">\[\displaystyle \int a^x\,dx=\frac{a^x}{\ln a}+C,\quad a>0,\ a\ne1\]</div></div><p>The denominator \(\ln a\) reverses the factor created by differentiating \(a^x\).</p></div></div>
+        <div class="box"><div class="box-head sol"><span class="dot"></span>EXAMPLE &amp; VIDEO</div><div class="box-body"><div class="vid-slot" data-vid="exponential"><span class="vid-rec">&#9679; REC</span><span class="expand-hint">EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">EXAMPLE VIDEO // EXPONENTIAL</div></div></div><div class="sol-text"><div class="sol-head">EVALUATE</div><div class="eqc">\[\displaystyle \int5\cdot2^x\,dx=5\int2^x\,dx=\frac{5\cdot2^x}{\ln2}+C.\]</div></div></div></div>
+    </div></section>
+
+    <section class="slide formula-slide" data-slide="4"><div class="slide-title"><span class="tag">FORMULAS</span><h1>Basic Trigonometric Antiderivatives</h1></div><div class="slide-body">
+        <div class="box"><div class="box-head"><span class="dot"></span>SINE, COSINE &amp; SQUARES</div><div class="box-body"><div class="formula-grid"><div class="formula-card"><b>COSINE</b>\[\int\cos x\,dx=\sin x+C\]</div><div class="formula-card"><b>SINE</b>\[\int\sin x\,dx=-\cos x+C\]</div><div class="formula-card"><b>SECANT SQUARED</b>\[\int\sec^2x\,dx=\tan x+C\]</div><div class="formula-card"><b>COSECANT SQUARED</b>\[\int\csc^2x\,dx=-\cot x+C\]</div></div></div></div>
+        <div class="box"><div class="box-head sol"><span class="dot"></span>PRODUCT PAIRS</div><div class="box-body"><div class="eq-box"><div class="eq-head">SECANT–TANGENT</div><div class="eq-body">\[\displaystyle \int\sec x\tan x\,dx=\sec x+C\]</div></div><div class="eq-box"><div class="eq-head">COSECANT–COTANGENT</div><div class="eq-body">\[\displaystyle \int\csc x\cot x\,dx=-\csc x+C\]</div></div><p class="note">Negative signs come directly from the corresponding derivative formulas.</p></div></div>
+    </div></section>
+
+    <section class="slide" data-slide="5"><div class="slide-title"><span class="num">01</span><h1>Rewrite Before Integrating</h1></div><div class="slide-body">
+        <div class="box"><div class="box-head"><span class="dot"></span>PROBLEM</div><div class="box-body"><div class="prompt">Evaluate the integral.</div><div class="eq-box"><div class="eq-head">ORIGINAL FORM</div><div class="eq-body">\[\displaystyle \int\left(4\sqrt{x}-\frac3{x^2}+\frac2x\right)dx\]</div></div><div class="eq-box"><div class="eq-head">REWRITE</div><div class="eq-body">\[\displaystyle 4x^{1/2}-3x^{-2}+2x^{-1}\]</div></div></div></div>
+        <div class="box"><div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div><div class="box-body"><div class="vid-slot" data-vid="rewrite"><span class="vid-rec">&#9679; REC</span><span class="expand-hint">EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 01</div></div></div><div class="sol-text"><div class="sol-head">TERM BY TERM</div><div class="eqc">\[\displaystyle \int(4x^{1/2}-3x^{-2}+2x^{-1})dx\]</div><div class="eqc">\[\displaystyle =\frac83x^{3/2}+\frac3x+2\ln|x|+C.\]</div></div></div></div>
+    </div></section>
+
+    <section class="slide theorem-slide" data-slide="6"><div class="slide-title"><span class="tag">PATTERN</span><h1>Linear Inner Functions</h1></div><div class="slide-body">
+        <div class="box"><div class="box-head"><span class="dot"></span>REVERSE CHAIN RULE</div><div class="box-body"><p>For a linear inner function \(ax+b\), divide by its derivative \(a\).</p><div class="eq-box"><div class="eq-head">POWER</div><div class="eq-body">\[\displaystyle \int(ax+b)^n dx=\frac{(ax+b)^{n+1}}{a(n+1)}+C\]</div></div><div class="eq-box"><div class="eq-head">LOGARITHM</div><div class="eq-body">\[\displaystyle \int\frac1{ax+b}dx=\frac1a\ln|ax+b|+C\]</div></div></div></div>
+        <div class="box"><div class="box-head sol"><span class="dot"></span>EXPONENTIAL &amp; TRIG</div><div class="box-body compact"><div class="eq-box"><div class="eq-body">\[\displaystyle \int e^{ax+b}dx=\frac1a e^{ax+b}+C\]</div></div><div class="eq-box"><div class="eq-body">\[\displaystyle \int\cos(ax+b)dx=\frac1a\sin(ax+b)+C\]</div></div><div class="eq-box"><div class="eq-body">\[\displaystyle \int\sin(ax+b)dx=-\frac1a\cos(ax+b)+C\]</div></div></div></div>
+    </div></section>
+
+    <section class="slide" data-slide="7"><div class="slide-title"><span class="num">02</span><h1>Mixed Linear Forms</h1></div><div class="slide-body">
+        <div class="box"><div class="box-head"><span class="dot"></span>PROBLEM</div><div class="box-body"><div class="prompt">Evaluate.</div><div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\displaystyle \int\left(\frac6{2x+5}-4\sin(4x)\right)dx\]</div></div><div class="formula-grid"><div class="formula-card"><b>INNER DERIVATIVE</b>\(\frac{d}{dx}(2x+5)=2\)</div><div class="formula-card"><b>INNER DERIVATIVE</b>\(\frac{d}{dx}(4x)=4\)</div></div></div></div>
+        <div class="box"><div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div><div class="box-body"><div class="vid-slot" data-vid="linear-forms"><span class="vid-rec">&#9679; REC</span><span class="expand-hint">EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 02</div></div></div><div class="sol-text"><div class="sol-head">ACCOUNT FOR BOTH INNER DERIVATIVES</div><div class="eqc">\[\displaystyle 6\left(\frac12\ln|2x+5|\right)-4\left(-\frac14\cos4x\right)+C\]</div><div class="eqc">\[\displaystyle =3\ln|2x+5|+\cos(4x)+C.\]</div></div></div></div>
+    </div></section>
+
+    <section class="slide" data-slide="8"><div class="slide-title"><span class="num">03</span><h1>Use an Initial Condition</h1></div><div class="slide-body">
+        <div class="box"><div class="box-head"><span class="dot"></span>PROBLEM</div><div class="box-body"><div class="prompt">Find \(F\) given</div><div class="eq-box"><div class="eq-head">DERIVATIVE &amp; CONDITION</div><div class="eq-body">\[\displaystyle F'(x)=3x^2-4,\qquad F(1)=2.\]</div></div><p>An initial condition selects one function from the family \(F(x)+C\).</p></div></div>
+        <div class="box"><div class="box-head sol"><span class="dot"></span>SOLUTION</div><div class="box-body"><div class="sol-text"><div class="sol-head">1 // GENERAL ANTIDERIVATIVE</div><div class="eqc">\[\displaystyle F(x)=x^3-4x+C.\]</div><div class="sol-head">2 // USE THE CONDITION</div><div class="eqc">\[\displaystyle 2=1^3-4(1)+C=-3+C\quad\Rightarrow\quad C=5.\]</div><div class="sol-head">3 // PARTICULAR SOLUTION</div><div class="eqc">\[\displaystyle \boxed{F(x)=x^3-4x+5}.\]</div></div></div></div>
+    </div></section>
+
+    <section class="slide formula-slide" data-slide="9"><div class="slide-title"><span class="tag">SUMMARY</span><h1>Principal Results</h1></div><div class="slide-body">
+        <div class="box"><div class="box-head"><span class="dot"></span>ALGEBRAIC &amp; EXPONENTIAL</div><div class="box-body compact"><div class="eq-box"><div class="eq-body">\[\displaystyle \int kdx=kx+C\]</div></div><div class="eq-box"><div class="eq-body">\[\displaystyle \int x^n dx=\frac{x^{n+1}}{n+1}+C\quad(n\ne-1)\]</div></div><div class="eq-box"><div class="eq-body">\[\displaystyle \int\frac1x dx=\ln|x|+C\]</div></div><div class="eq-box"><div class="eq-body">\[\displaystyle \int a^x dx=\frac{a^x}{\ln a}+C\]</div></div></div></div>
+        <div class="box"><div class="box-head sol"><span class="dot"></span>TRIG &amp; FINAL CHECKS</div><div class="box-body compact"><div class="eq-box"><div class="eq-body">\[\displaystyle \int\cos xdx=\sin x+C,\qquad\int\sin xdx=-\cos x+C\]</div></div><div class="eq-box"><div class="eq-body">\[\displaystyle \int\sec^2x dx=\tan x+C,\qquad\int\csc^2x dx=-\cot x+C\]</div></div><div class="rule-list"><div class="rule"><em>✓</em><div>Rewrite before choosing a formula.</div></div><div class="rule"><em>✓</em><div>Account for inner derivatives.</div></div><div class="rule"><em>✓</em><div>Add one \(C\), then differentiate to verify.</div></div></div></div></div>
+    </div></section>
+</div>
+<div class="controls"><button class="ctrl-btn" id="prev" aria-label="Previous slide">&#9664;</button><div class="counter"><b id="cur">1</b> / <span id="tot">10</span></div><button class="ctrl-btn" id="next" aria-label="Next slide">&#9654;</button></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="modal-stage"><button class="modal-close" id="modalClose" aria-label="Close">&times;</button><div class="vid-slot" id="modalSlot" style="aspect-ratio:unset;"><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label" id="modalLabel">VIDEO</div></div></div><div class="modal-caption" id="modalCaption"></div></div></div>
+<script>
+document.querySelectorAll('.slide').forEach((slide,index)=>{if(index===0||slide.querySelector('.vid-slot'))return;const slot=document.createElement('div');slot.className='vid-slot supplemental-video';slot.dataset.vid='slide-'+String(index+1).padStart(2,'0');slot.innerHTML='<span class="vid-rec">&#9679; REC</span><span class="expand-hint">EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">LESSON VIDEO // SLIDE '+String(index+1).padStart(2,'0')+'</div></div>';const target=slide.querySelector('.box:last-child .box-body')||slide;target.prepend(slot);});
+</script>
+
+<!-- 【精准云端寻址：删除无效的 nav JS，接入机甲引擎】 -->
+<script src="./js/ignite-deck.js"></script>
+</body>
+</html>
