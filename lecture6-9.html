@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGNITE // 09 Fundamental Theorem of Calculus and Definite Integrals</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Rajdhani:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    
+    <!-- 【精准云端寻址】 -->
+    <link rel="stylesheet" href="./css/ignite-deck.css">
+    <link rel="stylesheet" href="./css/graph-style.css">
+    <link rel="stylesheet" href="integration-topic.css">
+
+    <style>
+        .mini-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:14px; }
+        .mini-card { border:1px solid var(--border); background:var(--bg-soft); padding:14px; }
+        .mini-card b { display:block; color:var(--accent-2); font-family:var(--font-tech); font-size:11px; letter-spacing:1.4px; margin-bottom:7px; }
+        .sign-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+        .sign-card { border:1px solid var(--border); padding:16px; background:var(--bg-soft); }
+        .sign-card strong { color:var(--accent); }
+        .compact .eq-box { margin:12px 0; }
+        .compact .step { margin:7px 0; }
+        .supplemental-video { width:min(100%,420px); margin:18px auto 0; flex:0 0 auto; }
+        .slide.title .supplemental-video { position:absolute; width:min(420px,38vw); left:50%; bottom:72px; transform:translateX(-50%); margin:0; }
+    </style>
+
+    <script>window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="auto-resize">
+
+<nav class="progress-nav" id="progressNav" aria-label="Lesson sections">
+    <div class="pn-item active" data-go="0"><div class="pn-node">01</div><div class="pn-title">OVERVIEW</div><div class="pn-sub">Two inverse processes</div></div>
+    <div class="pn-item" data-go="1"><div class="pn-node">02</div><div class="pn-title">CONNECTION</div><div class="pn-sub">Accumulation functions</div></div>
+    <div class="pn-item" data-go="2"><div class="pn-node">03</div><div class="pn-title">FTC PART 1</div><div class="pn-sub">Differentiate an integral</div></div>
+    <div class="pn-item" data-go="3"><div class="pn-node">04</div><div class="pn-title">EXERCISE 01</div><div class="pn-sub">Variable upper limit</div></div>
+    <div class="pn-item" data-go="4"><div class="pn-node">05</div><div class="pn-title">EXERCISE 02</div><div class="pn-sub">Two variable limits</div></div>
+    <div class="pn-item" data-go="5"><div class="pn-node">06</div><div class="pn-title">FTC PART 2</div><div class="pn-sub">Evaluate an integral</div></div>
+    <div class="pn-item" data-go="6"><div class="pn-node">07</div><div class="pn-title">EXERCISE 03</div><div class="pn-sub">Exact evaluation</div></div>
+    <div class="pn-item" data-go="7"><div class="pn-node">08</div><div class="pn-title">PROPERTIES</div><div class="pn-sub">Reverse, split, combine</div></div>
+    <div class="pn-item" data-go="8"><div class="pn-node">09</div><div class="pn-title">EXERCISE 04</div><div class="pn-sub">Net vs total area</div></div>
+    <div class="pn-item" data-go="9"><div class="pn-node">10</div><div class="pn-title">SUMMARY</div><div class="pn-sub">Choose the theorem</div></div>
+</nav>
+
+<div class="deck" id="deck">
+
+    <section class="slide title active" data-slide="0">
+        <div class="title-brand">09 <span>//</span> FUNDAMENTAL THEOREM</div>
+        <div class="title-sub">DIFFERENTIATION &harr; INTEGRATION &nbsp;&bull;&nbsp; DEFINITE INTEGRALS</div>
+        <div class="title-rule"></div>
+        <div class="title-meta">ACCUMULATION AND RATE ARE INVERSE IDEAS</div>
+    </section>
+
+    <section class="slide definition-slide" data-slide="1">
+        <div class="slide-title"><span class="tag">CONNECTION</span><h1>From Accumulation to Rate</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>ACCUMULATION FUNCTION</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <p>For a continuous function \(f\), define the accumulated signed area from a fixed point \(a\) to a moving endpoint \(x\):</p>
+                        <div class="eq-box"><div class="eq-head">DEFINITION</div><div class="eq-body">\[\displaystyle F(x)=\int_a^x f(t)\,dt.\]</div></div>
+                        <p>The letter \(t\) is a <strong>dummy variable</strong>. The output \(F(x)\) changes as the endpoint \(x\) moves.</p>
+                        <p class="note">Area above the axis adds; area below the axis subtracts.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>GEOMETRIC PICTURE</div>
+                <div class="box-body">
+                    <div class="graph-box">
+                        <div class="graph-head">NET ACCUMULATION // A TO X</div>
+                        <div class="figure">
+                            <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Accumulated area under a curve from a to x">
+                                <defs><marker id="arr-ftc" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#7d8ea0"/></marker></defs>
+                                <line class="axis" x1="35" y1="245" x2="500" y2="245" marker-end="url(#arr-ftc)"/>
+                                <line class="axis" x1="62" y1="270" x2="62" y2="28" marker-end="url(#arr-ftc)"/>
+                                <path class="region" d="M135 245 L135 142 C195 58 270 72 355 128 C386 148 408 142 432 110 L432 245 Z"/>
+                                <path class="curve" d="M84 204 C150 80 245 58 355 128 C397 155 433 130 468 75"/>
+                                <line class="ref" x1="135" y1="245" x2="135" y2="142"/>
+                                <line class="ref" x1="432" y1="245" x2="432" y2="110"/>
+                                <text class="lbl" x="130" y="266">a</text><text class="lbl" x="428" y="266">x</text>
+                                <text class="lbl" x="474" y="72">f(t)</text>
+                                <text class="lbl" x="220" y="198">F(x) = signed area</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="sol-text"><div class="sol-head">THE BIG IDEA</div><div class="step">A tiny increase \(dx\) adds approximately \(f(x)\,dx\) of area.</div><div class="eqc">\[\displaystyle \frac{\text{change in area}}{\text{change in }x}\approx f(x).\]</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide theorem-slide" data-slide="2">
+        <div class="slide-title"><span class="tag">THEOREM</span><h1>FTC Part 1: Differentiate Accumulation</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>STATEMENT</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <p>If \(f\) is continuous, then differentiation recovers the original integrand:</p>
+                        <div class="eq-box"><div class="eq-head">FTC PART 1</div><div class="eq-body">\[\displaystyle \boxed{\frac{d}{dx}\int_a^x f(t)\,dt=f(x)}\]</div></div>
+                        <p>For a composite upper endpoint \(g(x)\), use the chain rule:</p>
+                        <div class="eq-box"><div class="eq-head">FTC + CHAIN RULE</div><div class="eq-body">\[\displaystyle \boxed{\frac{d}{dx}\int_a^{g(x)}f(t)\,dt=f(g(x))g'(x)}\]</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>INTERPRETATION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="ftc-part-one"><span class="vid-rec">&#9679; REC</span><span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">THEOREM VIDEO // FTC 1</div></div></div>
+                    <div class="sol-text"><div class="sol-head">READ IT AS A PROCESS</div><div class="step">1. Replace the dummy variable with the upper limit.</div><div class="step">2. Multiply by the derivative of that upper limit.</div><div class="step">3. Do <strong>not</strong> search for an antiderivative.</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="3">
+        <div class="slide-title"><span class="num">01</span><h1>Variable Upper Limit</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body">
+                    <div class="prompt">Differentiate the accumulation function.</div>
+                    <div class="eq-box"><div class="eq-head">GIVEN</div><div class="eq-body">\[\displaystyle H(x)=\int_1^{x^3}\cos(t^2)\,dt\]</div></div>
+                    <div class="mini-grid"><div class="mini-card"><b>INTEGRAND</b>\(f(t)=\cos(t^2)\)</div><div class="mini-card"><b>UPPER LIMIT</b>\(g(x)=x^3\)</div></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="upper-limit"><span class="vid-rec">&#9679; REC</span><span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 01</div></div></div>
+                    <div class="sol-text"><div class="sol-head">WORKED SOLUTION</div><div class="step">Insert \(x^3\) wherever the integrand has \(t\):</div><div class="eqc">\[\displaystyle f(g(x))=\cos((x^3)^2)=\cos(x^6).\]</div><div class="step">Multiply by \(g'(x)=3x^2\):</div><div class="eqc">\[\displaystyle H'(x)=3x^2\cos(x^6).\]</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="4">
+        <div class="slide-title"><span class="num">02</span><h1>Two Variable Limits</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body">
+                    <div class="prompt">Find \(G'(x)\).</div>
+                    <div class="eq-box"><div class="eq-head">GIVEN</div><div class="eq-body">\[\displaystyle G(x)=\int_{x^2}^{3x}e^{t^2}\,dt\]</div></div>
+                    <div class="sign-grid"><div class="sign-card"><strong>UPPER LIMIT</strong><br>\(v(x)=3x\)<br>contributes positively</div><div class="sign-card"><strong>LOWER LIMIT</strong><br>\(u(x)=x^2\)<br>contributes negatively</div></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body compact">
+                    <div class="vid-slot" data-vid="two-limits"><span class="vid-rec">&#9679; REC</span><span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 02</div></div></div>
+                    <div class="sol-text"><div class="sol-head">UPPER MINUS LOWER</div><div class="eqc">\[\displaystyle \frac{d}{dx}\int_{u(x)}^{v(x)}f(t)\,dt=f(v(x))v'(x)-f(u(x))u'(x)\]</div><div class="eqc">\[\displaystyle G'(x)=3e^{9x^2}-2x e^{x^4}.\]</div><div class="step">The negative sign belongs to the lower-limit contribution.</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide theorem-slide" data-slide="5">
+        <div class="slide-title"><span class="tag">THEOREM</span><h1>FTC Part 2: Evaluate Definite Integrals</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>EVALUATION THEOREM</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <p>If \(f\) is continuous on \([a,b]\) and \(F'(x)=f(x)\), then</p>
+                        <div class="eq-box"><div class="eq-head">FTC PART 2</div><div class="eq-body">\[\displaystyle \boxed{\int_a^b f(x)\,dx=F(b)-F(a)}\]</div></div>
+                        <div class="eq-box"><div class="eq-head">EVALUATION NOTATION</div><div class="eq-body">\[\displaystyle \int_a^b f(x)\,dx=\left[F(x)\right]_a^b\]</div></div>
+                        <p class="note">A definite integral is a number, so the final answer does not include (+C).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>ALGORITHM &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="ftc-part-two"><span class="vid-rec">&#9679; REC</span><span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">THEOREM VIDEO // FTC 2</div></div></div>
+                    <div class="sol-text"><div class="sol-head">THREE MOVES</div><div class="mapping"><div>Find \(F\)</div><div class="arrow">&rarr;</div><div>\(F'=f\)</div></div><div class="mapping"><div>Upper value</div><div class="arrow">&rarr;</div><div>\(F(b)\)</div></div><div class="mapping"><div>Subtract</div><div class="arrow">&rarr;</div><div>\(F(b)-F(a)\)</div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="6">
+        <div class="slide-title"><span class="num">03</span><h1>Evaluate Exactly</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body"><div class="prompt">Evaluate the definite integral.</div><div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\displaystyle \int_1^3\left(2x+\frac1x\right)dx\]</div></div><div class="mini-grid"><div class="mini-card"><b>POWER RULE</b>\(\int 2x\,dx=x^2\)</div><div class="mini-card"><b>LOG RULE</b>\(\int \frac1x\,dx=\ln|x|\)</div></div></div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="evaluate-exactly"><span class="vid-rec">&#9679; REC</span><span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 03</div></div></div>
+                    <div class="sol-text"><div class="sol-head">WORKED SOLUTION</div><div class="eqc">\[\displaystyle \int_1^3\left(2x+\frac1x\right)dx=\left[x^2+\ln|x|\right]_1^3\]</div><div class="eqc">\[\displaystyle =(9+\ln3)-(1+\ln1)=8+\ln3.\]</div><div class="step">No \(+C\): any constant would cancel between the endpoints.</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide formula-slide" data-slide="7">
+        <div class="slide-title"><span class="tag">PROPERTIES</span><h1>Definite Integral Algebra</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>ORIENTATION &amp; LINEARITY</div>
+                <div class="box-body">
+                    <div class="eq-box"><div class="eq-head">ZERO WIDTH</div><div class="eq-body">\[\displaystyle \int_a^a f(x)\,dx=0\]</div></div>
+                    <div class="eq-box"><div class="eq-head">REVERSE LIMITS</div><div class="eq-body">\[\displaystyle \int_a^b f(x)\,dx=-\int_b^a f(x)\,dx\]</div></div>
+                    <div class="eq-box"><div class="eq-head">LINEARITY</div><div class="eq-body">\[\displaystyle \int_a^b(kf\pm g)=k\int_a^b f\pm\int_a^b g\]</div></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>ADD INTERVALS</div>
+                <div class="box-body">
+                    <div class="statement"><p>A shared endpoint allows adjacent intervals to combine:</p><div class="eq-box"><div class="eq-head">ADDITIVITY</div><div class="eq-body">\[\displaystyle \int_a^b f(x)\,dx+\int_b^c f(x)\,dx=\int_a^c f(x)\,dx\]</div></div><p>If \(\int_1^4 f=7\) and \(\int_4^6 f=-2\), then</p><div class="eq-box"><div class="eq-head">QUICK APPLICATION</div><div class="eq-body">\[\displaystyle \int_1^6f(x)\,dx=7+(-2)=5.\]</div></div><p class="note">Match orientation before combining intervals.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="8">
+        <div class="slide-title"><span class="num">04</span><h1>Net Area versus Total Area</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM &amp; GRAPH</div>
+                <div class="box-body">
+                    <div class="prompt">For \(f(x)=x-1\) on \([-1,2]\), find the net signed area and the total geometric area.</div>
+                    <div class="graph-box"><div class="graph-head">GRAPH // Y = X - 1</div><div class="figure"><svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Line y equals x minus one with signed regions"><defs><marker id="arr-area" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#7d8ea0"/></marker></defs><line class="axis" x1="28" y1="130" x2="455" y2="130" marker-end="url(#arr-area)"/><line class="axis" x1="180" y1="235" x2="180" y2="18" marker-end="url(#arr-area)"/><path class="region" d="M55 130 L55 220 L330 130 Z"/><path class="region" d="M330 130 L420 52 L420 130 Z" style="opacity:.42"/><path class="curve" d="M55 220 L420 52"/><line class="ref" x1="55" y1="130" x2="55" y2="220"/><line class="ref" x1="420" y1="130" x2="420" y2="52"/><text class="lbl" x="48" y="149">-1</text><text class="lbl" x="324" y="149">1</text><text class="lbl" x="414" y="149">2</text><text class="lbl" x="430" y="50">y=x-1</text></svg></div></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body compact">
+                    <div class="vid-slot" data-vid="signed-area"><span class="vid-rec">&#9679; REC</span><span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 04</div></div></div>
+                    <div class="sol-text"><div class="sol-head">TWO DIFFERENT QUESTIONS</div><div class="step">Net signed area:</div><div class="eqc">\[\displaystyle \int_{-1}^{2}(x-1)\,dx=-\frac12.\]</div><div class="step">Split at \(x=1\) and make both regions positive:</div><div class="eqc">\[\displaystyle \int_{-1}^{2}|x-1|\,dx=2+\frac12=\frac52.\]</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide formula-slide" data-slide="9">
+        <div class="slide-title"><span class="tag">SUMMARY</span><h1>Choose the Correct FTC Move</h1></div>
+        <div class="slide-body single">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>DECISION GUIDE</div>
+                <div class="box-body">
+                    <div class="logic-strip">
+                        <div><b>DIFFERENTIATE AN INTEGRAL</b>Use FTC Part 1; substitute the endpoint and apply the chain rule.</div>
+                        <div><b>EVALUATE AN INTEGRAL</b>Use FTC Part 2; find \(F(b)-F(a)\).</div>
+                        <div><b>COMBINE INTERVALS</b>Match direction, then use additivity.</div>
+                    </div>
+                    <div class="mini-grid">
+                        <div class="mini-card"><b>VARIABLE LOWER LIMIT</b>Add a negative sign.</div>
+                        <div class="mini-card"><b>DEFINITE INTEGRAL</b>Do not add (+C).</div>
+                        <div class="mini-card"><b>NET AREA</b>Keep contributions below the axis negative.</div>
+                        <div class="mini-card"><b>TOTAL AREA</b>Integrate (|f|) or split at zeros.</div>
+                    </div>
+                    <div class="eq-box"><div class="eq-head">THE FUNDAMENTAL CONNECTION</div><div class="eq-body">\[\displaystyle \frac{d}{dx}\int_a^x f(t)\,dt=f(x),\qquad \int_a^b f(x)\,dx=F(b)-F(a).\]</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="controls">
+    <button class="ctrl-btn" id="prev" aria-label="Previous slide">&#9664;</button>
+    <div class="counter"><b id="cur">1</b> / <span id="tot">10</span></div>
+    <button class="ctrl-btn" id="next" aria-label="Next slide">&#9654;</button>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-stage">
+        <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+        <div class="vid-slot" id="modalSlot" style="aspect-ratio:unset;"><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label" id="modalLabel">VIDEO</div></div></div>
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+</div>
+
+<!-- 保留了你的自动视频框生成脚本，但去除了有冲突的废弃脚本 -->
+<script>
+document.querySelectorAll('.slide').forEach((slide,index)=>{if(index===0||index>=8){slide.querySelectorAll('.vid-slot').forEach(slot=>slot.remove());return;}if(slide.querySelector('.vid-slot'))return;const slot=document.createElement('div');slot.className='vid-slot supplemental-video';slot.dataset.vid='slide-'+String(index+1).padStart(2,'0');slot.innerHTML='<span class="vid-rec">&#9679; REC</span><span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">LESSON VIDEO // SLIDE '+String(index+1).padStart(2,'0')+'</div></div>';const target=slide.querySelector('.box:last-child .box-body')||slide;target.prepend(slot);});
+</script>
+
+<script src="./js/ignite-deck.js"></script>
+</body>
+</html>
