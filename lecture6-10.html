@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGNITE // 10 Evaluating and Applying Definite Integrals</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Rajdhani:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    
+    <!-- 【精准云端寻址】 -->
+    <link rel="stylesheet" href="./css/ignite-deck.css">
+    <link rel="stylesheet" href="./css/graph-style.css">
+
+    <!-- 本课专属定制排版 -->
+    <style>
+        .mini-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:14px; }
+        .mini-card { border:1px solid var(--border); background:var(--bg-soft); padding:14px; }
+        .mini-card b { display:block; color:var(--accent-2); font-family:var(--font-tech); font-size:11px; letter-spacing:1.4px; margin-bottom:7px; }
+        .sign-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+        .sign-card { border:1px solid var(--border); padding:16px; background:var(--bg-soft); }
+        .sign-card strong { color:var(--accent); }
+        .formula-stack { display:grid; gap:13px; }
+        .formula-card { border:1px solid var(--border); border-left:2px solid var(--accent-2); background:var(--bg-soft); padding:15px 18px; }
+        .formula-card b { display:block; color:var(--accent-2); font-family:var(--font-tech); font-size:10px; letter-spacing:1.6px; margin-bottom:8px; }
+        .compact .eq-box { margin:12px 0; }
+        .compact .step { margin:7px 0; }
+        .data-table td, .data-table th { text-align:center; padding: 10px; border: 1px solid rgba(255,255,255,0.1); font-family: var(--font-tech); }
+        .data-table thead { background: rgba(0, 243, 255, 0.1); color: var(--accent); }
+        .supplemental-video { width:min(100%,420px); margin:18px auto 0; flex:0 0 auto; }
+        .slide.title .supplemental-video { position:absolute; width:min(420px,38vw); left:50%; bottom:72px; transform:translateX(-50%); margin:0; }
+        .logic-strip { display: flex; flex-wrap: wrap; gap: 15px; background: rgba(0, 0, 0, 0.5); padding: 12px 15px; border-radius: 6px; border-left: 3px solid var(--accent-2); }
+        .logic-strip > div { display: flex; flex-direction: column; font-size: 13px; }
+        .logic-strip b { color: var(--accent-2); font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 1px; margin-bottom: 3px; }
+        .mapping { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 15px; background: rgba(255,255,255,0.03); padding: 10px 20px; border-radius: 4px; margin-bottom: 8px; border-left: 2px solid var(--accent); }
+        .mapping .arrow { color: var(--accent); font-weight: bold; font-family: 'Share Tech Mono'; }
+    </style>
+
+    <script>window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="auto-resize">
+
+<nav class="progress-nav" id="progressNav" aria-label="Lesson sections">
+    <div class="pn-item active" data-go="0"><div class="pn-node">01</div><div class="pn-title">OVERVIEW</div><div class="pn-sub">Meaningful accumulation</div></div>
+    <div class="pn-item" data-go="1"><div class="pn-node">02</div><div class="pn-title">METHOD</div><div class="pn-sub">Evaluate exactly</div></div>
+    <div class="pn-item" data-go="2"><div class="pn-node">03</div><div class="pn-title">EXERCISE 01</div><div class="pn-sub">Polynomial integral</div></div>
+    <div class="pn-item" data-go="3"><div class="pn-node">04</div><div class="pn-title">SYMMETRY</div><div class="pn-sub">Even, odd, geometry</div></div>
+    <div class="pn-item" data-go="4"><div class="pn-node">05</div><div class="pn-title">AVERAGE VALUE</div><div class="pn-sub">Equal-area height</div></div>
+    <div class="pn-item" data-go="5"><div class="pn-node">06</div><div class="pn-title">EXERCISE 02</div><div class="pn-sub">Average value</div></div>
+    <div class="pn-item" data-go="6"><div class="pn-node">07</div><div class="pn-title">NET CHANGE</div><div class="pn-sub">Rate to quantity</div></div>
+    <div class="pn-item" data-go="7"><div class="pn-node">08</div><div class="pn-title">MOTION</div><div class="pn-sub">Displacement vs distance</div></div>
+    <div class="pn-item" data-go="8"><div class="pn-node">09</div><div class="pn-title">DATA</div><div class="pn-sub">Accumulation from a table</div></div>
+    <div class="pn-item" data-go="9"><div class="pn-node">10</div><div class="pn-title">SUMMARY</div><div class="pn-sub">Interpret before computing</div></div>
+</nav>
+
+<div class="deck" id="deck">
+
+    <section class="slide title active" data-slide="0">
+        <div class="title-brand">10 <span>//</span> DEFINITE INTEGRALS</div>
+        <div class="title-sub">EVALUATE &nbsp;&bull;&nbsp; INTERPRET &nbsp;&bull;&nbsp; APPLY</div>
+        <div class="title-rule"></div>
+        <div class="title-meta">AN INTEGRAL ACCUMULATES A RATE INTO A QUANTITY</div>
+    </section>
+
+    <section class="slide formula-slide" data-slide="1">
+        <div class="slide-title"><span class="tag">METHOD</span><h1>Evaluate a Definite Integral</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>FTC EVALUATION</div>
+                <div class="box-body">
+                    <div class="statement">
+                        <p>If \(F'(x)=f(x)\), then</p>
+                        <div class="eq-box"><div class="eq-head">FUNDAMENTAL THEOREM</div><div class="eq-body">\[\displaystyle \int_a^b f(x)\,dx=\left[F(x)\right]_a^b=F(b)-F(a).\]</div></div>
+                        <p>The answer is a number representing net accumulation over ([a,b]).</p>
+                        <p class="note">A definite integral does not include (+C).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>WORKFLOW &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="evaluation-method"><span class="vid-rec">&#9679; REC</span><span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">METHOD VIDEO // EVALUATION</div></div></div>
+                    <div class="sol-text"><div class="sol-head">FOUR CHECKPOINTS</div><div class="mapping"><div>Simplify</div><div class="arrow">&rarr;</div><div>recognize the integrand</div></div><div class="mapping"><div>Integrate</div><div class="arrow">&rarr;</div><div>find \(F\)</div></div><div class="mapping"><div>Evaluate</div><div class="arrow">&rarr;</div><div>\(F(b)-F(a)\)</div></div><div class="mapping"><div>Interpret</div><div class="arrow">&rarr;</div><div>state units</div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="2">
+        <div class="slide-title"><span class="num">01</span><h1>Exact Evaluation</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body"><div class="prompt">Evaluate the definite integral exactly.</div><div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\displaystyle \int_0^2(3x^2-4x+1)\,dx\]</div></div><div class="mini-grid"><div class="mini-card"><b>FIRST MOVE</b>Integrate term by term.</div><div class="mini-card"><b>LAST MOVE</b>Upper value minus lower value.</div></div></div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="polynomial-evaluation"><span class="vid-rec">&#9679; REC</span><span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 01</div></div></div>
+                    <div class="sol-text"><div class="sol-head">WORKED SOLUTION</div><div class="eqc">\[\displaystyle \int_0^2(3x^2-4x+1)\,dx=\left[x^3-2x^2+x\right]_0^2\]</div><div class="eqc">\[\displaystyle =(8-8+2)-0=2.\]</div><div class="step">Sanity check: positive and negative contributions combine to a small positive net value.</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide formula-slide" data-slide="3">
+        <div class="slide-title"><span class="tag">SYMMETRY</span><h1>Evaluate Before You Integrate</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>EVEN &amp; ODD FUNCTIONS</div>
+                <div class="box-body">
+                    <div class="formula-stack">
+                        <div class="formula-card"><b>EVEN // MIRROR SYMMETRY</b>\[\displaystyle f(-x)=f(x),\qquad \int_{-a}^{a}f(x)\,dx=2\int_0^a f(x)\,dx\]</div>
+                        <div class="formula-card"><b>ODD // ROTATIONAL SYMMETRY</b>\[\displaystyle f(-x)=-f(x),\qquad \int_{-a}^{a}f(x)\,dx=0\]</div>
+                    </div>
+                    <p class="note">These shortcuts require a symmetric interval ([-a,a]).</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>GEOMETRY</div>
+                <div class="box-body">
+                    <div class="prompt">Evaluate without finding an antiderivative:</div>
+                    <div class="eq-box"><div class="eq-head">UPPER SEMICIRCLE</div><div class="eq-body">\[\displaystyle \int_{-3}^{3}\sqrt{9-x^2}\,dx\]</div></div>
+                    <div class="graph-box"><div class="graph-head">RADIUS 3</div><div class="figure"><svg viewBox="0 0 420 235" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Upper semicircle of radius three"><defs><marker id="arr-sym" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#7d8ea0"/></marker></defs><line class="axis" x1="30" y1="190" x2="395" y2="190" marker-end="url(#arr-sym)"/><line class="axis" x1="210" y1="215" x2="210" y2="20" marker-end="url(#arr-sym)"/><path class="region" d="M70 190 A140 140 0 0 1 350 190 Z"/><path class="curve" d="M70 190 A140 140 0 0 1 350 190"/><text class="lbl" x="62" y="210">-3</text><text class="lbl" x="346" y="210">3</text><text class="lbl" x="260" y="85">r = 3</text></svg></div></div>
+                    <div class="eqc">\[\displaystyle \frac12\pi(3)^2=\frac{9\pi}{2}.\]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide definition-slide" data-slide="4">
+        <div class="slide-title"><span class="tag">DEFINITION</span><h1>Average Value of a Function</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>AVERAGE VALUE</div>
+                <div class="box-body">
+                    <div class="statement"><p>If \(f\) is continuous on \([a,b]\), its average value is</p><div class="eq-box"><div class="eq-head">FORMULA</div><div class="eq-body">\[\displaystyle \boxed{f_{\mathrm{avg}}=\frac{1}{b-a}\int_a^b f(x)\,dx}\]</div></div><p>It is the constant height of a rectangle with the same signed area as the region under \(f\).</p><p class="note">The divisor is interval length \(b-a\), not the number of endpoints.</p></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>EQUAL-AREA PICTURE</div>
+                <div class="box-body">
+                    <div class="graph-box"><div class="graph-head">FUNCTION AND AVERAGE HEIGHT</div><div class="figure"><svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Function with average value line"><defs><marker id="arr-avg" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#7d8ea0"/></marker></defs><line class="axis" x1="38" y1="235" x2="475" y2="235" marker-end="url(#arr-avg)"/><line class="axis" x1="68" y1="260" x2="68" y2="22" marker-end="url(#arr-avg)"/><path class="region" d="M120 235 L120 138 L420 138 L420 235 Z"/><line class="ref" x1="120" y1="138" x2="420" y2="138"/><path class="curve" d="M120 188 C185 44 275 72 330 155 C365 205 392 180 420 91"/><text class="lbl" x="112" y="255">a</text><text class="lbl" x="416" y="255">b</text><text class="lbl" x="425" y="142">f_avg</text><text class="lbl" x="425" y="89">f(x)</text></svg></div></div>
+                    <div class="eqc">\[\displaystyle (b-a)f_{\mathrm{avg}}=\int_a^b f(x)\,dx.\]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="5">
+        <div class="slide-title"><span class="num">02</span><h1>Find an Average Value</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-body"><div class="prompt">Find the average value of \(f(x)=x^2+1\) on \([0,3]\).</div><div class="eq-box"><div class="eq-head">SETUP TEMPLATE</div><div class="eq-body">\[\displaystyle f_{\mathrm{avg}}=\frac{1}{\text{interval length}}\int_{\text{left}}^{\text{right}}f(x)\,dx\]</div></div><div class="mini-grid"><div class="mini-card"><b>INTERVAL LENGTH</b>\(3-0=3\)</div><div class="mini-card"><b>ANTIDERIVATIVE</b>\(x^3/3+x\)</div></div></div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="average-value"><span class="vid-rec">&#9679; REC</span><span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 02</div></div></div>
+                    <div class="sol-text"><div class="sol-head">WORKED SOLUTION</div><div class="eqc">\[\displaystyle f_{\mathrm{avg}}=\frac13\int_0^3(x^2+1)\,dx\]</div><div class="eqc">\[\displaystyle =\frac13\left[\frac{x^3}{3}+x\right]_0^3=\frac13(12)=4.\]</div><div class="step">By the Mean Value Theorem for Integrals, \(f(c)=4\) for at least one \(c\in[0,3]\).</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide theorem-slide" data-slide="6">
+        <div class="slide-title"><span class="tag">THEOREM</span><h1>Net Change: Rate to Quantity</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>NET CHANGE THEOREM</div>
+                <div class="box-body"><div class="statement"><p>If \(Q'(t)\) is the rate of change of \(Q\), then</p><div class="eq-box"><div class="eq-head">NET CHANGE</div><div class="eq-body">\[\displaystyle \int_a^b Q'(t)\,dt=Q(b)-Q(a).\]</div></div><p>To recover the final amount, include the initial amount:</p><div class="eq-box"><div class="eq-head">FINAL QUANTITY</div><div class="eq-body">\[\displaystyle \boxed{Q(b)=Q(a)+\int_a^b Q'(t)\,dt}\]</div></div></div></div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>APPLICATION</div>
+                <div class="box-body compact"><div class="prompt">Water enters a tank at \(r(t)=6+2t\) L/min. Initially the tank holds \(40\) L. Find the amount after \(5\) min.</div><div class="eqc">\[\displaystyle Q(5)=40+\int_0^5(6+2t)\,dt\]</div><div class="eqc">\[\displaystyle =40+[6t+t^2]_0^5=95\text{ L}.\]</div><div class="formula-card"><b>UNIT CHECK</b>\((\text{liters/minute})(\text{minutes})=\text{liters}\)</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide formula-slide" data-slide="7">
+        <div class="slide-title"><span class="tag">MOTION</span><h1>Displacement versus Total Distance</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>TWO QUESTIONS</div>
+                <div class="box-body"><div class="formula-stack"><div class="formula-card"><b>DISPLACEMENT // NET CHANGE IN POSITION</b>\[\displaystyle \int_a^b v(t)\,dt=s(b)-s(a)\]</div><div class="formula-card"><b>TOTAL DISTANCE // ALL MOTION POSITIVE</b>\[\displaystyle \int_a^b|v(t)|\,dt\]</div></div><p class="note">Split the interval wherever velocity changes sign.</p></div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>EXAMPLE</div>
+                <div class="box-body compact"><div class="prompt">Let \(v(t)=(t-1)(t-3)\) on \(0\le t\le4\).</div><div class="step">Velocity changes sign at \(t=1\) and \(t=3\).</div><div class="eqc">\[\displaystyle \text{displacement}=\int_0^4v(t)\,dt=\frac43\]</div><div class="eqc">\[\displaystyle \text{distance}=\int_0^1v-\int_1^3v+\int_3^4v=4\]</div><div class="step">Absolute value prevents backward motion from canceling forward motion.</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" data-slide="8">
+        <div class="slide-title"><span class="num">03</span><h1>Accumulation from Tabular Data</h1></div>
+        <div class="slide-body">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>RATE TABLE</div>
+                <div class="box-body"><div class="prompt">The inflow rate \(r(t)\), in gallons per minute, is recorded below. Approximate the amount added from \(t=0\) to \(t=8\).</div><table class="data-table" style="width:100%; margin-top:20px;"><thead><tr><th>\(t\) (min)</th><th>0</th><th>2</th><th>5</th><th>8</th></tr></thead><tbody><tr><td>\(r(t)\)</td><td>4</td><td>7</td><td>5</td><td>9</td></tr></tbody></table><div class="formula-card" style="margin-top:20px;"><b>CAUTION</b>The time intervals have unequal widths: \(2,3,3\).</div></div>
+            </div>
+            <div class="box">
+                <div class="box-head sol"><span class="dot"></span>TRAPEZOIDAL APPROXIMATION</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="tabular-accumulation"><span class="vid-rec">&#9679; REC</span><span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">SOLUTION VIDEO // EX 03</div></div></div>
+                    <div class="sol-text"><div class="sol-head">COMPUTE EACH TRAPEZOID</div><div class="eqc">\[\displaystyle \int_0^8r(t)\,dt\approx\frac22(4+7)+\frac32(7+5)+\frac32(5+9)\]</div><div class="eqc">\[\displaystyle =11+18+21=50\text{ gallons}.\]</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide formula-slide" data-slide="9">
+        <div class="slide-title"><span class="tag">SUMMARY</span><h1>Interpret Before You Compute</h1></div>
+        <div class="slide-body single">
+            <div class="box">
+                <div class="box-head"><span class="dot"></span>DECISION GUIDE</div>
+                <div class="box-body">
+                    <div class="logic-strip"><div><b>EXACT VALUE</b>Find an antiderivative, then evaluate upper minus lower.</div><div><b>SHORTCUT</b>Check symmetry, geometry, and algebra first.</div><div><b>APPLICATION</b>Identify the rate, the interval, the initial value, and the requested quantity.</div></div>
+                    <div class="mini-grid"><div class="mini-card"><b>AVERAGE VALUE</b>\(\frac1{b-a}\int_a^b f\)</div><div class="mini-card"><b>FINAL AMOUNT</b>initial \(+\int\) rate</div><div class="mini-card"><b>DISPLACEMENT</b>\(\int v(t)\,dt\)</div><div class="mini-card"><b>TOTAL DISTANCE</b>\(\int|v(t)|\,dt\)</div></div>
+                    <div class="eq-box"><div class="eq-head">FINAL CHECK</div><div class="eq-body">\[\displaystyle \text{units of integrand}\times\text{units of }dx=\text{units of accumulation}.\]</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="controls">
+    <button class="ctrl-btn" id="prev" aria-label="Previous slide">&#9664;</button>
+    <div class="counter"><b id="cur">1</b> / <span id="tot">10</span></div>
+    <button class="ctrl-btn" id="next" aria-label="Next slide">&#9654;</button>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-stage"><button class="modal-close" id="modalClose" aria-label="Close">&times;</button><div class="vid-slot" id="modalSlot" style="aspect-ratio:unset;"><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label" id="modalLabel">VIDEO</div></div></div><div class="modal-caption" id="modalCaption"></div></div>
+</div>
+
+<script>
+document.querySelectorAll('.slide').forEach((slide,index)=>{if(index===0||index>=8){slide.querySelectorAll('.vid-slot').forEach(slot=>slot.remove());return;}if(slide.querySelector('.vid-slot'))return;const slot=document.createElement('div');slot.className='vid-slot supplemental-video';slot.dataset.vid='slide-'+String(index+1).padStart(2,'0');slot.innerHTML='<span class="vid-rec">&#9679; REC</span><span class="expand-hint">EXPAND</span><video controls preload="none"></video><div class="vid-placeholder"><div class="vid-icon">&#9654;</div><div class="vid-label">LESSON VIDEO // SLIDE '+String(index+1).padStart(2,'0')+'</div></div>';const target=slide.querySelector('.box:last-child .box-body')||slide;target.prepend(slot);});
+</script>
+
+<!-- 精准相对路径 -->
+<script src="./js/ignite-deck.js"></script>
+</body>
+</html>
