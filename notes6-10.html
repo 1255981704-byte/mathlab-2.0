@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATA LOG // 6.10 Evaluating and Applying Definite Integrals</title>
+
+    <!-- 引入机甲字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- 配置 MathJax 渲染数学公式 -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], tags: 'none' },
+            chtml: { scale: 1.1 } 
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- 专属数据日志 CSS -->
+    <style>
+        :root {
+            --bg-page: transparent;
+            --text-main: #d8e6f2;
+            --text-dim: #7d8ea0;
+            --accent-cyan: #00f3ff;
+            --accent-orange: #ff7a3d;
+            --accent-red: #ff3333;
+            --accent-gray: #aab4d4;
+            --font-ui: 'Rajdhani', sans-serif;
+            --font-tech: 'Share Tech Mono', monospace;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        html, body {
+            margin: 0; padding: 0; background: var(--bg-page); color: var(--text-main);
+            font-family: var(--font-body); line-height: 1.7; font-size: 15px;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 243, 255, 0.05); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 243, 255, 0.3); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 243, 255, 0.8); }
+
+        .log-container { padding: 30px 40px; max-width: 900px; margin: 0 auto; }
+
+        /* 标题排版 */
+        .doc-header { border-bottom: 1px solid rgba(0,243,255,0.3); padding-bottom: 15px; margin-bottom: 30px; }
+        .doc-id { font-family: var(--font-tech); color: var(--accent-orange); letter-spacing: 3px; font-size: 12px; margin-bottom: 5px; }
+        .doc-title { font-family: var(--font-ui); font-size: 32px; font-weight: 700; color: #fff; margin: 0; letter-spacing: 1px; text-shadow: 0 0 10px rgba(0,243,255,0.5); }
+
+        h2 { 
+            font-family: var(--font-ui); color: var(--accent-cyan); font-size: 22px; font-weight: 700; 
+            letter-spacing: 2px; margin-top: 40px; margin-bottom: 15px; border-left: 4px solid var(--accent-cyan); padding-left: 10px;
+        }
+        p { margin-bottom: 15px; }
+        ul, ol { padding-left: 20px; color: var(--text-dim); }
+        li { margin-bottom: 8px; }
+        strong { color: #fff; }
+
+        /* --- 科幻数据框样式 --- */
+        .t-box {
+            margin: 20px 0; padding: 20px; border-radius: 4px;
+            background: rgba(0, 15, 30, 0.6); position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        .t-box-title {
+            font-family: var(--font-tech); font-size: 13px; font-weight: 700; letter-spacing: 2px;
+            margin-bottom: 15px; display: inline-block; padding: 4px 10px; background: #000;
+        }
+
+        /* 定义框 (Definition) - 赛博青色 */
+        .box-def { border: 1px solid rgba(0, 243, 255, 0.3); border-left: 4px solid var(--accent-cyan); }
+        .box-def .t-box-title { color: var(--accent-cyan); border: 1px solid var(--accent-cyan); box-shadow: 0 0 8px rgba(0,243,255,0.3); }
+
+        /* 公式框 (Formula) - 警示橙色 */
+        .box-formula { border: 1px solid rgba(255, 122, 61, 0.3); border-left: 4px solid var(--accent-orange); background: rgba(30, 10, 0, 0.4); }
+        .box-formula .t-box-title { color: var(--accent-orange); border: 1px solid var(--accent-orange); box-shadow: 0 0 8px rgba(255,122,61,0.3); }
+
+        /* 警告框 (Warning) - 危险红色 */
+        .box-warning { border: 1px solid rgba(255, 51, 51, 0.3); border-left: 4px solid var(--accent-red); background: rgba(40, 5, 5, 0.4); }
+        .box-warning .t-box-title { color: var(--accent-red); border: 1px solid var(--accent-red); box-shadow: 0 0 10px rgba(255,51,51,0.5); animation: pulse-red 2s infinite; }
+
+        /* 示例框 (Example) - 冷静灰蓝 */
+        .box-example { border: 1px solid rgba(170, 180, 212, 0.2); border-left: 4px solid var(--accent-gray); background: rgba(255, 255, 255, 0.02); }
+        .box-example .t-box-title { color: var(--accent-gray); border: 1px solid var(--accent-gray); }
+        
+        /* 任务框 (Task/Exercise) - 冰蓝色 */
+        .box-task { border: 1px solid rgba(0, 243, 255, 0.2); border-left: 4px solid var(--accent-cyan); background: rgba(255, 255, 255, 0.02); }
+        .box-task .t-box-title { color: var(--accent-cyan); border: 1px solid var(--accent-cyan); box-shadow: 0 0 8px rgba(0,243,255,0.3); }
+
+        /* 数据表格 */
+        .data-table { width: 100%; border-collapse: collapse; text-align: center; margin: 20px 0; font-family: var(--font-tech); font-size: 15px; color: var(--text-main); }
+        .data-table th, .data-table td { border: 1px solid rgba(255,255,255,0.1); padding: 12px; }
+        .data-table thead { background: rgba(0, 243, 255, 0.1); color: var(--accent-cyan); }
+
+        /* 终端提示符 */
+        .awaiting-computation {
+            border-top: 1px dashed rgba(0, 243, 255, 0.3);
+            margin-top: 20px; padding-top: 15px; padding-bottom: 20px;
+            font-family: var(--font-tech); font-size: 13px; color: rgba(0, 243, 255, 0.5);
+            letter-spacing: 2px; animation: blink-text 2s infinite;
+        }
+
+        @keyframes pulse-red { 0%, 100% { box-shadow: 0 0 5px rgba(255,51,51,0.3); } 50% { box-shadow: 0 0 15px rgba(255,51,51,0.8); } }
+        @keyframes blink-text { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+        
+        mjx-container { color: #fff !important; text-shadow: 0 0 2px rgba(255,255,255,0.3); }
+    </style>
+</head>
+<body>
+
+<div class="log-container">
+    <div class="doc-header">
+        <div class="doc-id">DATA LOG // SECTION 6.10</div>
+        <h1 class="doc-title">Evaluating and Applying Definite Integrals</h1>
+    </div>
+
+    <!-- 1. Evaluating Definite Integrals -->
+    <h2>1. Evaluating Definite Integrals</h2>
+    <p>The Fundamental Theorem of Calculus turns a definite integral into an antiderivative problem. If \(F'(x)=f(x)\), then</p>
+    \[ \int_a^b f(x)\,dx=F(b)-F(a). \]
+    <p>The result is a number representing net accumulation over \([a,b]\).</p>
+
+    <div class="t-box box-formula">
+        <div class="t-box-title">EVALUATION PROCEDURE</div>
+        <p>To evaluate \(\displaystyle\int_a^b f(x)\,dx\):</p>
+        <ol>
+            <li>Find an antiderivative \(F\) of \(f\).</li>
+            <li>Write \(\left[F(x)\right]_a^b\).</li>
+            <li>Substitute the upper and lower limits: \(F(b)-F(a)\).</li>
+            <li>Simplify and include units when the integral represents a quantity.</li>
+        </ol>
+    </div>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 1: EXACT EVALUATION</div>
+        <p>Evaluate \[ \int_0^2(3x^2-4x+1)\,dx. \]</p>
+        <p>An antiderivative is \(x^3-2x^2+x\), so</p>
+        \[
+        \begin{aligned}
+        \int_0^2(3x^2-4x+1)\,dx &=\left[x^3-2x^2+x\right]_0^2\\
+        &=(8-8+2)-0=\boxed{2}.
+        \end{aligned}
+        \]
+    </div>
+
+    <div class="t-box box-warning">
+        <div class="t-box-title">WARNING // BEFORE INTEGRATING, SIMPLIFY</div>
+        <p>Algebra can reveal a familiar antiderivative. For example,</p>
+        \[ \int_1^4\frac{x^2+2x}{x}\,dx =\int_1^4(x+2)\,dx. \]
+        <p>Always check whether the integrand can be expanded, factored, or reduced first.</p>
+    </div>
+
+    <!-- 2. Symmetry and Geometry -->
+    <h2>2. Symmetry and Geometry</h2>
+    <p>Some definite integrals can be evaluated without finding an antiderivative. Symmetry is especially useful on intervals of the form \([-a,a]\).</p>
+
+    <div class="t-box box-formula">
+        <div class="t-box-title">EVEN AND ODD FUNCTIONS</div>
+        <p>If \(f\) is even, so that \(f(-x)=f(x)\), then</p>
+        \[ \boxed{\int_{-a}^{a}f(x)\,dx=2\int_0^a f(x)\,dx}. \]
+        <p>If \(f\) is odd, so that \(f(-x)=-f(x)\), then</p>
+        \[ \boxed{\int_{-a}^{a}f(x)\,dx=0}. \]
+    </div>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 2: USING SYMMETRY</div>
+        <p>Evaluate \[ \int_{-2}^{2}(x^3+4)\,dx. \]</p>
+        <p>The term \(x^3\) is odd and its integral over \([-2,2]\) is zero. The constant term is even, so</p>
+        \[ \int_{-2}^{2}(x^3+4)\,dx=0+4(2-(-2))=\boxed{16}. \]
+    </div>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 3: EVALUATION FROM GEOMETRY</div>
+        <p>Evaluate \[ \int_{-3}^{3}\sqrt{9-x^2}\,dx. \]</p>
+        <p>The graph \(y=\sqrt{9-x^2}\) is the upper semicircle of radius \(3\). Therefore,</p>
+        \[ \int_{-3}^{3}\sqrt{9-x^2}\,dx =\frac12\pi(3)^2=\boxed{\frac{9\pi}{2}}. \]
+    </div>
+
+    <!-- 3. Average Value of a Function -->
+    <h2>3. Average Value of a Function</h2>
+    <p>The average value of a continuous function is the height of a rectangle whose area equals the signed area under the function over the same interval.</p>
+
+    <div class="t-box box-def">
+        <div class="t-box-title">AVERAGE VALUE</div>
+        <p>If \(f\) is continuous on \([a,b]\), its average value is</p>
+        \[ \boxed{f_{\mathrm{avg}}=\frac{1}{b-a}\int_a^b f(x)\,dx}. \]
+        <p>The factor \(b-a\) is the length of the interval.</p>
+    </div>
+
+    <!-- Average Value Vector Graph -->
+    <svg viewBox="0 0 600 300" style="width: 100%; max-width: 500px; margin: 20px auto; display: block;">
+        <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#7d8ea0"/></marker></defs>
+        <line x1="30" y1="250" x2="550" y2="250" stroke="#7d8ea0" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="60" y1="270" x2="60" y2="20" stroke="#7d8ea0" stroke-width="1.2" marker-end="url(#arrow)"/>
+        
+        <!-- Rectangle Area -->
+        <rect x="120" y="120" width="370" height="130" fill="rgba(0, 243, 255, 0.15)"/>
+        <!-- f_avg Line -->
+        <line x1="120" y1="120" x2="490" y2="120" stroke="#00ffaa" stroke-width="2" stroke-dasharray="6 4"/>
+        
+        <!-- Curve -->
+        <path d="M 120 180 C 200 40 320 60 490 100" fill="none" stroke="#00f3ff" stroke-width="2.5"/>
+        
+        <!-- Guidelines -->
+        <line x1="120" y1="250" x2="120" y2="120" stroke="#00f3ff" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <line x1="490" y1="250" x2="490" y2="100" stroke="#00f3ff" stroke-width="1.5" stroke-dasharray="4 4"/>
+        
+        <!-- Labels -->
+        <text x="115" y="270" fill="#7d8ea0" font-family="Share Tech Mono" font-size="14">a</text>
+        <text x="485" y="270" fill="#7d8ea0" font-family="Share Tech Mono" font-size="14">b</text>
+        <text x="560" y="255" fill="#7d8ea0" font-family="Share Tech Mono" font-size="14">x</text>
+        <text x="45" y="20" fill="#7d8ea0" font-family="Share Tech Mono" font-size="14">y</text>
+        <text x="500" y="125" fill="#00ffaa" font-family="Share Tech Mono" font-size="14">f_avg</text>
+        <text x="500" y="90" fill="#00f3ff" font-family="Share Tech Mono" font-size="14">y=f(x)</text>
+    </svg>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 4: FINDING AN AVERAGE VALUE</div>
+        <p>Find the average value of \(f(x)=x^2+1\) on \([0,3]\).</p>
+        \[
+        \begin{aligned}
+        f_{\mathrm{avg}} &=\frac{1}{3-0}\int_0^3(x^2+1)\,dx\\
+        &=\frac13\left[\frac{x^3}{3}+x\right]_0^3 =\frac13(9+3)=\boxed{4}.
+        \end{aligned}
+        \]
+    </div>
+
+    <div class="t-box box-def">
+        <div class="t-box-title">MEAN VALUE THEOREM FOR INTEGRALS</div>
+        <p>If \(f\) is continuous on \([a,b]\), then there is at least one number \(c\) in \([a,b]\) such that</p>
+        \[ f(c)=\frac{1}{b-a}\int_a^b f(x)\,dx. \]
+        <p>In other words, the function attains its average value somewhere on the interval.</p>
+    </div>
+
+    <!-- 4. The Net Change Theorem -->
+    <h2>4. The Net Change Theorem</h2>
+    <p>If a rate of change is known, integrating the rate gives the total change in the original quantity.</p>
+
+    <div class="t-box box-formula">
+        <div class="t-box-title">NET CHANGE THEOREM</div>
+        <p>If \(Q'(t)\) is the rate of change of a quantity \(Q\), then</p>
+        \[ \boxed{\int_a^b Q'(t)\,dt=Q(b)-Q(a)}. \]
+        <p>Therefore,</p>
+        \[ \boxed{Q(b)=Q(a)+\int_a^b Q'(t)\,dt}. \]
+    </div>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 5: RECOVERING A QUANTITY FROM ITS RATE</div>
+        <p>Water enters a tank at the rate \[ r(t)=6+2t \quad \text{liters per minute}, \] where \(0\leq t\leq 5\). If the tank initially contains \(40\) liters, how much water is in the tank after \(5\) minutes?</p>
+        \[
+        \begin{aligned}
+        Q(5)&=Q(0)+\int_0^5 r(t)\,dt\\
+        &=40+\left[6t+t^2\right]_0^5\\
+        &=40+30+25=\boxed{95\text{ liters}}.
+        \end{aligned}
+        \]
+    </div>
+
+    <div class="t-box box-warning">
+        <div class="t-box-title">WARNING // UNITS OF AN INTEGRAL</div>
+        <p>Multiply the units of the integrand by the units of the variable of integration. A rate measured in liters per minute, integrated with respect to minutes, produces liters. This quick check often catches an incorrect setup.</p>
+    </div>
+
+    <!-- 5. Motion: Displacement and Total Distance -->
+    <h2>5. Motion: Displacement and Total Distance</h2>
+    <p>For motion along a line, velocity is the rate of change of position: \(v(t)=s'(t)\). Integrating velocity gives displacement.</p>
+
+    <div class="t-box box-formula">
+        <div class="t-box-title">MOTION FORMULAS</div>
+        \[ \boxed{\text{Displacement}=\int_a^b v(t)\,dt=s(b)-s(a)} \]
+        \[ \boxed{\text{Total distance}=\int_a^b |v(t)|\,dt} \]
+        <p>The particle changes direction whenever \(v(t)\) changes sign.</p>
+    </div>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 6: DISPLACEMENT VERSUS DISTANCE</div>
+        <p>A particle moves with velocity \[ v(t)=t^2-4t+3=(t-1)(t-3), \qquad 0\leq t\leq4. \] Find its displacement and total distance traveled.</p>
+        <p>The displacement is</p>
+        \[ \int_0^4 v(t)\,dt =\left[\frac{t^3}{3}-2t^2+3t\right]_0^4 =\boxed{\frac43}. \]
+        <p>Velocity changes sign at \(t=1\) and \(t=3\). Thus the total distance is</p>
+        \[
+        \begin{aligned}
+        \int_0^4|v(t)|\,dt &=\int_0^1v(t)\,dt-\int_1^3v(t)\,dt+\int_3^4v(t)\,dt\\
+        &=\frac43+\frac43+\frac43=\boxed{4}.
+        \end{aligned}
+        \]
+    </div>
+
+    <!-- 6. Accumulation from Data -->
+    <h2>6. Accumulation from Data</h2>
+    <p>When a rate is given by a table rather than a formula, a definite integral can be approximated with trapezoids. With unequal subintervals, compute each width separately.</p>
+
+    <div class="t-box box-example">
+        <div class="t-box-title">EXAMPLE 7: APPLYING THE TRAPEZOIDAL RULE TO DATA</div>
+        <p>The inflow rate \(r(t)\), in gallons per minute, is recorded below.</p>
+        
+        <table class="data-table">
+            <thead><tr><th>\(t\) (min)</th><th>0</th><th>2</th><th>5</th><th>8</th></tr></thead>
+            <tbody><tr><th>\(r(t)\) (gal/min)</th><td>4</td><td>7</td><td>5</td><td>9</td></tr></tbody>
+        </table>
+
+        <p>Approximate the total amount of water added from \(t=0\) to \(t=8\):</p>
+        \[
+        \begin{aligned}
+        \int_0^8r(t)\,dt &\approx \frac{2}{2}(4+7)+\frac{3}{2}(7+5) +\frac{3}{2}(5+9)\\
+        &=11+18+21=\boxed{50\text{ gallons}}.
+        \end{aligned}
+        \]
+    </div>
+
+    <!-- 7. Guided Practice -->
+    <h2>7. Guided Practice</h2>
+
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 01 // EXACT EVALUATION</div>
+        <p>Evaluate exactly: \[ \int_1^4\left(\sqrt{x}+\frac{2}{x}\right)dx. \]</p>
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 02 // USE SYMMETRY</div>
+        <p>Evaluate using symmetry: \[ \int_{-3}^{3}(2x^5-x^3+6)\,dx. \]</p>
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 03 // AVERAGE VALUE</div>
+        <p>Find the average value of \(f(x)=\sin x\) on \([0,\pi]\).</p>
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 04 // NET CHANGE</div>
+        <p>The temperature of a liquid changes at the rate \(T'(t)=3e^{-0.2t}\) degrees Celsius per minute. If \(T(0)=18^\circ\text{C}\), write an integral expression for \(T(10)\) and evaluate it.</p>
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <div class="t-box box-task">
+        <div class="t-box-title">EX 05 // MOTION</div>
+        <p>A particle has velocity \(v(t)=t-2\) for \(0\leq t\leq5\). Find its displacement and total distance traveled.</p>
+        <div class="awaiting-computation">&gt; AWAITING COMPUTATION...</div>
+    </div>
+
+    <!-- 8. Strategy Summary -->
+    <h2>8. Strategy Summary</h2>
+
+    <div class="t-box box-formula" style="border-color: #00ff66; border-left-color: #00ff66;">
+        <div class="t-box-title" style="color: #00ff66; border-color: #00ff66; box-shadow: 0 0 8px rgba(0,255,102,0.3);">CHOOSING THE RIGHT INTERPRETATION</div>
+        <ol>
+            <li>For an exact integral, find an antiderivative and evaluate upper minus lower.</li>
+            <li>Before integrating, look for symmetry, familiar geometric regions, or algebraic simplifications.</li>
+            <li>For average value, divide the integral by the interval length \(b-a\).</li>
+            <li>To recover a quantity, add its initial value to the integral of its rate of change.</li>
+            <li>In motion problems, integrate \(v\) for displacement and \(|v|\) for total distance.</li>
+            <li>Check that the units of the answer match the quantity being requested.</li>
+        </ol>
+    </div>
+
+    <div class="t-box box-warning">
+        <div class="t-box-title">WARNING // COMMON ERRORS</div>
+        <ul>
+            <li>Forgetting the factor \(1/(b-a)\) in an average-value problem.</li>
+            <li>Confusing a rate with the accumulated amount.</li>
+            <li>Adding an initial value when the question asks only for net change.</li>
+            <li>Using displacement when the question asks for total distance.</li>
+            <li>Ignoring points where velocity changes sign.</li>
+        </ul>
+    </div>
+
+    <br><br><br>
+</div>
+
+</body>
+</html>
