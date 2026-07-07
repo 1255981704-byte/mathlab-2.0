@@ -7,9 +7,15 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Rajdhani:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet">
     
-    <!-- 【修改点：修正了 css 路径】 -->
+    <!-- 【精准云端寻址】 -->
     <link rel="stylesheet" href="./css/ignite-deck.css">
     <link rel="stylesheet" href="./css/graph-style.css">
+
+    <!-- 【极致 16:9 全尺寸视频容器样式】 -->
+    <style>
+        .box-video-only .box-body { padding: 0 !important; background: #000 !important; display: flex; align-items: center; justify-content: center; }
+        .box-video-only .vid-slot { width: 100%; height: 100%; max-height: none; border: none; margin: 0; aspect-ratio: 16 / 9; }
+    </style>
 
     <script>window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -30,6 +36,7 @@
 
 <div class="deck" id="deck">
 
+    <!-- 0 -->
     <section class="slide title active" data-slide="0">
         <div class="title-brand">01 <span>//</span> ANTIDERIVATIVES</div>
         <div class="title-sub">REVERSE DIFFERENTIATION &nbsp;&bull;&nbsp; FAMILIES OF FUNCTIONS</div>
@@ -37,13 +44,14 @@
         <div class="title-meta">EVERY ANTIDERIVATIVE CARRIES A CONSTANT</div>
     </section>
 
+    <!-- 1 -->
     <section class="slide definition-slide" data-slide="1">
         <div class="slide-title">
             <h1>Antiderivatives</h1>
         </div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>STATEMENT</div>
+                <div class="box-head"><span class="dot"></span>STATEMENT &amp; EXAMPLE</div>
                 <div class="box-body">
                     <div class="statement">
                         <p>Antidifferentiation is the inverse process of differentiation. A function \(F\) is an <strong>antiderivative</strong> of \(f\) on an interval \(I\) if</p>
@@ -53,17 +61,6 @@
                         </div>
                         <p class="note">A proposed antiderivative is verified by differentiation.</p>
                     </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>EXPLANATION &amp; VIDEO</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="definition">
-                        <span class="vid-rec">● REC</span>
-                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
-                        <video controls preload="none"><!-- <source src="definition.mp4" type="video/mp4"> --></video>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">CONCEPT VIDEO // ANTIDERIVATIVES</div></div>
-                    </div>
                     <div class="sol-text">
                         <div class="sol-head">EXAMPLE</div>
                         <div class="step">Differentiate the proposed function:</div>
@@ -72,16 +69,28 @@
                     </div>
                 </div>
             </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>CONCEPT VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="definition">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // ANTIDERIVATIVES</div></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- 2 -->
     <section class="slide theorem-slide" data-slide="2">
         <div class="slide-title">
             <h1>The General Antiderivative</h1>
         </div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>STATEMENT</div>
+                <div class="box-head"><span class="dot"></span>STATEMENT &amp; EXPLORATION</div>
                 <div class="box-body">
                     <div class="statement">
                         <p>Adding a constant does not change a derivative. If \(F\) is an antiderivative of \(f\) on an interval \(I\), every antiderivative has the form</p>
@@ -90,18 +99,7 @@
                             <div class="eq-body">\[\displaystyle \boxed{F(x)+C}\]</div>
                         </div>
                         <p>The arbitrary constant \(C\) is the <strong>constant of integration</strong>.</p>
-                        <p class="note">The interval condition ensures that any two antiderivatives of the same function differ by a constant.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>EXPLANATION &amp; VIDEO</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="constant-c">
-                        <span class="vid-rec">● REC</span>
-                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
-                        <video controls preload="none"><!-- <source src="constant-c.mp4" type="video/mp4"> --></video>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">CONCEPT VIDEO // THE +C FAMILY</div></div>
+                        <p class="note">The interval condition ensures that any two antiderivatives differ by a constant.</p>
                     </div>
                     <div class="sol-text">
                         <div class="sol-head">ONE DERIVATIVE — A FAMILY</div>
@@ -111,16 +109,28 @@
                     </div>
                 </div>
             </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>CONCEPT VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="constant-c">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // THE +C FAMILY</div></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- 3 -->
     <section class="slide definition-slide" data-slide="3">
         <div class="slide-title">
             <h1>Indefinite-Integral Notation</h1>
         </div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>NOTATION</div>
+                <div class="box-head"><span class="dot"></span>NOTATION &amp; EXAMPLES</div>
                 <div class="box-body">
                     <div class="statement">
                         <p>The family of all antiderivatives of a function is represented by an <strong>indefinite integral</strong>.</p>
@@ -128,19 +138,8 @@
                             <div class="eq-head">IF F′(x) = f(x)</div>
                             <div class="eq-body">\[\displaystyle \boxed{\int f(x)\,dx=F(x)+C}\]</div>
                         </div>
-                        <p>\(\int\) is the integral sign, \(f(x)\) is the integrand, \(dx\) specifies the variable of integration, and \(C\) is the constant of integration.</p>
+                        <p>\(\int\) is the integral sign, \(f(x)\) is the integrand, \(dx\) specifies the variable of integration.</p>
                         <p class="note">An indefinite integral is a family of functions, not a single function.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>EXAMPLES &amp; VIDEO</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="notation">
-                        <span class="vid-rec">● REC</span>
-                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
-                        <video controls preload="none"><!-- <source src="notation.mp4" type="video/mp4"> --></video>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">EXAMPLES VIDEO // NOTATION</div></div>
                     </div>
                     <div class="sol-text">
                         <div class="sol-head">QUICK EXAMPLES</div>
@@ -150,33 +149,34 @@
                     </div>
                 </div>
             </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>EXAMPLES VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="notation">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // NOTATION</div></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- 4 -->
     <section class="slide formula-slide" data-slide="4">
         <div class="slide-title">
             <h1>Basic Integration Formulas</h1>
         </div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>FORMULAS</div>
+                <div class="box-head"><span class="dot"></span>FORMULAS &amp; APPLICATION</div>
                 <div class="box-body">
                     <div class="statement">
                         <div class="eq-box"><div class="eq-head">CONSTANT RULE</div><div class="eq-body">\[\displaystyle \int a\,dx=ax+C\]</div></div>
                         <div class="eq-box"><div class="eq-head">POWER RULE — n ≠ −1</div><div class="eq-body">\[\displaystyle \int x^n\,dx=\frac{x^{n+1}}{n+1}+C\]</div></div>
                         <div class="eq-box"><div class="eq-head">LOGARITHMIC FORMULA</div><div class="eq-body">\[\displaystyle \int\frac1x\,dx=\ln|x|+C\]</div></div>
                         <p class="note">The power rule excludes \(n=-1\), because \(1/(n+1)\) would be undefined.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>APPLICATION &amp; VIDEO</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="power-rule">
-                        <span class="vid-rec">● REC</span>
-                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
-                        <video controls preload="none"><!-- <source src="power-rule.mp4" type="video/mp4"> --></video>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">FORMULA VIDEO // POWER RULE</div></div>
                     </div>
                     <div class="sol-text">
                         <div class="sol-head">EXAMPLE — INTEGRATE x⁵</div>
@@ -186,33 +186,33 @@
                     </div>
                 </div>
             </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>FORMULA VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="power-rule">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // POWER RULE</div></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- 5 -->
     <section class="slide formula-slide" data-slide="5">
         <div class="slide-title">
             <h1>Linearity of Indefinite Integrals</h1>
         </div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>STATEMENT</div>
+                <div class="box-head"><span class="dot"></span>STATEMENT &amp; WARNING</div>
                 <div class="box-body">
                     <div class="statement">
                         <p>Sums and differences may be integrated term by term, and constant factors may be placed outside the integral.</p>
                         <div class="eq-box"><div class="eq-head">SUM &amp; DIFFERENCE RULES</div><div class="eq-body">\[\displaystyle \int(f\pm g)\,dx=\int f\,dx\pm\int g\,dx\]</div></div>
                         <div class="eq-box"><div class="eq-head">CONSTANT-MULTIPLE RULE</div><div class="eq-body">\[\displaystyle \int cf(x)\,dx=c\int f(x)\,dx\]</div></div>
-                        <p class="note">Only one arbitrary constant is needed in the final expression.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>WARNING &amp; VIDEO</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="linearity">
-                        <span class="vid-rec">● REC</span>
-                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
-                        <video controls preload="none"><!-- <source src="linearity.mp4" type="video/mp4"> --></video>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">CONCEPT VIDEO // LINEARITY</div></div>
                     </div>
                     <div class="sol-text">
                         <div class="sol-head">PRODUCTS OF FUNCTIONS</div>
@@ -222,84 +222,95 @@
                     </div>
                 </div>
             </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>CONCEPT VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="linearity">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // LINEARITY</div></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- 6 -->
     <section class="slide" data-slide="6">
         <div class="slide-title">
             <h1>Integration Term by Term</h1>
         </div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-head"><span class="dot"></span>PROBLEM &amp; SOLUTION</div>
                 <div class="box-body">
                     <div class="prompt">Evaluate</div>
                     <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\displaystyle \int\left(3x^5+4x^4+2x^2+1+\frac8x-\frac5{x^2}\right)dx.\]</div></div>
                     <div class="statement">
                         <p>First rewrite the final term using a negative exponent:</p>
                         <div class="eq-box"><div class="eq-head">REWRITE</div><div class="eq-body">\[\displaystyle -\frac5{x^2}=-5x^{-2}.\]</div></div>
-                        <p class="note">Use the logarithmic formula only for the \(8/x\) term.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="ex1">
-                        <span class="vid-rec">● REC</span>
-                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
-                        <video controls preload="none"><!-- <source src="ex1.mp4" type="video/mp4"> --></video>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">SOLUTION VIDEO // EX 01</div></div>
                     </div>
                     <div class="sol-text">
                         <div class="sol-head">WORKED SOLUTION</div>
                         <div class="step">Apply linearity and integrate each term with its matching formula.</div>
                         <div class="eqc">\[\displaystyle \boxed{\frac{x^6}{2}+\frac{4x^5}{5}+\frac{2x^3}{3}+x+8\ln|x|+\frac5x+C}\]</div>
-                        <div class="step">Sign check: \(\frac{d}{dx}(5/x)=-5/x^2\).</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="ex1">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // EX 01</div></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- 7 -->
     <section class="slide" data-slide="7">
         <div class="slide-title">
             <h1>Antiderivatives of Linear Inner Functions</h1>
         </div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-head"><span class="dot"></span>PROBLEM &amp; SOLUTION</div>
                 <div class="box-body">
                     <div class="prompt">Evaluate</div>
                     <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\displaystyle \int\sin(2x)\,dx.\]</div></div>
                     <div class="statement">
                         <p>The chain rule introduces the derivative of an inner function:</p>
                         <div class="eq-box"><div class="eq-head">CHAIN RULE</div><div class="eq-body">\[\displaystyle \frac{d}{dx}\cos(2x)=-2\sin(2x).\]</div></div>
-                        <p class="note">Reverse the chain rule by compensating for the factor \(2\).</p>
+                        <p class="note">Reverse the chain rule by compensating for the factor 2.</p>
+                    </div>
+                    <div class="sol-text">
+                        <div class="sol-head">WORKED SOLUTION</div>
+                        <div class="eqc">\[\displaystyle \boxed{\int\sin(2x)\,dx=-\frac12\cos(2x)+C}\]</div>
+                        <div class="step">More generally, for \(a\ne0\):</div>
+                        <div class="eqc">\[\displaystyle \int\sin(ax)dx=-\frac1a\cos(ax)+C\]</div>
                     </div>
                 </div>
             </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION VIDEO</div>
                 <div class="box-body">
                     <div class="vid-slot" data-vid="ex2">
                         <span class="vid-rec">● REC</span>
                         <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
-                        <video controls preload="none"><!-- <source src="ex2.mp4" type="video/mp4"> --></video>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">SOLUTION VIDEO // EX 02</div></div>
-                    </div>
-                    <div class="sol-text">
-                        <div class="sol-head">WORKED SOLUTION</div>
-                        <div class="step">Multiply by \(-\frac12\) to produce the required derivative.</div>
-                        <div class="eqc">\[\displaystyle \boxed{\int\sin(2x)\,dx=-\frac12\cos(2x)+C}\]</div>
-                        <div class="step">More generally, for \(a\ne0\):</div>
-                        <div class="eqc">\[\displaystyle \int\sin(ax)dx=-\frac1a\cos(ax)+C,\quad \int\cos(ax)dx=\frac1a\sin(ax)+C.\]</div>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // EX 02</div></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- 8 -->
     <section class="slide formula-slide" data-slide="8">
         <div class="slide-title">
             <h1>Principal Results</h1>
@@ -320,22 +331,22 @@
                             \end{aligned}\]</div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>BIG PICTURE &amp; VIDEO</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="summary">
-                        <span class="vid-rec">● REC</span>
-                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
-                        <video controls preload="none"><!-- <source src="summary.mp4" type="video/mp4"> --></video>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">REVIEW VIDEO // ANTIDERIVATIVES</div></div>
-                    </div>
                     <div class="sol-text">
                         <div class="sol-head">FINAL CONNECTION</div>
                         <div class="step">An antiderivative is one function \(F\) satisfying \(F'=f\).</div>
                         <div class="eqc">\[\displaystyle \int f(x)\,dx=F(x)+C\]</div>
                         <div class="step">Every indefinite integral can be verified by differentiating the result.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>REVIEW VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="summary">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // REVIEW</div></div>
                     </div>
                 </div>
             </div>
@@ -360,7 +371,6 @@
     </div>
 </div>
 
-<!-- 【修改点：修正了 js 路径】 -->
 <script src="./js/ignite-deck.js"></script>
 </body>
 </html>
