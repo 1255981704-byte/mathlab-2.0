@@ -6,10 +6,14 @@
     <title>IGNITE // 05 Long Division and Completing the Square</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Rajdhani:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
-    
-    <!-- 【精准云端寻址：彻底抛弃旧的相对路径】 -->
     <link rel="stylesheet" href="./css/ignite-deck.css">
     <link rel="stylesheet" href="./css/graph-style.css">
+    
+    <!-- 【极致 16:9 全尺寸视频容器样式】 -->
+    <style>
+        .box-video-only .box-body { padding: 0 !important; background: #000 !important; display: flex; align-items: center; justify-content: center; }
+        .box-video-only .vid-slot { width: 100%; height: 100%; max-height: none; border: none; margin: 0; aspect-ratio: 16 / 9; }
+    </style>
     
     <script>window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -51,7 +55,7 @@
             <div class="box">
                 <div class="box-head sol"><span class="dot"></span>STEP 2 — INSPECT THE QUADRATIC</div>
                 <div class="box-body">
-                    <div class="sol-text">
+                    <div class="sol-text" style="border-top:none; margin-top:0; padding-top:0;">
                         <div class="step">If the denominator is an irreducible quadratic, complete the square.</div>
                         <div class="eqc">\[x^2+bx+c=\left(x+\frac b2\right)^2+c-\frac{b^2}{4}\]</div>
                         <div class="step">Then match an arctangent or logarithmic form.</div>
@@ -65,22 +69,27 @@
         <div class="slide-title"><h1>Make the Fraction Proper</h1></div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-head"><span class="dot"></span>PROBLEM &amp; SOLUTION</div>
                 <div class="box-body">
-                    <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{x^3+2x^2+x+1}{x^2+1}dx\]</div></div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="long-division">
-                        <span class="vid-rec">● REC</span>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LESSON VIDEO // LONG DIVISION</div></div>
+                    <div class="statement">
+                        <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{x^3+2x^2+x+1}{x^2+1}dx\]</div></div>
                     </div>
                     <div class="sol-text">
+                        <div class="sol-head">WORKED SOLUTION</div>
                         <div class="eqc">\[\frac{x^3+2x^2+x+1}{x^2+1}=x+2-\frac1{x^2+1}\]</div>
                         <div class="eqc">\[\boxed{\frac{x^2}{2}+2x-\arctan x+C}\]</div>
                         <div class="step">Never integrate numerator and denominator separately.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="long-division">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // LONG DIVISION</div></div>
                     </div>
                 </div>
             </div>
@@ -114,22 +123,27 @@
         <div class="slide-title"><h1>Quadratic Denominator</h1></div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-head"><span class="dot"></span>PROBLEM &amp; SOLUTION</div>
                 <div class="box-body">
-                    <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{dx}{x^2+6x+13}\]</div></div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="arctan">
-                        <span class="vid-rec">● REC</span>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">SOLUTION VIDEO // QUADRATIC DENOMINATOR</div></div>
+                    <div class="statement">
+                        <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{dx}{x^2+6x+13}\]</div></div>
                     </div>
                     <div class="sol-text">
+                        <div class="sol-head">WORKED SOLUTION</div>
                         <div class="eqc">\[x^2+6x+13=(x+3)^2+2^2\]</div>
                         <div class="eqc">\[\int\frac{dx}{(x+3)^2+2^2}=\boxed{\frac12\arctan\left(\frac{x+3}{2}\right)+C}\]</div>
                         <div class="step">Differentiate to verify the one-half scale factor.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="arctan">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // QUADRATIC DENOMINATOR</div></div>
                     </div>
                 </div>
             </div>
@@ -140,22 +154,27 @@
         <div class="slide-title"><h1>Linear Numerator over Quadratic</h1></div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-head"><span class="dot"></span>PROBLEM &amp; SOLUTION</div>
                 <div class="box-body">
-                    <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{x+1}{x^2+4x+8}dx\]</div></div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="split-numerator">
-                        <span class="vid-rec">● REC</span>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">SOLUTION VIDEO // LINEAR NUMERATOR</div></div>
+                    <div class="statement">
+                        <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{x+1}{x^2+4x+8}dx\]</div></div>
                     </div>
                     <div class="sol-text">
+                        <div class="sol-head">WORKED SOLUTION</div>
                         <div class="eqc">\[x+1=\frac12(2x+4)-1,\qquad x^2+4x+8=(x+2)^2+2^2\]</div>
                         <div class="eqc">\[\int\frac{x+1}{x^2+4x+8}dx=\frac12\ln(x^2+4x+8)-\int\frac{dx}{(x+2)^2+2^2}\]</div>
                         <div class="eqc">\[\boxed{\frac12\ln(x^2+4x+8)-\frac12\arctan\left(\frac{x+2}{2}\right)+C}\]</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="split-numerator">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // LINEAR NUMERATOR</div></div>
                     </div>
                 </div>
             </div>
@@ -166,22 +185,27 @@
         <div class="slide-title"><h1>Shifted Quadratic Denominator</h1></div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-head"><span class="dot"></span>PROBLEM &amp; SOLUTION</div>
                 <div class="box-body">
-                    <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{dx}{x^2-4x+3}\]</div></div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>SOLUTION VIDEO &amp; CONNECTION</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="difference-of-squares">
-                        <span class="vid-rec">● REC</span>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">SOLUTION VIDEO // SHIFTED QUADRATIC</div></div>
+                    <div class="statement">
+                        <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{dx}{x^2-4x+3}\]</div></div>
                     </div>
                     <div class="sol-text">
+                        <div class="sol-head">WORKED SOLUTION</div>
                         <div class="eqc">\[x^2-4x+3=(x-2)^2-1=(x-1)(x-3)\]</div>
                         <div class="eqc">\[\boxed{\frac12\ln\left|\frac{x-3}{x-1}\right|+C}\]</div>
                         <div class="step">The completed-square and factored forms lead to equivalent logarithmic antiderivatives.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="difference-of-squares">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // SHIFTED QUADRATIC</div></div>
                     </div>
                 </div>
             </div>
@@ -206,7 +230,7 @@
             <div class="box">
                 <div class="box-head sol"><span class="dot"></span>COMMON ERRORS</div>
                 <div class="box-body">
-                    <div class="sol-text">
+                    <div class="sol-text" style="border-top:none; margin-top:0; padding-top:0;">
                         <div class="step">Wrong completing-square constant.</div>
                         <div class="step">Missing the scale factor in arctangent.</div>
                         <div class="step">Missing absolute values in logarithms.</div>
@@ -234,7 +258,6 @@
     </div>
 </div>
 
-<!-- 【仅保留唯一的引擎控制脚本，剔除了 integration-nav.js 炸弹】 -->
 <script src="./js/ignite-deck.js"></script>
 </body>
 </html>
