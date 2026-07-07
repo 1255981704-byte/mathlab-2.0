@@ -6,10 +6,14 @@
     <title>IGNITE // 04 U-Substitution</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Rajdhani:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
-    
-    <!-- 【精准云端寻址：彻底抛弃旧的相对路径】 -->
     <link rel="stylesheet" href="./css/ignite-deck.css">
     <link rel="stylesheet" href="./css/graph-style.css">
+    
+    <!-- 【极致 16:9 全尺寸视频容器样式】 -->
+    <style>
+        .box-video-only .box-body { padding: 0 !important; background: #000 !important; display: flex; align-items: center; justify-content: center; }
+        .box-video-only .vid-slot { width: 100%; height: 100%; max-height: none; border: none; margin: 0; aspect-ratio: 16 / 9; }
+    </style>
     
     <script>window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -40,7 +44,7 @@
         <div class="slide-title"><h1>Why Introduce a New Variable?</h1></div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>METHOD 1 — EXPAND</div>
+                <div class="box-head"><span class="dot"></span>PROBLEM &amp; STRUCTURE</div>
                 <div class="box-body">
                     <div class="statement">
                         <p>Start with the lecture's first example:</p>
@@ -49,20 +53,22 @@
                         <div class="eqc">\[=2x^4+4x^3+3x^2+x+C\]</div>
                         <p class="note">Expansion works, but it scales badly for large powers.</p>
                     </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>METHOD 2 — SEE THE INNER FUNCTION</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="why-u">
-                        <span class="vid-rec">● REC</span>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // WHY U?</div></div>
-                    </div>
                     <div class="sol-text">
-                        <div class="sol-head">STRUCTURE</div>
+                        <div class="sol-head">SUBSTITUTION</div>
                         <div class="eqc">\[u=2x+1\]</div>
                         <div class="eqc">\[du=2dx\]</div>
                         <div class="step">Substitution turns a composite power into an ordinary power of (u).</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>LECTURE VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="why-u">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // WHY U?</div></div>
                     </div>
                 </div>
             </div>
@@ -73,25 +79,28 @@
         <div class="slide-title"><h1>Track the Differential Carefully</h1></div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>SET UP</div>
+                <div class="box-head"><span class="dot"></span>SET UP &amp; SOLUTION</div>
                 <div class="box-body">
                     <div class="statement">
                         <div class="eq-box"><div class="eq-head">CHOOSE U</div><div class="eq-body">\[u=2x+1\]</div></div>
                         <div class="eq-box"><div class="eq-head">DIFFERENTIAL</div><div class="eq-body">\[\frac{du}{dx}=2\Rightarrow du=2dx\Rightarrow dx=\frac12du\]</div></div>
                         <p class="note">Replace both the inner expression and the differential dx.</p>
                     </div>
+                    <div class="sol-text">
+                        <div class="sol-head">WORKED SOLUTION</div>
+                        <div class="eqc">\[\int u^3\frac12du=\frac12\cdot\frac{u^4}{4}+C\]</div>
+                        <div class="eqc">\[\boxed{\frac18(2x+1)^4+C}\]</div>
+                    </div>
                 </div>
             </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION VIDEO</div>
                 <div class="box-body">
                     <div class="vid-slot" data-vid="example-1">
                         <span class="vid-rec">● REC</span>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // EXAMPLE 01</div></div>
-                    </div>
-                    <div class="sol-text">
-                        <div class="eqc">\[\int u^3\frac12du=\frac12\cdot\frac{u^4}{4}+C\]</div>
-                        <div class="eqc">\[\boxed{\frac18(2x+1)^4+C}\]</div>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // EXAMPLE 01</div></div>
                     </div>
                 </div>
             </div>
@@ -102,25 +111,28 @@
         <div class="slide-title"><h1>Denominator and Its Derivative</h1></div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-head"><span class="dot"></span>PROBLEM &amp; SOLUTION</div>
                 <div class="box-body">
                     <div class="statement">
                         <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{x}{x^2+9}dx\]</div></div>
                     </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="example-2">
-                        <span class="vid-rec">● REC</span>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // LOG PATTERN</div></div>
-                    </div>
                     <div class="sol-text">
+                        <div class="sol-head">WORKED SOLUTION</div>
                         <div class="eqc">\[u=x^2+9,\qquad du=2x\,dx,\qquad x\,dx=\frac12du\]</div>
                         <div class="eqc">\[\frac12\int\frac1u du=\frac12\ln|u|+C\]</div>
                         <div class="eqc">\[\boxed{\frac12\ln(x^2+9)+C}\]</div>
                         <div class="step">The denominator is always positive.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="example-2">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // LOG PATTERN</div></div>
                     </div>
                 </div>
             </div>
@@ -131,23 +143,26 @@
         <div class="slide-title"><h1>Two Correct Choices of (u)</h1></div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-head"><span class="dot"></span>PROBLEM &amp; SOLUTION</div>
                 <div class="box-body">
                     <div class="statement">
                         <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\sin x\cos x\,dx\]</div></div>
                     </div>
+                    <div class="sol-text">
+                        <div class="sol-head">TWO VALID PATHS</div>
+                        <div class="eqc">\[u=\sin x,\quad du=\cos x\,dx\Rightarrow \boxed{\frac12\sin^2x+C}\]</div>
+                        <div class="eqc">\[u=\cos x,\quad du=-\sin x\,dx\Rightarrow \boxed{-\frac12\cos^2x+C}\]</div>
+                    </div>
                 </div>
             </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION VIDEO</div>
                 <div class="box-body">
                     <div class="vid-slot" data-vid="example-3">
                         <span class="vid-rec">● REC</span>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // TWO CHOICES</div></div>
-                    </div>
-                    <div class="sol-text">
-                        <div class="eqc">\[u=\sin x,\quad du=\cos x\,dx\Rightarrow \boxed{\frac12\sin^2x+C}\]</div>
-                        <div class="eqc">\[u=\cos x,\quad du=-\sin x\,dx\Rightarrow \boxed{-\frac12\cos^2x+C}\]</div>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // TWO CHOICES</div></div>
                     </div>
                 </div>
             </div>
@@ -158,25 +173,28 @@
         <div class="slide-title"><h1>Different Forms, Same Family</h1></div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>USE THE PYTHAGOREAN IDENTITY</div>
+                <div class="box-head"><span class="dot"></span>IDENTITY &amp; EQUIVALENCE</div>
                 <div class="box-body">
                     <div class="statement">
                         <div class="eq-box"><div class="eq-head">IDENTITY</div><div class="eq-body">\[\cos^2x=1-\sin^2x\]</div></div>
                         <div class="eqc">\[-\frac12\cos^2x+C=-\frac12+\frac12\sin^2x+C\]</div>
                         <div class="eqc">\[=\frac12\sin^2x+\widetilde C\]</div>
                     </div>
+                    <div class="sol-text">
+                        <div class="sol-head">BIG PICTURE</div>
+                        <div class="step">Indefinite integrals that differ only by a constant represent the same family.</div>
+                        <div class="step">Differentiate both answers: each derivative is (sin xcos x).</div>
+                    </div>
                 </div>
             </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>BIG PICTURE &amp; VIDEO</div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>CONCEPT VIDEO</div>
                 <div class="box-body">
                     <div class="vid-slot" data-vid="equivalent">
                         <span class="vid-rec">● REC</span>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // EQUIVALENT ANSWERS</div></div>
-                    </div>
-                    <div class="sol-text">
-                        <div class="step">Indefinite integrals that differ only by a constant represent the same family.</div>
-                        <div class="step">Differentiate both answers: each derivative is (sin xcos x).</div>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // EQUIVALENT ANSWERS</div></div>
                     </div>
                 </div>
             </div>
@@ -187,24 +205,27 @@
         <div class="slide-title"><h1>Rewrite Before Substituting</h1></div>
         <div class="slide-body">
             <div class="box">
-                <div class="box-head"><span class="dot"></span>PROBLEM</div>
+                <div class="box-head"><span class="dot"></span>PROBLEM &amp; SOLUTION</div>
                 <div class="box-body">
                     <div class="statement">
                         <div class="eq-box"><div class="eq-head">INTEGRAL</div><div class="eq-body">\[\int\frac{\sin^5x}{\cos^7x}dx\]</div></div>
                     </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-head sol"><span class="dot"></span>SOLUTION &amp; VIDEO</div>
-                <div class="box-body">
-                    <div class="vid-slot" data-vid="example-4">
-                        <span class="vid-rec">● REC</span>
-                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">LECTURE VIDEO // TAN SUBSTITUTION</div></div>
-                    </div>
                     <div class="sol-text">
+                        <div class="sol-head">WORKED SOLUTION</div>
                         <div class="eqc">\[\frac{\sin^5x}{\cos^7x}=\frac{\sin^5x}{\cos^5x}\frac1{\cos^2x}=\tan^5x\sec^2x\]</div>
                         <div class="eqc">\[u=\tan x,\quad du=\sec^2x\,dx\]</div>
                         <div class="eqc">\[\int u^5du=\boxed{\frac16\tan^6x+C}\]</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-video-only">
+                <div class="box-head sol"><span class="dot"></span>SOLUTION VIDEO</div>
+                <div class="box-body">
+                    <div class="vid-slot" data-vid="example-4">
+                        <span class="vid-rec">● REC</span>
+                        <span class="expand-hint"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>EXPAND</span>
+                        <video controls preload="none"></video>
+                        <div class="vid-placeholder"><div class="vid-icon">▶</div><div class="vid-label">VIDEO // TAN SUBSTITUTION</div></div>
                     </div>
                 </div>
             </div>
@@ -214,6 +235,7 @@
     <section class="slide formula-slide" data-slide="7">
         <div class="slide-title"><h1>Reverse the Chain Rule</h1></div>
         <div class="slide-body">
+            <!-- 这一页原版没有视频，保持左右两个文本框对齐的经典布局 -->
             <div class="box">
                 <div class="box-head"><span class="dot"></span>CORE FORMULA</div>
                 <div class="box-body">
@@ -226,7 +248,7 @@
             <div class="box">
                 <div class="box-head sol"><span class="dot"></span>FINAL CHECKLIST</div>
                 <div class="box-body">
-                    <div class="sol-text">
+                    <div class="sol-text" style="border-top:none; margin-top:0; padding-top:0;">
                         <div class="step">Can you identify an inner function?</div>
                         <div class="step">Is its derivative present up to a constant?</div>
                         <div class="step">Did every (x) and (dx) disappear after substitution?</div>
@@ -236,6 +258,7 @@
             </div>
         </div>
     </section>
+
 </div>
 
 <div class="controls">
@@ -254,7 +277,6 @@
     </div>
 </div>
 
-<!-- 【仅保留唯一的引擎控制脚本，剔除了 integration-nav.js 炸弹】 -->
 <script src="./js/ignite-deck.js"></script>
 </body>
 </html>
